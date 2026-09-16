@@ -96,9 +96,11 @@ def github_get(path: str) -> object | None:
 
 
 def collect_github_signals(days: int) -> dict[str, object]:
-    since = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-    runs = github_get(f"/actions/runs?per_page=100&created=>={since}")
-    issues = github_get(f"/issues?state=all&per_page=100&since={since}")
+    since = datetime.now(timezone.utc) - timedelta(days=days)
+    since_iso = since.isoformat()
+    since_date = since.date().isoformat()
+    runs = github_get(f"/actions/runs?per_page=100&created=%3E%3D{since_date}")
+    issues = github_get(f"/issues?state=all&per_page=100&since={since_iso}")
 
     workflow_failures: Counter[str] = Counter()
     workflow_total = 0
@@ -131,14 +133,51 @@ def collect_github_signals(days: int) -> dict[str, object]:
     }
 
 
+def parse_statuses(base: Path, statuses: set[str]) -> int:
+    count = 0
+    if not base.exists():
+        return 0
+    for path in base.glob("*.md"):
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for match in re.finditer(r"(?im)^status:\s*[\"']?([a-z_]+)", text):
+            if match.group(1).lower() in statuses:
+                count += 1
+        for match in re.finditer(r"(?im)^status:\s*$\n\s*[-*]\s*([A-Z_]+)", text):
+            if match.group(1).lower() in statuses:
+                count += 1
+    return count
+
+
+def count_recurrence(base: Path) -> int:
+    total = 0
+    if not base.exists():
+        return 0
+    for path in base.glob("*.md"):
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for match in re.finditer(r"(?im)^recurrence[_ ]count:\s*(\d+)", text):
+            total += int(match.group(1))
+        for match in re.finditer(r"(?im)^##\s*Recurrence Count\s*$\n\s*(\d+)", text):
+            total += int(match.group(1))
+    return total
+
+
 def load_record_counts() -> dict[str, int]:
     base = ROOT / ".ai" / "self-improvement" / "records"
-    observations = list((base / "observations").glob("*.md")) if (base / "observations").exists() else []
-    proposals = list((base / "proposals").glob("*.md")) if (base / "proposals").exists() else []
-    outcomes = list((base / "outcomes").glob("*.md")) if (base / "outcomes").exists() else []
+    observations_dir = base / "observations"
+    proposals_dir = base / "proposals"
+    outcomes_dir = base / "outcomes"
+    observations = list(observations_dir.glob("*.md")) if observations_dir.exists() else []
+    proposals = list(proposals_dir.glob("*.md")) if proposals_dir.exists() else []
+    outcomes = list(outcomes_dir.glob("*.md")) if outcomes_dir.exists() else []
     return {
         "observation_count": len(observations),
+        "recurrence_count": count_recurrence(observations_dir),
         "proposal_count": len(proposals),
+        "accepted_count": parse_statuses(proposals_dir, {"approved", "applied"}),
+        "rejected_count": parse_statuses(proposals_dir, {"rejected"}),
+        "reverted_count": parse_statuses(proposals_dir, {"reverted"}) + parse_statuses(outcomes_dir, {"reverted"}),
+        "regression_count": parse_statuses(outcomes_dir, {"regression", "regressed"}),
+        "confirmed_improvements": parse_statuses(outcomes_dir, {"confirmed"}),
         "outcome_count": len(outcomes),
     }
 
@@ -195,15 +234,7 @@ def build_report(mode: str, days: int) -> dict[str, object]:
             "records": records,
         },
         "candidate_signals": recurring,
-        "metrics": {
-            "observation_count": records["observation_count"],
-            "proposal_count": records["proposal_count"],
-            "accepted_count": 0,
-            "rejected_count": 0,
-            "reverted_count": 0,
-            "regression_count": 0,
-            "confirmed_improvements": 0,
-        },
+        "metrics": records,
         "interpretation_policy": {
             "fact": "Directly collected evidence.",
             "hypothesis": "Tentative explanation that requires validation.",
@@ -242,6 +273,16 @@ def main() -> int:
         f"- Missing referenced paths: {len(report['facts']['missing_referenced_paths'])}",
         f"- Workflow runs observed: {report['facts']['github']['workflow_run_count']}",
         f"- Issue/PR signals observed: {report['facts']['github']['issue_signal_count']}",
+        "",
+        "## Metrics",
+        f"- Observations: {report['metrics']['observation_count']}",
+        f"- Recurrence count: {report['metrics']['recurrence_count']}",
+        f"- Proposals: {report['metrics']['proposal_count']}",
+        f"- Accepted/applied: {report['metrics']['accepted_count']}",
+        f"- Rejected: {report['metrics']['rejected_count']}",
+        f"- Reverted: {report['metrics']['reverted_count']}",
+        f"- Regressions: {report['metrics']['regression_count']}",
+        f"- Confirmed improvements: {report['metrics']['confirmed_improvements']}",
         "",
         "## Candidate signals",
     ]
