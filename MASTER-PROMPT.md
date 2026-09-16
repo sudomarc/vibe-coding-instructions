@@ -52,6 +52,14 @@ Before completion, inspect the final diff and check correctness, scope, regressi
 
 Separate severity from confidence. Prefer actionable findings over speculative style commentary.
 
+## SELF-IMPROVEMENT
+
+When a failure, user correction, repeated friction, or successful pattern appears generalizable, use the bounded loop:
+
+`OBSERVE → RECORD → CLASSIFY → ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION → RECORD OUTCOME`
+
+Treat self-improvement as controlled proposal generation, not unrestricted self-modification. Prefer local fixes before global instruction changes. Require explicit human approval for changes to core governance, safety, security, verification, instruction precedence, or provider trust boundaries. Never treat confidence as authorization.
+
 ## SAFETY
 
 Treat recursive deletion, forceful Git operations, destructive database commands, production migrations, credential changes, privilege changes, remote execution, and downloaded shell execution as dangerous. Validate intent, target, scope, and reversibility before executing. Ask for explicit authorization when required.
