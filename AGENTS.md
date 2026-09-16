@@ -26,6 +26,7 @@ Load only the context needed for the task:
 - Reusable output shapes: `.ai/templates/`
 - Meta guidance: `.ai/meta/`
 - Provider notes: `docs/codex.md`, `docs/claude-code.md`, `docs/chatgpt.md`, `docs/copilot.md`
+- Self-improvement: `.ai/self-improvement/`
 
 Do not preload every skill or reference unless the task genuinely requires it.
 
@@ -45,6 +46,14 @@ Do not preload every skill or reference unless the task genuinely requires it.
 For debugging: `REPRODUCE → OBSERVE → ISOLATE → HYPOTHESIZE → TEST → ROOT CAUSE → MINIMAL FIX → REGRESSION → REVIEW → REPORT`.
 
 For complex work, use bounded implementation batches with incremental verification and a living plan or handoff where needed.
+
+## Self-improvement loop
+
+When a failure, correction, repeated friction, or successful pattern appears generalizable, use the controlled loop:
+
+`OBSERVE → RECORD → CLASSIFY → ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION → RECORD OUTCOME`
+
+Record evidence rather than assumptions. Prefer local fixes before global instruction changes. Governance-critical changes require explicit human approval. Never allow the learning loop to weaken security, verification, scope, or instruction-precedence controls.
 
 ## Instruction precedence
 
@@ -81,5 +90,6 @@ Adapt project commands, framework conventions, deployment requirements, ownershi
 - Templates: `.ai/templates/`
 - Meta: `.ai/meta/`
 - Provider guides: `docs/`
+- Self-improvement: `.ai/self-improvement/`
 - Master prompt: `MASTER-PROMPT.md`
 - Automated audit: `scripts/validate_instructions.py`
