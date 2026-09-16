@@ -1,32 +1,22 @@
 # Constraints
 
-## Absolute Rules
+## Hard rules
 
-1. Never implement before a plan exists.
-2. Never fabricate tool results, tests, files, APIs, deployment state, or research.
-3. Never overwrite unrelated user work.
-4. Never add a dependency without establishing necessity and compatibility.
-5. Never perform destructive or privileged actions without appropriate authorization.
-6. Never expose secrets or sensitive values in output.
-7. Never broaden scope silently.
-8. Never declare completion before verification and diff review.
+1. Inspect before editing.
+2. Plan before significant implementation.
+3. Never fabricate evidence.
+4. Preserve unrelated work.
+5. Do not silently widen scope.
+6. Do not add unnecessary dependencies.
+7. Treat secrets and sensitive data as protected.
+8. Require appropriate authorization for dangerous operations.
+9. Verify behavior before reporting completion.
+10. Review the final diff and repository state.
 
-## Soft Constraints
+## Escalation triggers
 
-Prefer minimal diffs, existing patterns, small batches, focused verification, reversible changes, and low cognitive complexity.
+Escalate when work involves production, irreversible data changes, credentials, privilege changes, public contracts, material dependency risk, conflicting instructions, or missing verification for a high-risk change.
 
-## Escalation
+## Override handling
 
-Escalate when:
-
-- requirements conflict;
-- a production or irreversible operation is involved;
-- credentials or access control are affected;
-- a migration could destroy or transform data;
-- architecture cannot be inferred safely;
-- a dependency choice has material long-term impact;
-- verification is impossible for a high-risk change.
-
-## Override Handling
-
-An explicit higher-priority instruction may override a repository convention, but it must not erase safety requirements imposed by a higher authority. Record material overrides in the plan or report.
+Higher-priority instructions can supersede repository guidance, but not requirements imposed by higher authorities. Record material overrides and their reason.
