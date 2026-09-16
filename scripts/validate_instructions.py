@@ -39,28 +39,30 @@ def fail(message: str) -> None:
     print(f"FAIL: {message}")
 
 
-def main() -> int:
-    failures: list[str] = []
-
+def validate_required_paths(failures: list[str]) -> None:
     for rel in REQUIRED_PATHS:
         if not (ROOT / rel).exists():
             failures.append(f"missing required path: {rel}")
 
-    for rel in [
+
+def validate_governance_markers(failures: list[str]) -> None:
+    governance_files = [
         ".ai/self-improvement/SKILL.md",
         ".ai/self-improvement/rules.md",
         ".ai/self-improvement/feedback-loop.md",
         ".github/agents/self-improvement.agent.md",
-        "AGENTS.md",
-    ]:
+    ]
+    for rel in governance_files:
         path = ROOT / rel
         if not path.exists():
             continue
         text = path.read_text(encoding="utf-8", errors="ignore").lower()
         missing = [marker for marker in GOVERNANCE_MARKERS if marker not in text]
-        if missing and rel != "AGENTS.md":
+        if missing:
             failures.append(f"{rel} is missing governance marker(s): {', '.join(missing)}")
 
+
+def validate_links(failures: list[str]) -> None:
     for path in ROOT.rglob("*.md"):
         if ".git" in path.parts:
             continue
@@ -78,22 +80,40 @@ def main() -> int:
             if not candidate.exists():
                 failures.append(f"broken link in {rel}: {target}")
 
-    agent = ROOT / ".github/agents/self-improvement.agent.md"
-    if agent.exists():
-        text = agent.read_text(encoding="utf-8", errors="ignore")
-        if not text.startswith("---\n") or "description:" not in text.split("---", 2)[1]:
-            failures.append("custom agent frontmatter is missing required description")
-        if "OBSERVE → RECORD → CLASSIFY" not in text:
-            failures.append("custom agent is missing the controlled improvement loop")
 
+def validate_custom_agent(failures: list[str]) -> None:
+    agent = ROOT / ".github/agents/self-improvement.agent.md"
+    if not agent.exists():
+        return
+    text = agent.read_text(encoding="utf-8", errors="ignore")
+    parts = text.split("---", 2)
+    if len(parts) < 3 or not parts[0].strip() == "":
+        failures.append("custom agent frontmatter is missing required YAML delimiters")
+    elif "description:" not in parts[1]:
+        failures.append("custom agent frontmatter is missing required description")
+    if "OBSERVE → RECORD → CLASSIFY" not in text:
+        failures.append("custom agent is missing the controlled improvement loop")
+
+
+def validate_workflows(failures: list[str]) -> None:
     workflow_dir = ROOT / ".github/workflows"
-    if workflow_dir.exists():
-        for workflow in workflow_dir.glob("*.y*ml"):
-            text = workflow.read_text(encoding="utf-8", errors="ignore")
-            if "workflow_dispatch" not in text:
-                failures.append(f"automation workflow lacks workflow_dispatch: {workflow.relative_to(ROOT)}")
-            if "permissions:" not in text:
-                failures.append(f"automation workflow lacks explicit permissions: {workflow.relative_to(ROOT)}")
+    if not workflow_dir.exists():
+        return
+    for workflow in workflow_dir.glob("*.y*ml"):
+        text = workflow.read_text(encoding="utf-8", errors="ignore")
+        if "workflow_dispatch" not in text:
+            failures.append(f"automation workflow lacks workflow_dispatch: {workflow.relative_to(ROOT)}")
+        if "permissions:" not in text:
+            failures.append(f"automation workflow lacks explicit permissions: {workflow.relative_to(ROOT)}")
+
+
+def main() -> int:
+    failures: list[str] = []
+    validate_required_paths(failures)
+    validate_governance_markers(failures)
+    validate_links(failures)
+    validate_custom_agent(failures)
+    validate_workflows(failures)
 
     if failures:
         for failure in failures:
