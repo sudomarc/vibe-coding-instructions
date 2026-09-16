@@ -57,7 +57,7 @@ Every proposal must identify:
 - confidence;
 - approval requirement.
 
-Confidence is evidence quality, not permission.
+Confidence is evidence quality, not authorization. Confidence is evidence quality, never authorization to change governance.
 
 ## Anti-Drift Rule
 
