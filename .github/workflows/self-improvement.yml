@@ -1,0 +1,252 @@
+name: Self-Improvement Cycle
+
+on:
+  schedule:
+    - cron: "15 4 * * 1"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Collection window mode"
+        required: true
+        default: weekly
+        type: choice
+        options:
+          - daily
+          - weekly
+          - manual
+      window_days:
+        description: "Evidence window in days"
+        required: true
+        default: "7"
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+    outputs:
+      has_candidates: ${{ steps.detect.outputs.has_candidates }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Collect deterministic evidence
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          mode="weekly"
+          days="7"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            mode="${{ inputs.mode }}"
+            days="${{ inputs.window_days }}"
+          fi
+          python3 scripts/self_improvement_cycle.py --mode "$mode" --days "$days"
+
+      - name: Publish cycle summary
+        run: cat cycle-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Detect candidate signals
+        id: detect
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          report = json.loads(Path("cycle-report.json").read_text(encoding="utf-8"))
+          print("has_candidates=" + ("true" if report["candidate_signals"] else "false"))
+          PY
+
+      - name: Create durable signal issue
+        if: steps.detect.outputs.has_candidates == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          title="Self-improvement cycle — ${{ github.run_id }}"
+          gh issue create \
+            --title "$title" \
+            --body-file cycle-report.md
+
+      - name: Upload cycle evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: self-improvement-cycle-${{ github.run_id }}
+          path: |
+            cycle-report.json
+            cycle-report.md
+          if-no-files-found: error
+
+  improve:
+    needs: collect
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Download cycle evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: self-improvement-cycle-${{ github.run_id }}
+
+      - name: Skip AI phase when there is no signal
+        if: needs.collect.outputs.has_candidates != 'true'
+        run: echo "No deterministic candidate signal; no AI change requested."
+
+      - name: Check Copilot automation credential
+        if: needs.collect.outputs.has_candidates == 'true'
+        id: auth
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          if [ -n "${COPILOT_GITHUB_TOKEN:-}" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "COPILOT_GITHUB_TOKEN is not configured; the evidence-only cycle is complete." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Set up Node.js
+        if: steps.auth.outputs.available == 'true'
+        uses: actions/setup-node@v7
+
+      - name: Install GitHub Copilot CLI
+        if: steps.auth.outputs.available == 'true'
+        run: npm install -g @github/copilot
+
+      - name: Create isolated improvement branch
+        if: steps.auth.outputs.available == 'true'
+        env:
+          BRANCH: auto/self-improvement-${{ github.run_id }}
+          BASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git switch -c "$BRANCH" "$BASE_SHA"
+          echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
+          echo "BASE_SHA=$BASE_SHA" >> "$GITHUB_ENV"
+
+      - name: Run the self-improvement agent
+        if: steps.auth.outputs.available == 'true'
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          COPILOT_AUTO_UPDATE: "false"
+        run: |
+          set -euo pipefail
+          copilot \
+            --agent=self-improvement \
+            --prompt="$(cat .github/prompts/self-improvement-cycle.prompt.md)" \
+            --allow-tool='shell(git diff:*)' \
+            --allow-tool='shell(git status:*)' \
+            --allow-tool='shell(git log:*)' \
+            --allow-tool='shell(git show:*)' \
+            --allow-tool='shell(git ls-files:*)' \
+            --allow-tool='shell(git grep:*)' \
+            --allow-tool='shell(python3:*)' \
+            --allow-tool=write \
+            --secret-env-vars=COPILOT_GITHUB_TOKEN \
+            --no-ask-user \
+            --output-format=text
+
+      - name: Reject unauthorized governance edits
+        if: steps.auth.outputs.available == 'true'
+        env:
+          BASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only "$BASE_SHA")"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -Eq '^\.ai/core/|^\.github/agents/|^\.ai/self-improvement/rules\.md$'; then
+            echo "Governance-critical files changed in unattended mode. The agent must propose, not apply, governance changes." >&2
+            exit 1
+          fi
+
+      - name: Validate framework
+        if: steps.auth.outputs.available == 'true'
+        run: python3 scripts/validate_instructions.py
+
+      - name: Inspect diff
+        if: steps.auth.outputs.available == 'true'
+        env:
+          BASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git diff --check "$BASE_SHA"
+          git diff --stat "$BASE_SHA"
+          git diff --name-only "$BASE_SHA"
+
+      - name: Stop when agent produced no change
+        if: steps.auth.outputs.available == 'true'
+        id: changes
+        env:
+          BASE_SHA: ${{ github.sha }}
+        run: |
+          if git diff --quiet "$BASE_SHA"; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push reviewable change
+        if: steps.auth.outputs.available == 'true' && steps.changes.outputs.has_changes == 'true'
+        env:
+          BRANCH: auto/self-improvement-${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat(self-improvement): apply controlled cycle"
+          git push --set-upstream origin "$BRANCH"
+
+      - name: Open draft pull request
+        if: steps.auth.outputs.available == 'true' && steps.changes.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: auto/self-improvement-${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          {
+            echo "# Controlled self-improvement"
+            echo
+            echo "This draft PR was produced by the repository's evidence-driven improvement cycle."
+            echo
+            echo "## Evidence"
+            cat cycle-report.md
+            echo
+            echo "## Validation"
+            echo "- \\`python3 scripts/validate_instructions.py\\` passed in the workflow."
+            echo "- \\`git diff --check\\` passed in the workflow."
+            echo "- The final diff was inspected before the PR was opened."
+            echo
+            echo "## Governance"
+            echo "Governance-critical files are blocked from unattended application. A governed proposal requires explicit human approval before merge/application."
+            echo
+            echo "## Measurement"
+            echo "Measure the target signal after merge and record the outcome under \\`.ai/self-improvement/records/outcomes/\\`."
+          } > pr-body.md
+          gh pr create \
+            --draft \
+            --base main \
+            --head "$BRANCH" \
+            --title "feat(self-improvement): evidence-driven improvement cycle" \
+            --body-file pr-body.md
