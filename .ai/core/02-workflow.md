@@ -1,79 +1,49 @@
 # Workflow
 
-## Stage 0 — Inspect
+## REQUEST
 
-Before planning, inspect repository status, applicable instructions, project shape, target files, nearby tests, and existing patterns.
+Translate the request into an observable outcome, constraints, and completion criteria.
 
-### Output
+## UNDERSTAND
 
-`Observed:` repository facts and current state.
+Separate facts, assumptions, unknowns, conflicts, and user decisions.
 
-`Unknown:` information that remains missing.
+## INSPECT
 
-`Constraints:` relevant rules.
+Inspect status, applicable instructions, repository topology, manifests, target files, tests, tooling, and analogous implementations.
 
-### Stop Conditions
+## CLARIFY / ASSUME
 
-Stop if the target cannot be located, requirements conflict materially, or a required authorization is missing.
+Clarify only decisions that materially change the result. Otherwise make the smallest safe assumption and state it.
 
-## Stage 1 — PLAN
+## PLAN
 
-State the observable goal, bounded scope, affected areas, key decisions, risks, dependencies, verification, and approval state.
+For significant work, record objective, scope, non-goals, affected files, decisions, dependencies, risks, verification, rollback, and completion criteria. Trivial work may use a one-line plan.
 
-### Output
+## IMPLEMENT
 
-```text
-PLAN
-Goal:
-Scope:
-Files:
-Decisions:
-Risks:
-Verification:
-Approval:
-```
+Use logical batches. Keep batches independently inspectable and verify after meaningful changes.
 
-### Stop Conditions
+## TEST
 
-Do not implement when architecture is materially ambiguous or approval is required and absent.
+Choose the smallest meaningful test set for the current batch, then expand coverage when risk warrants it.
 
-## Stage 2 — IMPLEMENT
+## REVIEW
 
-Execute one logical batch at a time. After each batch, inspect the resulting diff and run focused verification. Do not silently widen the batch because another improvement appears convenient.
+Inspect the diff for correctness, scope, regressions, security, maintainability, compatibility, tests, and documentation.
 
-### Output
+## VERIFY
 
-```text
-BATCH
-Purpose:
-Changed:
-Checks:
-Result:
-Next:
-```
+Use concrete evidence and distinguish `VERIFIED` from `UNVERIFIED`. Never infer successful deployment or production health from a completed command alone.
 
-### Stop Conditions
+## DOCUMENT
 
-Stop when a batch fails unexpectedly, exposes a new design decision, requires dangerous action, or expands scope.
+Update only documentation made stale or required by the change. Record decisions and non-obvious constraints.
 
-## Stage 3 — VERIFY
+## REPORT
 
-Run appropriate tests, linters, type checks, builds, integration checks, or runtime inspection. Re-run regressions after fixes. Inspect the final diff.
+Use an evidence-first summary: Status, Changed, Verified, Not Verified, Risks, Next.
 
-### Output
+## Stop conditions
 
-```text
-VERIFY
-Checks run:
-Evidence:
-Failures:
-Remaining uncertainty:
-```
-
-## Final Report
-
-Separate implementation facts from evaluation. Report files changed, commands actually run, results, and limitations.
-
-## Interruptions
-
-When interrupted, preserve the current batch state. Do not restart from memory. Create a handoff with current repository status, completed work, evidence, blockers, and exact next actions.
+Stop before editing when target location is unknown, a material instruction conflict exists, architecture is insufficiently understood, or high-risk authorization is missing.
