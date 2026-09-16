@@ -1,20 +1,27 @@
 # Learning Record
 
-Use this structure for a bounded learning record.
+Use this structure for a bounded learning record that can be audited across cycles.
 
-- ID:
-- Date:
-- Category: local / workflow / skill / provider / governance
-- Observation:
-- Evidence:
-- User feedback:
-- Impact:
-- Root-cause hypothesis:
-- Alternative explanations considered:
-- Confidence: low / medium / high
-- Recurrence count:
-- Affected guidance:
-- Proposal ID:
-- Status: observed / investigating / proposed / resolved / rejected
+```yaml
+id: "LR-YYYY-NNN"
+date: "YYYY-MM-DD"
+category: "local|workflow|documentation|skill|provider|tooling|governance"
+classification: "ONE_OFF_FAILURE|RECURRING_FAILURE|SYSTEMIC_FAILURE"
+observation: ""
+evidence: []
+user_feedback: []
+impact: ""
+scope: ""
+facts: []
+root_cause_hypothesis: ""
+alternative_explanations: []
+confidence: "low|medium|high"
+recurrence_count: 0
+affected_guidance: []
+affected_files: []
+proposal_id: null
+status: "observed|investigating|proposed|resolved|rejected"
+result: null
+```
 
-Record evidence, not assumptions. Do not store secrets or unnecessary personal information.
+Record facts and evidence first. User feedback is evidence when explicitly available; it is not a license to weaken governance. Do not store secrets or unnecessary personal information.
