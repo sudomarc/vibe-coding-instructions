@@ -77,13 +77,24 @@ The system explicitly supports `ADD`, `REMOVE`, `MERGE`, `SIMPLIFY`, and `REPLAC
 
 ## GitHub integration
 
-The repository contains the official repository-level Custom Agent profile at `.github/agents/self-improvement.agent.md`. GitHub documents repository custom agents under `.github/agents/` and supports `.agent.md` profiles with YAML frontmatter. citeturn126286search0turn126286search5
+The repository contains the repository-level Custom Agent profile at `.github/agents/self-improvement.agent.md`. GitHub's current documentation supports repository custom agents under `.github/agents/` and `.agent.md` profiles with YAML frontmatter:
 
-A weekly GitHub Actions workflow at `.github/workflows/self-improvement.yml` runs deterministic collection, stores the run evidence as an artifact, and creates an issue when candidate signals are found. When `COPILOT_GITHUB_TOKEN` is configured, the workflow can additionally invoke the custom agent in an isolated branch and open a draft pull request after validation. GitHub documents Copilot CLI automation from Actions and recommends minimal tool permissions in automated runs. citeturn693570search2turn627179search4
+https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents
+https://docs.github.com/en/copilot/reference/custom-agents-configuration
 
-Because this is a user-owned repository, the repository cannot be assumed to have the organization-level Copilot billing path for the built-in `GITHUB_TOKEN` flow. The documented personal-token route is `COPILOT_GITHUB_TOKEN`; configuring that secret and an eligible Copilot plan is an external prerequisite that this repository cannot verify by itself. citeturn721340search0turn693570search0
+A weekly GitHub Actions workflow at `.github/workflows/self-improvement.yml` runs deterministic collection, stores the run evidence as an artifact, and creates an issue when candidate signals are found. When `COPILOT_GITHUB_TOKEN` is configured, the workflow can additionally invoke the custom agent in an isolated branch and open a draft pull request after validation. GitHub documents Copilot CLI automation from Actions and recommends minimal tool permissions in automated runs:
 
-The workflow uses weekly scheduling plus manual dispatch. GitHub Actions supports scheduled workflows and `workflow_dispatch`; scheduled workflows run from the latest commit on the default branch. citeturn837776search0
+https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions
+https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically
+
+Because this is a user-owned repository, the organization-only built-in `GITHUB_TOKEN` Copilot billing path cannot be assumed. The documented personal-token route is `COPILOT_GITHUB_TOKEN`; configuring that secret and an eligible Copilot plan is an external prerequisite that this repository cannot verify by itself:
+
+https://docs.github.com/en/copilot/how-tos/github-agentic-workflows/creating-github-agentic-workflows
+https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli
+
+The workflow uses weekly scheduling plus manual dispatch. GitHub Actions supports scheduled workflows and `workflow_dispatch`; scheduled workflows run from the latest commit on the default branch:
+
+https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax
 
 ## Validation
 
