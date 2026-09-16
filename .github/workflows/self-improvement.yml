@@ -138,10 +138,12 @@ jobs:
         if: steps.auth.outputs.available == 'true'
         env:
           BRANCH: auto/self-improvement-${{ github.run_id }}
+          BASE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          git switch -c "$BRANCH"
+          git switch -c "$BRANCH" "$BASE_SHA"
           echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
+          echo "BASE_SHA=$BASE_SHA" >> "$GITHUB_ENV"
 
       - name: Run the self-improvement agent
         if: steps.auth.outputs.available == 'true'
@@ -153,7 +155,12 @@ jobs:
           copilot \
             --agent=self-improvement \
             --prompt="$(cat .github/prompts/self-improvement-cycle.prompt.md)" \
-            --allow-tool='shell(git:*)' \
+            --allow-tool='shell(git diff:*)' \
+            --allow-tool='shell(git status:*)' \
+            --allow-tool='shell(git log:*)' \
+            --allow-tool='shell(git show:*)' \
+            --allow-tool='shell(git ls-files:*)' \
+            --allow-tool='shell(git grep:*)' \
             --allow-tool='shell(python3:*)' \
             --allow-tool=write \
             --secret-env-vars=COPILOT_GITHUB_TOKEN \
@@ -162,12 +169,13 @@ jobs:
 
       - name: Reject unauthorized governance edits
         if: steps.auth.outputs.available == 'true'
+        env:
+          BASE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          changed="$(git diff --name-only HEAD)"
+          changed="$(git diff --name-only "$BASE_SHA")"
           printf '%s\n' "$changed"
-          if printf '%s\n' "$changed" | grep -Eq '(^|/)(\.ai/core/|\.github/agents/)' || \
-             printf '%s\n' "$changed" | grep -Eq '^\.ai/self-improvement/rules\.md$'; then
+          if printf '%s\n' "$changed" | grep -Eq '^\.ai/core/|^\.github/agents/|^\.ai/self-improvement/rules\.md$'; then
             echo "Governance-critical files changed in unattended mode. The agent must propose, not apply, governance changes." >&2
             exit 1
           fi
@@ -178,17 +186,21 @@ jobs:
 
       - name: Inspect diff
         if: steps.auth.outputs.available == 'true'
+        env:
+          BASE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          git diff --check
-          git diff --stat
-          git diff --name-only
+          git diff --check "$BASE_SHA"
+          git diff --stat "$BASE_SHA"
+          git diff --name-only "$BASE_SHA"
 
       - name: Stop when agent produced no change
         if: steps.auth.outputs.available == 'true'
         id: changes
+        env:
+          BASE_SHA: ${{ github.sha }}
         run: |
-          if git diff --quiet HEAD; then
+          if git diff --quiet "$BASE_SHA"; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
