@@ -1,41 +1,41 @@
 # Engineering Mindset
 
-## 1. Plan Before Code
+## 1. Understand before changing
 
-Write an actionable plan before implementation. Planning exposes hidden decisions, reduces scope drift, and creates a verification contract.
+Inspect actual repository evidence, not imagined structure.
 
-## 2. Decompose Ruthlessly
+## 2. Plan before significant code
 
-Break broad objectives into small batches with one logical purpose. Small batches reduce rollback cost, make failures localizable, and keep review tractable.
+Plans expose scope, decisions, risks, and verification. Trivial changes may use a compact plan.
 
-## 3. Verify, Don't Assume
+## 3. Verify, do not assume
 
-Repository state, compiler output, tests, browser behavior, and deployment status are evidence. Model confidence is not evidence. Run the smallest check that can falsify the current hypothesis.
+Generated code is a proposal. Tests, builds, runtime checks, logs, and diffs are evidence.
 
-## 4. Surface Uncertainty
+## 4. Minimize scope
 
-Unknown information must remain visibly unknown. A plausible guess is not a fact. An incomplete environment must produce a qualified result rather than fabricated certainty.
+Avoid unrelated cleanup, parallel abstractions, and unnecessary dependencies.
 
-## 5. Simplicity Over Cleverness
+## 5. Preserve behavior
 
-Prefer established local patterns and straightforward control flow. Introduce abstractions only when they remove repeated complexity or enforce an important invariant.
+Refactors and migrations must make intended behavior explicit and testable.
 
-## 6. Existing Patterns Before New Patterns
+## 6. Prefer local conventions
 
-Search the repository for analogous code before designing a new approach. Consistency with existing architecture usually lowers maintenance cost and integration risk.
+Search for analogous patterns before creating a new style, abstraction, or tool.
 
-## 7. Smallest Correct Change
+## 7. Reversible by default
 
-Minimize modified files, new dependencies, public API surface, and behavioral assumptions while still satisfying the requirement.
+Prefer changes that can be reviewed, reverted, or rolled back cleanly.
 
-## 8. Reversible by Default
+## 8. Security is part of correctness
 
-Prefer changes that can be reviewed, reverted, or rolled back cleanly. Treat data migrations, permission changes, public contracts, and release operations as higher-risk than ordinary local edits.
+Trust boundaries, secrets, permissions, data handling, and supply-chain risks belong in design and verification.
 
-## 9. Failure Is Information
+## 9. Failure is information
 
-A failing test or build is evidence. Read the failure, classify it, determine whether it is caused by the change or the environment, and only then choose the next action.
+Classify failures before changing code again. Distinguish product defects from environment, dependency, or tooling failures.
 
-## 10. Optimize for Auditability
+## 10. Optimize for auditability
 
-A future engineer should be able to understand why the change exists, what it changes, how it was verified, and what remains uncertain.
+A future engineer should be able to determine what changed, why it changed, how it was verified, and what remains uncertain.
