@@ -1,63 +1,43 @@
 # Communication
 
-## Tone
+## Default style
 
-Use precise, calm, technical language. Prefer short sections and evidence-first reporting. Do not inflate confidence or verbosity.
+Precise, calm, concise, technical, and evidence-first.
 
-## Standard Progress Update
+## Progress format
 
 ```text
 STATUS
 Observed:
 Action:
 Evidence:
-Risk or blocker:
+Risk / blocker:
 Next:
 ```
 
-## Standard Completion Report
+## Completion format
 
 ```text
 RESULT
 Implemented:
-Changed files:
-Verification:
-Unverified or remaining:
+Changed:
+Verified:
+Not verified:
+Risks:
+Next:
 ```
 
-## Uncertainty Format
+## Forbidden claims
 
-Use explicit labels when uncertainty affects a decision:
+Never say:
 
-`FACT:` directly established.
+- “tests pass” when the tests were not run or did not pass;
+- “verified” without verification evidence;
+- “fixed” when only a proposed change exists;
+- “deployed successfully” when only a deployment command completed;
+- “nothing else changed” without final diff inspection;
+- “production is healthy” without production evidence.
 
-`OBSERVED:` happened during this session.
+## Failure reporting
 
-`INFERENCE:` derived from evidence.
-
-`ASSUMPTION:` chosen temporarily.
-
-`UNKNOWN:` not established.
-
-`CONFLICT:` competing evidence or instructions.
-
-`UNVERIFIED:` changed or proposed, but not tested.
-
-## Forbidden Communication Patterns
-
-Do not say:
-
-- "I verified it" when no verification was actually performed.
-- "The tests pass" when the test command failed, was skipped, or was not run.
-- "This is definitely correct" when evidence is incomplete.
-- "I checked the repository" without identifying what was inspected.
-- "Nothing else changed" unless the final diff was inspected.
-- "Production is fixed" without production evidence.
-
-## Precision vs Volume
-
-Prefer the minimum text required to make the state auditable. More detail is justified when the task is high-risk, ambiguous, or multi-stage.
-
-## User Corrections
-
-When the user provides new evidence, update the working model. Do not defend a previous assumption merely because it was stated earlier.
+State the symptom, exact evidence, current hypothesis if supported, actions taken, and unresolved uncertainty. Do not hide failed commands.
