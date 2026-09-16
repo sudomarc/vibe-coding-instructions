@@ -1,92 +1,79 @@
-# Standard Workflow
+# Workflow
 
-## Overview
+## Stage 0 — Inspect
 
-All ordinary implementation follows three operational stages:
+Before planning, inspect repository status, applicable instructions, project shape, target files, nearby tests, and existing patterns.
 
-1. **PLAN**
-2. **IMPLEMENT**
-3. **VERIFY**
+### Output
 
-The full communication loop is:
+`Observed:` repository facts and current state.
 
-`PROMPT → PLAN → IMPLEMENT → VERIFY → REPORT`
+`Unknown:` information that remains missing.
+
+`Constraints:` relevant rules.
+
+### Stop Conditions
+
+Stop if the target cannot be located, requirements conflict materially, or a required authorization is missing.
 
 ## Stage 1 — PLAN
 
-Inspect the repository and relevant instructions before changing files.
+State the observable goal, bounded scope, affected areas, key decisions, risks, dependencies, verification, and approval state.
 
-Produce:
+### Output
 
-```markdown
-## Plan
-Goal: ...
-Scope: ...
-Files: ...
-Decisions: ...
-Risks: ...
-Verification: ...
+```text
+PLAN
+Goal:
+Scope:
+Files:
+Decisions:
+Risks:
+Verification:
+Approval:
 ```
 
-Stop if a required decision or approval is missing.
+### Stop Conditions
 
-### Plan stop conditions
-
-- requirements are materially ambiguous;
-- a destructive action is required without authorization;
-- a repository rule conflicts with the request and cannot be resolved;
-- a critical external dependency cannot be verified;
-- implementation would exceed the agreed scope.
+Do not implement when architecture is materially ambiguous or approval is required and absent.
 
 ## Stage 2 — IMPLEMENT
 
-Use the implementation skill when the task is non-trivial. Work in bounded batches, normally one logical unit and fewer than 50 changed lines where practical.
+Execute one logical batch at a time. After each batch, inspect the resulting diff and run focused verification. Do not silently widen the batch because another improvement appears convenient.
 
-After each batch report:
+### Output
 
-```markdown
-### Batch N
-Changed: ...
-Reason: ...
-Verification: ...
-Next: ...
+```text
+BATCH
+Purpose:
+Changed:
+Checks:
+Result:
+Next:
 ```
 
-Do not mix unrelated refactors into a batch merely because the file is open.
+### Stop Conditions
+
+Stop when a batch fails unexpectedly, exposes a new design decision, requires dangerous action, or expands scope.
 
 ## Stage 3 — VERIFY
 
-Perform checks appropriate to the risk: targeted tests, broader tests, type checking, linting, formatting, build, smoke test, or manual inspection.
+Run appropriate tests, linters, type checks, builds, integration checks, or runtime inspection. Re-run regressions after fixes. Inspect the final diff.
 
-Then inspect the diff and repository status.
+### Output
 
-Report:
-
-```markdown
-## Verification
-Passed: ...
-Failed: ...
-Not run: ...
-Evidence: ...
-Remaining uncertainty: ...
+```text
+VERIFY
+Checks run:
+Evidence:
+Failures:
+Remaining uncertainty:
 ```
+
+## Final Report
+
+Separate implementation facts from evaluation. Report files changed, commands actually run, results, and limitations.
 
 ## Interruptions
 
-When the user changes direction, stop new implementation and update the plan. Preserve correct work already completed unless the new instruction explicitly supersedes it.
-
-When a tool fails, do not conceal it. Diagnose the failure, determine whether retrying is safe, and report the actual state.
-
-## Completion gate
-
-Do not say “done” until:
-
-- scope is implemented;
-- relevant checks ran;
-- diff was inspected;
-- unresolved failures are explicit;
-- no unauthorized destructive action was taken.
-
-## Short tasks
-
-For a one-line safe change, the plan can be implicit in a concise action note, but the invariant remains: understand the target and verify the change.
+When interrupted, preserve the current batch state. Do not restart from memory. Create a handoff with current repository status, completed work, evidence, blockers, and exact next actions.

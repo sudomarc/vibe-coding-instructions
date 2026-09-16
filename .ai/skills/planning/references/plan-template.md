@@ -1,70 +1,33 @@
-# Expanded Plan Template
+# Expanded Planning Template
 
-## Goal
+## Outcome
 
-State the user-visible or system-observable outcome in one sentence.
-
-## Context
-
-Summarize the relevant repository facts discovered during inspection.
+Describe the observable result in one paragraph.
 
 ## Scope
 
-### Included
+List what changes and what explicitly does not change.
 
-- Feature or behavior explicitly requested.
-- Necessary supporting changes.
-- Verification work required to establish correctness.
+## Evidence
 
-### Excluded
+Record repository files, existing patterns, commands, and external sources that establish the current state.
 
-- Unrelated refactors.
-- Cosmetic changes without task value.
-- Speculative future architecture.
+## Design
 
-## Files
+Describe components, interfaces, data flow, and state transitions only to the depth required by the task.
 
-| File | Action | Purpose | Risk |
-|---|---|---|---|
-| `path/to/file` | modify | behavior | low |
-| `path/to/test` | add | regression | low |
+## Decision Log
 
-## Decisions
+Record consequential choices and why alternatives were rejected.
 
-Record concrete choices, not implementation narration.
+## Risk Register
 
-Examples:
+For each risk, include trigger, impact, mitigation, and rollback path.
 
-- Reuse the existing validation helper instead of adding another validator.
-- Keep the existing API shape to avoid breaking consumers.
-- Add a focused test before a broad integration test.
+## Verification Matrix
 
-## Dependencies
-
-List new packages, services, environment variables, migrations, or external APIs. State whether each is already present.
-
-## Risks
-
-For each material risk, provide mitigation or a reason it is accepted.
-
-## Verification
-
-Define checks before implementation:
-
-1. targeted unit test;
-2. type check;
-3. lint or format check;
-4. build or smoke test when applicable;
-5. diff and status inspection.
+Map each requirement to at least one verification method.
 
 ## Approval
 
-State one of:
-
-- `not required` — task is clearly authorized within existing scope;
-- `required and received` — approval was explicitly given;
-- `required and pending` — do not implement yet.
-
-## Exit criteria
-
-The plan is ready when another engineer could implement it without reconstructing the missing decisions.
+Record whether implementation may proceed without an additional approval checkpoint.

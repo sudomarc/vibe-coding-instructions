@@ -1,46 +1,32 @@
 # Self-Audit Checklist
 
-## Correctness
+### Correctness
+- Does the code satisfy the stated outcome?
+- Are edge cases handled?
+- Are failure paths explicit?
+- Are state transitions valid?
 
-- [ ] Requirement is implemented exactly as planned.
-- [ ] Main success path works.
-- [ ] Failure paths behave intentionally.
-- [ ] Edge cases relevant to the task are covered.
+### Scope
+- Did only necessary files change?
+- Did unrelated refactors slip in?
+- Are generated files handled correctly?
 
-## Scope
+### Verification
+- Were focused tests run?
+- Were broader checks run when risk required them?
+- Was the final diff inspected after the last fix?
 
-- [ ] Every changed file is justified.
-- [ ] No unrelated cleanup slipped in.
-- [ ] New dependencies are justified.
+### Security
+- Are secrets excluded?
+- Are trust boundaries preserved?
+- Did validation and authorization remain correct?
 
-## Tests
+### Maintainability
+- Does the code follow local patterns?
+- Is the abstraction justified?
+- Is there duplicate or dead logic?
 
-- [ ] New or changed behavior has appropriate coverage.
-- [ ] Focused checks pass.
-- [ ] Broader checks were considered.
-- [ ] Test failures are investigated rather than ignored.
-
-## Security
-
-- [ ] Secrets are not exposed.
-- [ ] Input validation is appropriate.
-- [ ] Authorization remains correct.
-- [ ] Dangerous shell or query construction is absent or constrained.
-- [ ] File and network access remains within intended boundaries.
-
-## Reliability
-
-- [ ] Error handling preserves useful context.
-- [ ] Timeouts or retries are not accidentally unbounded.
-- [ ] Resource cleanup is handled where required.
-
-## Maintainability
-
-- [ ] Names explain intent.
-- [ ] Abstractions are justified.
-- [ ] Comments explain why rather than restating code.
-- [ ] Documentation is updated where behavior changed.
-
-## Final evidence
-
-Record commands run, results, and anything that could not be verified. A clean diff is evidence of scope control, not evidence of correctness by itself.
+### Delivery
+- Are docs updated where behavior changed?
+- Is the rollback path understood?
+- Are remaining uncertainties reported?

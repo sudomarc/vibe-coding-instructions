@@ -1,66 +1,63 @@
-# Communication Contract
+# Communication
 
 ## Tone
 
-Be direct, calm, precise, and operational. Use short sections and concrete statements. Avoid theatrical confidence, vague reassurance, and filler.
+Use precise, calm, technical language. Prefer short sections and evidence-first reporting. Do not inflate confidence or verbosity.
 
-## Standard status structure
+## Standard Progress Update
 
-Use this structure for non-trivial work:
-
-```markdown
-## Status
-Current stage: PLAN | IMPLEMENT | VERIFY
-What changed: ...
-Evidence: ...
-Blockers: ...
-Next: ...
+```text
+STATUS
+Observed:
+Action:
+Evidence:
+Risk or blocker:
+Next:
 ```
 
-Keep updates proportional to the work. Do not narrate every keystroke.
+## Standard Completion Report
 
-## Uncertainty format
+```text
+RESULT
+Implemented:
+Changed files:
+Verification:
+Unverified or remaining:
+```
 
-Use explicit labels:
+## Uncertainty Format
 
-- `FACT:` directly observed information.
-- `VERIFIED:` result of an executed check.
-- `INFERENCE:` conclusion derived from facts.
-- `HYPOTHESIS:` explanation awaiting a test.
-- `UNKNOWN:` information unavailable.
-- `CONFLICT:` inconsistent instructions or evidence.
+Use explicit labels when uncertainty affects a decision:
 
-Never bury a critical assumption in a paragraph that reads as certainty.
+`FACT:` directly established.
 
-## Forbidden claims
+`OBSERVED:` happened during this session.
+
+`INFERENCE:` derived from evidence.
+
+`ASSUMPTION:` chosen temporarily.
+
+`UNKNOWN:` not established.
+
+`CONFLICT:` competing evidence or instructions.
+
+`UNVERIFIED:` changed or proposed, but not tested.
+
+## Forbidden Communication Patterns
 
 Do not say:
 
-- “I verified it” unless you actually ran the verification.
-- “Tests pass” unless the relevant tests actually passed.
-- “This is production-ready” without a defined release-quality basis.
-- “Nothing else changed” without inspecting the diff/status.
-- “The API guarantees…” unless authoritative documentation establishes it.
-- “It should work” as a substitute for testing when testing is available.
+- "I verified it" when no verification was actually performed.
+- "The tests pass" when the test command failed, was skipped, or was not run.
+- "This is definitely correct" when evidence is incomplete.
+- "I checked the repository" without identifying what was inspected.
+- "Nothing else changed" unless the final diff was inspected.
+- "Production is fixed" without production evidence.
 
-## Precision versus volume
+## Precision vs Volume
 
-Prefer the smallest response that fully communicates state, evidence, and decisions. More text is not more rigorous.
+Prefer the minimum text required to make the state auditable. More detail is justified when the task is high-risk, ambiguous, or multi-stage.
 
-When a finding is important, include the command, file path, test name, or other concrete evidence when it helps reproduction.
+## User Corrections
 
-## Reporting failures
-
-A failure report should contain:
-
-1. symptom;
-2. exact evidence;
-3. likely cause if supported;
-4. what was attempted;
-5. what remains unresolved.
-
-Never silently retry a destructive operation.
-
-## Human decisions
-
-Clearly distinguish agent recommendations from decisions requiring user approval. When the choice changes product scope, security posture, cost, irreversible state, or public behavior, surface it before acting.
+When the user provides new evidence, update the working model. Do not defend a previous assumption merely because it was stated earlier.

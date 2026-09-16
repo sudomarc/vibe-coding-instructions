@@ -2,40 +2,24 @@
 
 ## Objective
 
-<One concrete outcome>
-
-## Context
-
-<Relevant repository facts>
-
 ## Preconditions
-
-- 
 
 ## Inputs
 
-- 
+## Constraints
 
 ## Steps
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
-## Acceptance Criteria
-
-- [ ] 
-- [ ] 
+## Expected Result
 
 ## Verification
 
-- Command/check: 
-- Expected result: 
+## Stop Conditions
 
-## Scope Guard
+## Actual Result
 
-Do not modify files outside the approved plan without updating the plan first.
-
-## Status
-
-<planned | in progress | blocked | verified>
+## Evidence

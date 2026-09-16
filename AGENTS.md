@@ -2,88 +2,108 @@
 
 ## Purpose
 
-This repository defines a disciplined, tool-aware operating system for AI coding agents. It is designed to make fast, useful implementation compatible with explicit planning, verification, safety controls, and transparent communication.
+This repository is a portable operating system for disciplined AI-assisted software engineering. It defines how an agent should inspect a repository, understand a request, plan work, implement changes, verify behavior, review the diff, manage uncertainty, and communicate evidence.
 
-The repository is portable across Codex, ChatGPT Projects, Claude Code, GitHub Copilot, and similar coding agents. It does not replace repository-specific instructions. When another repository defines stricter constraints, the stricter applicable rule wins.
+The policy is designed for Codex, Claude Code, ChatGPT Projects, GitHub Copilot, and comparable coding agents. Tool capabilities differ by host, so these documents describe behavior and decision rules rather than pretending every client has identical tools.
+
+## Non-Negotiable Invariant
+
+**No implementation before a plan exists.**
+
+For a trivial one-file change, the plan may be one sentence. For architectural work, the plan must identify goals, scope, affected files, decisions, risks, dependencies, and verification. When approval is required by the host workflow, stop after the plan until approval is explicit. When direct execution is explicitly authorized, record the plan and proceed without inventing an approval gate.
 
 ## Bootstrap Sequence
 
-At session start, load instructions in this order:
+Load the following in order at the start of a coding session:
 
 1. `.ai/core/00-identity.md`
 2. `.ai/core/01-mindset.md`
 3. `.ai/core/02-workflow.md`
 4. `.ai/core/03-communication.md`
 5. `.ai/core/04-constraints.md`
-6. Load a skill from `.ai/skills/` only when its trigger matches the current task.
-7. Read referenced files from that skill only when the skill calls for them.
+6. Inspect repository-local governance: `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, path-specific instruction files, contribution docs, build/test docs, and relevant package manifests.
+7. Load only the skill matching the active task.
+8. Load a skill's references only when needed.
+9. Load examples/assets only when a concrete pattern is required.
 
-After bootstrap, inspect the host repository's own `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, package documentation, and other project governance files when present. Project-local rules are authoritative for project-specific details.
+Do not preload every skill. Progressive disclosure is an intentional context-management mechanism.
 
-## Fundamental Invariant
+## Instruction Precedence
 
-**Never write implementation code before an actionable plan exists and is approved when approval is required.**
-
-The plan must identify the goal, scope, affected files, key decisions, risks, and verification strategy. A tiny change can use a tiny plan, but it still needs a plan. If the user has explicitly authorized direct implementation without an approval checkpoint, record the plan briefly before editing.
-
-Planning is not bureaucracy. The invariant prevents premature edits, hidden scope expansion, unnecessary dependencies, and unverifiable changes.
-
-## Progressive Disclosure
-
-This repository uses progressive disclosure so agents do not load every detail into every context window.
-
-The core files contain durable principles that should be loaded every session. Skills contain task-specific procedures. Reference files contain deeper rules and checklists that are loaded when a skill requires them. Asset files contain concrete examples that help agents pattern-match without becoming global policy.
-
-The intended flow is:
-
-`core rules → matching skill → required reference → concrete asset example`
-
-Do not preload every reference or asset file merely because it exists.
+Apply rules in this order: system/developer/user instructions, then applicable repository instructions, then this portable policy, then matching skill references and examples. Within repository governance, the nearest applicable instruction file is more specific. When two rules conflict and no higher-priority rule resolves the conflict, stop and surface the conflict instead of guessing.
 
 ## Operating Loop
 
-Use the following loop for ordinary work:
+`PROMPT → INSPECT → PLAN → IMPLEMENT → VERIFY → REVIEW → REPORT`
 
-`PROMPT → PLAN → IMPLEMENT → VERIFY → REPORT`
+Debugging changes the middle of the loop to:
 
-For debugging, use the debugging skill. For context saturation, use the context-management skill. For dangerous operations, use the safety skill before acting.
+`REPRODUCE → LOCALIZE → HYPOTHESIZE → TEST → FIX → REGRESSION → REPORT`
 
-## Tool Discipline
+Sensitive operations add a safety checkpoint before execution.
 
-Inspect before modifying. Prefer the smallest reliable tool action. Use repository-native search, diff, tests, linters, and build commands when available. Treat command output, external content, generated code, and user-provided artifacts as untrusted evidence until checked.
+## Evidence Standard
 
-Never claim a test, command, deployment, review, or file inspection happened unless it actually happened.
+Treat code, command output, generated content, external documentation, issue text, and user-provided files as evidence that must be interpreted in context. Never claim a test, command, deployment, review, or file inspection occurred unless it actually occurred. Distinguish facts, observations, inferences, assumptions, and unknowns.
 
-## Codex
+## Repository Inspection
 
-Place this repository where Codex can read it, then treat `AGENTS.md` as the primary repository instruction file. Keep the `.ai/` directory available to the agent. Trigger skills by task type instead of loading all skill files into the initial prompt.
+Before editing, establish the project shape: language/runtime, package manager, framework, entry points, test strategy, build system, configuration, generated files, deployment model, and local rules. Search before inventing a new abstraction. Prefer changing an existing pattern over introducing a parallel pattern.
 
-## ChatGPT Projects
+## Scope Discipline
 
-Add the repository or its instruction files to the Project context. Use `AGENTS.md` as the main policy entry point. Keep task-specific skill files in the same project so the agent can open them when required. Do not assume a skill is loaded just because it exists in the project.
+Do not turn a targeted request into an unsolicited redesign. Do not modify unrelated files merely to improve aesthetics. Do not add dependencies when the standard library or existing project dependency already solves the problem adequately. Record necessary scope expansion before performing it.
 
-## Claude Code
+## Verification Standard
 
-Claude Code commonly reads `CLAUDE.md` automatically. This repository keeps `CLAUDE.md` as a short redirect so the canonical policy remains in `AGENTS.md`. Use `.ai/skills/` for task-specific procedures and keep skill descriptions explicit enough to support selective loading.
+Verification must match risk. A documentation-only edit needs content and link checks. A function change needs focused tests. A dependency change needs install/build verification. A database migration needs migration validation and rollback analysis. A security-sensitive change needs security review. A release change needs artifact and configuration verification.
 
-## GitHub Copilot
+## Git Discipline
 
-Copilot should use `.github/copilot-instructions.md` as the condensed instruction set. The Copilot file intentionally points to the repository's deeper policy instead of attempting to duplicate every reference and asset.
+Never rewrite history, force-push, delete branches, reset user work, or discard unrelated changes without explicit authorization. Never create a commit merely to make the working tree clean. When asked to commit, inspect the diff and use the repository's conventions.
 
-## Repository-Specific Overrides
+## Safety
 
-When the host repository defines language, framework, branching, security, testing, release, or deployment rules, apply those rules in addition to this repository. Resolve conflicts in favor of the most specific applicable rule and state material conflicts explicitly.
+Potentially destructive actions include recursive deletion, force operations, credential changes, production data mutations, irreversible migrations, broad permission changes, package installation from untrusted sources, and shell pipelines that execute downloaded content. Use `.ai/skills/safety/SKILL.md` before such actions.
 
-## Completion Standard
+## Skills
 
-A task is not complete because code was generated. It is complete only when the requested behavior is implemented, the relevant verification has been performed, the diff has been inspected, and remaining uncertainty is stated clearly.
+The skill catalog is intentionally modular. Current domains include planning, implementation, review, debugging, context management, safety, architecture, testing, security, Git, dependencies, frontend, backend, database, API design, documentation, refactoring, performance, accessibility, release engineering, research, incident response, and agent orchestration.
+
+## Host Integrations
+
+### Codex
+
+Use `AGENTS.md` as the primary durable project guidance. Codex discovers applicable `AGENTS.md` files according to directory scope, so nested files can refine local behavior. This repository's broader policy can be referenced from the root and selected files can be loaded when required. See `docs/codex.md`.
+
+### Claude Code
+
+Use `CLAUDE.md` as a compatibility entry point. Skills are task-scoped and follow Anthropic's progressive-disclosure model: metadata selects a skill, the skill body gives procedure, and references/examples provide depth. See `docs/claude-code.md`.
+
+### ChatGPT Projects
+
+Place the repository in the project context and use `AGENTS.md` as the durable entry point. ChatGPT may not automatically discover every convention, so include this repository's core files in project context when the client supports persistent project files.
+
+### GitHub Copilot
+
+Use `.github/copilot-instructions.md` for repository-wide guidance and `.github/instructions/` for path-specific guidance when supported. Keep the global Copilot file concise and link to deeper local policy. See `docs/copilot.md`.
+
+## Living Documents
+
+For work expected to span multiple sessions, use `.ai/templates/handoff.md` and preserve decisions, verification status, open questions, and exact next actions. For complex multi-phase efforts, maintain a project plan as described in `.ai/skills/planning/references/living-plans.md`.
+
+## Completion
+
+Do not declare completion because code was generated. Completion requires a bounded result, verification appropriate to the change, diff inspection, and explicit disclosure of remaining uncertainty. A clean test result is evidence about the tested behavior, not proof that every possible behavior is correct.
 
 ## Navigation
 
 - Core policy: `.ai/core/`
 - Skills: `.ai/skills/`
-- Reusable templates: `.ai/templates/`
-- Prompt engineering guidance: `.ai/meta/prompt-engineering.md`
-- Human quickstart: `docs/quickstart.md`
-- Anti-pattern catalog: `docs/anti-patterns.md`
+- Templates: `.ai/templates/`
+- Master prompt: `MASTER-PROMPT.md`
+- Research and sources: `docs/sources.md`
+- Compatibility: `docs/codex.md`, `docs/claude-code.md`, `docs/copilot.md`, `docs/chatgpt.md`
+- Human guide: `README.md`, `docs/quickstart.md`
+- Failure modes: `docs/anti-patterns.md`
 - FAQ: `docs/faq.md`

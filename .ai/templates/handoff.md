@@ -1,46 +1,27 @@
 # Handoff
 
-Date: <YYYY-MM-DD>
-Task: <task>
-Repository: <repository>
-State: <clean | modified | blocked>
-
 ## Objective
 
-<Requested outcome>
+## Current Repository State
 
-## Completed
+## Applicable Instructions
 
-- 
+## Decisions Already Made
 
 ## Files Changed
 
-- `<path>` — <purpose>
+## Verification Performed
 
-## Verification
+## Known Failures
 
-- `<command>` — <result>
+## Open Questions
 
-## Decisions
+## Risks
 
-- 
+## Exact Next Actions
 
-## Open Issues
+1.
+2.
+3.
 
-- 
-
-## Next Action
-
-<Single concrete next action>
-
-## Safety Notes
-
-<Pending high-impact actions, recovery information, or say none>
-
-## Resume Checklist
-
-- [ ] Read `AGENTS.md`.
-- [ ] Read the core files.
-- [ ] Read this handoff.
-- [ ] Inspect status and diff.
-- [ ] Re-run current-state verification.
+## Completion Criteria

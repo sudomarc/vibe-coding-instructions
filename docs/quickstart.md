@@ -1,57 +1,29 @@
 # Quickstart
 
-Install this instruction system in an existing project in about five minutes.
+## Install
 
-## 1. Copy the entry point
+Copy `AGENTS.md`, `CLAUDE.md`, `.ai/`, and the desired `.github/` files into the target repository. Preserve paths so references work.
 
-Place `AGENTS.md` in the target repository root. Merge its rules with any existing project-specific governance rather than overwriting stronger local requirements.
+## First Session
 
-## 2. Copy the policy tree
+Open the project from its repository root. Read `AGENTS.md`. Inspect the target repository's own rules and tooling. Load only the skill matching the active task.
 
-Copy `.ai/core/`, `.ai/skills/`, `.ai/templates/`, and `.ai/meta/` into the target project.
+## First Feature
 
-## 3. Add tool-specific entry points
+Ask the agent to inspect and plan the feature before implementation. Review the plan, then authorize implementation if your workflow requires explicit approval.
 
-For Claude Code, add or merge `CLAUDE.md` so it points to `AGENTS.md`.
+## Verification
 
-For GitHub Copilot, add or merge `.github/copilot-instructions.md`.
+Require the agent to run the repository's documented focused tests, relevant static checks, and broader verification appropriate to the risk. Require a final diff review.
 
-For ChatGPT Projects, add the repository or instruction files to the project context. Treat `AGENTS.md` as the main policy entry point.
+## Long Tasks
 
-For Codex, make the repository available to the agent and keep `AGENTS.md` at the root.
+Use `.ai/templates/handoff.md` when the task spans sessions. Use a living plan for multi-phase efforts.
 
-## 4. Start a task
+## Copilot
 
-Use a prompt with a clear objective, constraints, and acceptance criteria. The agent should inspect instructions before changing files and produce a plan.
+Use `.github/copilot-instructions.md` for repository-wide instructions and `.github/instructions/` for path-specific rules where the client supports them.
 
-## 5. Verify
+## Offline or Prompt-Only Hosts
 
-Before completion, require the agent to show:
-
-- relevant checks run;
-- their results;
-- files changed;
-- remaining uncertainty.
-
-## Suggested local layout
-
-```text
-project/
-├── AGENTS.md
-├── CLAUDE.md
-├── .ai/
-│   ├── core/
-│   ├── skills/
-│   ├── templates/
-│   └── meta/
-└── .github/
-    └── copilot-instructions.md
-```
-
-## Minimal adoption
-
-Teams that do not want the full tree can start with `AGENTS.md` plus `.ai/core/`. Add skills only when a recurring workflow justifies them.
-
-## Updating the policy
-
-When changing a rule, update the most specific canonical file first. Search for duplicates before editing other entry points. Afterward, review cross-references and check that the condensed Copilot instructions still agree with core policy.
+Paste `MASTER-PROMPT.md` as the operating prompt. Then provide the project-specific context separately.

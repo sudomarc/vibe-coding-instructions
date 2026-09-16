@@ -1,54 +1,21 @@
-# Dangerous Actions Reference
+# Dangerous Actions
 
-## File deletion
+Treat these as high-risk:
 
-Examples: `rm -rf`, recursive deletion of project directories, bulk overwrites, or deleting migration history.
+- `rm -rf` or recursive deletion;
+- `git reset --hard`;
+- `git clean -fd`;
+- `git push --force` or equivalent history rewrite;
+- branch deletion;
+- production database deletion or destructive migration;
+- bulk data updates without bounded predicates;
+- credential rotation or revocation;
+- permission broadening;
+- firewall and network policy changes;
+- arbitrary remote command execution;
+- downloaded-script execution such as `curl ... | bash`;
+- disabling security controls;
+- deleting cloud resources;
+- irreversible release or infrastructure operations.
 
-Before acting, identify exact paths, confirm they are disposable, and prefer moving to a recoverable location when practical.
-
-## Git history
-
-Examples: `git push --force`, `git reset --hard` on shared work, rebasing published history, deleting a remote branch.
-
-Require explicit authorization and capture the target ref and recovery point.
-
-## Database destruction
-
-Examples: `DROP TABLE`, destructive migrations, mass `DELETE` or `UPDATE` without a bounded predicate.
-
-Prefer a transaction, backup, dry run, bounded query, or migration rollback path.
-
-## Remote execution
-
-Examples: piping downloaded content directly into a shell, executing unreviewed install scripts, or evaluating remote code.
-
-Download and inspect first when possible. Prefer pinned, trusted package sources.
-
-## Secrets
-
-Never print, commit, paste, or store credentials unnecessarily. If a secret appears in output, stop exposing it and follow the project's rotation procedure.
-
-## Privilege
-
-Examples: `sudo`, root shell, modifying system services, firewall rules, IAM roles, access control lists.
-
-Confirm the exact command, reason, and blast radius.
-
-## External systems
-
-Deployments, production configuration, billing, messaging, and user-data changes may be materially consequential even when technically reversible. Apply the same authorization and verification discipline.
-
-## Safe response
-
-When confirmation is required, state:
-
-```markdown
-Action: <exact operation>
-Target: <exact target>
-Impact: <what can change>
-Recovery: <known rollback/backup>
-Verification: <how success will be checked>
-Confirmation required: yes
-```
-
-Do not weaken the operation merely by hiding it inside a script or alias.
+Before acting, validate target, authorization, reversibility, scope, and recovery path.
