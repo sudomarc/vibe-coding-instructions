@@ -1,46 +1,41 @@
 # Engineering Mindset
 
-## Principle 1 — Plan Before Code
+## 1. Plan Before Code
 
-Write an actionable plan before implementation. Identify scope, affected files, dependencies, risks, and verification. A plan reduces accidental architecture and makes review possible before cost is sunk.
+Write an actionable plan before implementation. Planning exposes hidden decisions, reduces scope drift, and creates a verification contract.
 
-A tiny bug can have a one-paragraph plan. A cross-cutting feature needs an explicit file-level plan.
+## 2. Decompose Ruthlessly
 
-## Principle 2 — Decompose Ruthlessly
+Break broad objectives into small batches with one logical purpose. Small batches reduce rollback cost, make failures localizable, and keep review tractable.
 
-Break work into the smallest meaningful units that can be implemented and verified independently. Prefer logical batches over arbitrary time slices.
+## 3. Verify, Don't Assume
 
-Decomposition lowers debugging cost, limits blast radius, and makes the agent's progress legible.
+Repository state, compiler output, tests, browser behavior, and deployment status are evidence. Model confidence is not evidence. Run the smallest check that can falsify the current hypothesis.
 
-## Principle 3 — Verify, Don't Assume
+## 4. Surface Uncertainty
 
-Generated code is a proposal, not evidence. Run the relevant tests, type checks, linters, builds, smoke checks, or manual probes. Inspect the resulting diff.
+Unknown information must remain visibly unknown. A plausible guess is not a fact. An incomplete environment must produce a qualified result rather than fabricated certainty.
 
-A passing test is evidence for the tested behavior, not proof that every requirement is correct.
+## 5. Simplicity Over Cleverness
 
-## Principle 4 — Surface Uncertainty
+Prefer established local patterns and straightforward control flow. Introduce abstractions only when they remove repeated complexity or enforce an important invariant.
 
-State missing information, assumptions, conflicts, and unverified claims. Uncertainty that is visible can be resolved. Uncertainty hidden inside confident prose becomes a defect.
+## 6. Existing Patterns Before New Patterns
 
-Prefer: `UNKNOWN: production credentials are not available in this environment.`
-Not: `Production configuration is correct.`
+Search the repository for analogous code before designing a new approach. Consistency with existing architecture usually lowers maintenance cost and integration risk.
 
-## Principle 5 — Simplicity Over Cleverness
+## 7. Smallest Correct Change
 
-Prefer the smallest design that satisfies the requirement and fits the existing architecture. Avoid new abstractions, dependencies, patterns, or configuration unless they buy a concrete capability.
+Minimize modified files, new dependencies, public API surface, and behavioral assumptions while still satisfying the requirement.
 
-Simple code is easier to review, test, explain, and safely modify.
+## 8. Reversible by Default
 
-## Practical heuristics
+Prefer changes that can be reviewed, reverted, or rolled back cleanly. Treat data migrations, permission changes, public contracts, and release operations as higher-risk than ordinary local edits.
 
-- Reuse existing utilities before inventing equivalents.
-- Follow existing naming and directory conventions.
-- Prefer explicit control flow over compressed cleverness when readability matters.
-- Keep unrelated cleanup out of focused tasks.
-- Do not add a dependency to avoid writing a few lines of local logic unless the dependency solves a real recurring problem.
-- Treat security boundaries as design constraints, not post-processing.
-- When uncertain, inspect the repository or ask for the missing decision rather than guessing.
+## 9. Failure Is Information
 
-## Anti-hero rule
+A failing test or build is evidence. Read the failure, classify it, determine whether it is caused by the change or the environment, and only then choose the next action.
 
-Do not optimize for looking sophisticated. Optimize for a correct, reviewable, testable result.
+## 10. Optimize for Auditability
+
+A future engineer should be able to understand why the change exists, what it changes, how it was verified, and what remains uncertain.

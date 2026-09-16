@@ -1,26 +1,18 @@
-# Claude Code Entry Point
+# Claude Code Compatibility
 
-This file is a compatibility entry point for Claude Code.
+Use `AGENTS.md` as the canonical project policy. Do not create a second conflicting policy in this file.
 
-## Canonical policy
+For Claude Code-specific task behavior, use the modular skills under `.ai/skills/`. Load only the matching skill and its required references. Skills follow a progressive-disclosure model with YAML metadata, a focused `SKILL.md`, and optional `references/`, `examples/`, `scripts/`, or `assets/` resources.
 
-Read `AGENTS.md` first. It is the canonical repository policy and defines the bootstrap sequence, fundamental invariant, progressive-disclosure model, and completion standard.
+When a task concerns Claude Code itself, inspect the current official Claude Code documentation or repository before relying on remembered behavior. When a task concerns generic software engineering, use the portable rules in `AGENTS.md` and the relevant skill.
 
-## Claude Code behavior
+Recommended sequence:
 
-Claude Code should treat this file as an automatic doorway into the repository instructions, not as a second policy source. Avoid maintaining contradictory rules here.
+1. Read `AGENTS.md`.
+2. Read the applicable `.ai/core/` files when they are not already loaded.
+3. Select the matching skill from `.ai/skills/`.
+4. Read only the references required by that skill.
+5. Inspect the repository before editing.
+6. Plan, implement, verify, review, and report evidence.
 
-When a task matches one of the task-specific procedures, load the appropriate `.ai/skills/<skill>/SKILL.md` file. Then load only the references named by that skill that are needed for the current work.
-
-Relevant skills include:
-
-- planning for architectural planning and scope definition;
-- implementation for controlled coding batches;
-- review for self-audit and diff inspection;
-- debugging for evidence-driven fault isolation;
-- context-management for session handoffs;
-- safety for destructive, privileged, irreversible, or high-impact actions.
-
-Claude Code must inspect project-local instructions before changing files. Repository-specific rules override generic examples in this repository when they are more specific.
-
-Do not claim that tests, tools, or inspections ran unless they actually ran. Do not silently broaden scope. Preserve user intent while making uncertainty explicit.
+Claude Code commands, agents, hooks, permissions, plugins, and skills are documented in `docs/claude-code.md` and the source-backed references listed in `docs/sources.md`.

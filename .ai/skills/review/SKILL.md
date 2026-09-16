@@ -1,59 +1,34 @@
 ---
 name: review
-description: >
-  Use before declaring a task complete. Trigger after implementation or whenever
-  the user asks for an audit, diff review, regression check, or readiness assessment.
+description: This skill should be used before declaring implementation complete, before committing, before opening a pull request, or when performing a focused code review.
 ---
 
 # Review Skill
 
 ## When to Use
 
-Use after implementation and before completion. It is also appropriate for reviewing an existing diff without making changes.
+Review the final diff after implementation and after material fixes. Use focused review dimensions when risk justifies them.
 
 ## Workflow
 
-1. Read the task and plan.
-2. Inspect repository status and diff.
-3. Compare changed files with planned scope.
-4. Run targeted and appropriate broad verification.
-5. Inspect error handling, security, compatibility, tests, and documentation.
-6. Record findings.
-7. Correct issues only within authorized scope.
-8. Re-run relevant checks after corrections.
+1. Inspect repository status.
+2. Inspect the full diff.
+3. Check scope against the plan.
+4. Check correctness and edge cases.
+5. Check tests and error handling.
+6. Check security and compatibility.
+7. Check maintainability and simplicity.
+8. Run targeted verification for findings.
+9. Report only actionable findings with evidence.
 
-## Review report
+## Finding Format
 
-```markdown
-## Review
-Scope: ...
-Findings:
-- Severity: <critical|high|medium|low>
-  Location: <path:line or symbol>
-  Finding: ...
-  Evidence: ...
-Action: <fixed|accepted|blocked>
-Verification: ...
-Remaining uncertainty: ...
-```
+`Severity | Confidence | File:Line | Problem | Evidence | Suggested action`
 
-## Checklists
+Severity describes impact. Confidence describes evidentiary strength. Do not use confidence as a substitute for severity.
 
-- [ ] Diff matches plan.
-- [ ] No accidental files changed.
-- [ ] Tests cover the requested behavior.
-- [ ] Error paths are reasonable.
-- [ ] Security boundaries are preserved.
-- [ ] Public contracts are unchanged unless requested.
-- [ ] Documentation matches behavior.
-- [ ] Tooling checks ran.
-
-## Severity
-
-Critical or high findings block completion unless explicitly accepted by the appropriate human authority. Medium findings require a decision or correction. Low findings may be documented when outside scope.
-
-## Reference Files
+## References
 
 - `references/self-audit-checklist.md`
 - `references/diff-review-guide.md`
-- `assets/review-comment-examples.md`
+- `examples/review-report.md`

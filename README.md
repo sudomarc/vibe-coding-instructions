@@ -1,87 +1,84 @@
 # Vibe Coding Instructions
 
-A portable instruction repository for disciplined AI-assisted software development.
+A repository-native instruction system for disciplined AI coding agents.
 
 ## Why this exists
 
-AI coding agents are fast at producing plausible code. The failure mode is often not syntax; it is acting before the problem is understood, expanding scope, trusting assumptions, skipping verification, or making irreversible changes too casually.
+AI coding agents are capable of producing large changes quickly. The failure mode is not only bad code. It is also premature coding, misunderstood architecture, silent scope expansion, unverifiable claims, dependency drift, accidental destructive actions, and loss of context across sessions.
 
-This repository provides a small operating system around the model:
+This repository turns those concerns into a layered operating system:
 
-`PROMPT → PLAN → IMPLEMENT → VERIFY → REPORT`
+- always-on core policy for identity, mindset, workflow, communication, and constraints;
+- task-specific skills for planning, implementation, debugging, review, security, testing, and engineering domains;
+- references for detailed procedures and edge cases;
+- examples and assets for pattern matching without polluting every context window;
+- templates for plans, tasks, handoffs, and commits;
+- compatibility guides for Codex, Claude Code, ChatGPT Projects, and GitHub Copilot;
+- a master prompt for environments that cannot load a repository of instructions automatically.
 
-The goal is not to make agents slower. The goal is to spend compute and human attention on the decisions that have the highest failure cost.
+## Design basis
 
-## Design principles
+The design deliberately borrows architectural ideas from public agent ecosystems rather than copying their text. Anthropic's published skill-development material emphasizes a required `SKILL.md`, YAML metadata, explicit triggering, progressive disclosure, and optional bundled resources. Anthropic's public Claude Code repository also demonstrates specialized review agents and task-focused skills. OpenAI's Codex repository documents scoped `AGENTS.md` instructions, while the OpenAI Cookbook demonstrates persistent plans and iterative development workflows. GitHub documents repository-wide, path-specific, and agent instruction mechanisms for Copilot.
 
-The repository separates durable rules from task-specific procedures. Core rules are loaded every session. Skills are loaded on demand. Reference files carry deeper checklists. Assets carry examples.
+See `docs/sources.md` for the source list and the boundaries between source facts and this repository's original synthesis.
 
-This is progressive disclosure: enough policy to start safely, more detail only when the task needs it.
+## Core philosophy
 
-## Quick use
+### Plan before code
 
-1. Copy or link `AGENTS.md` into the project root.
-2. Keep `.ai/core/` available to the coding agent.
-3. Keep `.ai/skills/` available for on-demand loading.
-4. For Claude Code, retain `CLAUDE.md` as the automatic entry point.
-5. For Copilot, retain `.github/copilot-instructions.md`.
-6. Read `docs/quickstart.md` for a five-minute installation path.
+Every implementation begins with an observable goal, bounded scope, known constraints, and a verification strategy. Tiny changes use tiny plans; complex changes use living plans.
 
-## Core invariant
+### Decompose ruthlessly
 
-**Never write implementation code before an actionable plan exists and is approved when approval is required.**
+Break large work into independently verifiable batches. Each batch should have a clear purpose and a stop condition.
 
-The invariant applies to application code, configuration, migrations, scripts, CI changes, and infrastructure. A tiny change may use a tiny plan; it may not skip planning entirely.
+### Verify, do not assume
 
-## What this project does not do
+Use repository tools, tests, type checks, linters, builds, diffs, and runtime checks as evidence. Do not replace evidence with confidence.
 
-It does not replace project-specific security policy, framework guidance, compliance requirements, code ownership rules, or human review. It does not grant an agent permission to perform destructive operations. It does not make uncertain output trustworthy merely by formatting it.
+### Surface uncertainty
 
-## Tree
+State unknowns, assumptions, conflicting evidence, unverified behavior, and environment limitations explicitly.
+
+### Simplicity over cleverness
+
+Prefer the smallest architecture that correctly satisfies the requirement and fits existing project patterns.
+
+## Full workflow
+
+`PROMPT → INSPECT → PLAN → IMPLEMENT → VERIFY → REVIEW → REPORT`
+
+The workflow changes for debugging and incident response, but the same evidence standard remains.
+
+## Directory map
 
 ```text
-vibe-coding-instructions/
+.
 ├── AGENTS.md
 ├── CLAUDE.md
-├── README.md
+├── MASTER-PROMPT.md
 ├── .ai/
-│   ├── core/                 # Always-loaded operating principles
-│   ├── skills/               # Task-triggered procedures
-│   ├── templates/            # Reusable work artifacts
-│   └── meta/                 # Prompt-engineering guidance
+│   ├── core/
+│   ├── skills/
+│   ├── templates/
+│   └── meta/
 ├── .github/
-│   └── copilot-instructions.md
+│   ├── copilot-instructions.md
+│   ├── instructions/
+│   └── prompts/
 └── docs/
-    ├── quickstart.md
-    ├── anti-patterns.md
-    └── faq.md
 ```
 
-## The core layer
+## Using it in another repository
 
-`00-identity.md` defines the agent's role and boundaries.
-`01-mindset.md` defines five principles.
-`02-workflow.md` defines PLAN → IMPLEMENT → VERIFY.
-`03-communication.md` standardizes status and uncertainty.
-`04-constraints.md` defines absolute and soft constraints.
+Copy the policy entry files and the `.ai/` directory into the target repository. Preserve the same paths so cross-references remain valid. Then adapt only project-specific sections: runtime, framework, commands, architecture, branching, test commands, deployment procedures, and ownership rules.
 
-## The skills layer
+Do not blindly copy project-specific rules from this repository into another project. This repository defines a general operating system, not application-specific truth.
 
-Each skill uses Anthropic-style YAML frontmatter and a predictable body:
+## What this repository does not do
 
-- When to Use
-- Workflow
-- Checklists
-- Reference Files
+It does not guarantee perfect agent behavior. Instruction-following is probabilistic, tools vary, repositories contain ambiguous requirements, and verification can have blind spots. The purpose is to create a repeatable decision framework that makes those failure modes visible and easier to detect.
 
-This keeps triggering explicit and discovery shallow.
+## Further reading
 
-## Contribution model
-
-Changes should preserve stable terminology and internal links. Update the most specific document rather than duplicating a rule in multiple places. Examples may evolve without changing the governing principle.
-
-Before changing the instruction system itself, run a structural review: check file presence, frontmatter, path references, internal terminology, and accidental contradictions.
-
-## License and reuse
-
-The repository is intentionally plain Markdown so teams can adapt it to their own agent stack. Add a repository license appropriate to the project before distributing it under a formal open-source license.
+Start with `docs/quickstart.md`, then inspect `MASTER-PROMPT.md` and the relevant skill. For source attribution, read `docs/sources.md`.

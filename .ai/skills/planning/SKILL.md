@@ -1,62 +1,51 @@
 ---
 name: planning
-description: >
-  Use when a task changes architecture, introduces a feature, spans multiple files,
-  or contains material ambiguity. Trigger before implementation when a plan is needed.
+description: This skill should be used when the task is multi-file, architectural, ambiguous, risky, or requires a deliberate implementation plan before coding.
 ---
 
 # Planning Skill
 
 ## When to Use
 
-Use this skill before implementation when the task is multi-file, architectural, risky, ambiguous, or likely to expand scope. For a trivial safe change, the core workflow may provide sufficient planning.
+Use before implementation for feature work, architecture changes, multi-file refactors, migrations, integrations, security-sensitive changes, or requests with material ambiguity.
 
 ## Workflow
 
-1. Read the core rules.
+1. Read applicable core policy.
 2. Inspect repository structure and local instructions.
-3. Identify the requested outcome and constraints.
-4. Map the smallest affected file set.
-5. Record design decisions and alternatives.
-6. Identify risks and unknowns.
-7. Define verification before implementation.
-8. Present the plan in the template format.
-9. Obtain approval when the workflow requires it.
+3. Define the observable outcome.
+4. Bound scope and non-goals.
+5. Identify affected files and existing patterns.
+6. Evaluate architecture and alternatives.
+7. Record risks, dependencies, and rollback concerns.
+8. Define verification before implementation.
+9. Produce the plan.
+10. Wait for approval when approval is required.
 
-## Plan format
+## Plan Contract
 
-```markdown
-## Plan
-Goal: <observable outcome>
-Scope: <included and excluded work>
-Files:
-- <path> — <purpose>
+```text
+Goal:
+Scope:
+Non-goals:
+Repository evidence:
+Files or modules:
 Decisions:
-- <decision>
+Alternatives rejected:
 Risks:
-- <risk and mitigation>
+Dependencies:
 Verification:
-- <check>
-Approval: <required | not required>
+Rollback:
+Approval:
 ```
 
-## Checklists
+## Rules
 
-- [ ] Requirement is observable.
-- [ ] Scope is bounded.
-- [ ] Affected files are identified.
-- [ ] Existing architecture was inspected.
-- [ ] Dependencies are explicit.
-- [ ] Risks and unknowns are visible.
-- [ ] Verification is defined.
-- [ ] Approval state is explicit.
+Prefer modification of existing architecture over parallel systems. Do not invent APIs, schemas, commands, or deployment assumptions. Search for analogous implementations.
 
-## Stop conditions
+## References
 
-Stop before coding when requirements conflict, a critical choice is missing, or a dangerous action is necessary without authorization.
-
-## Reference Files
-
-- `references/plan-template.md` — expanded planning template.
-- `references/architecture-checklist.md` — architecture inspection checklist.
-- `assets/plan-example.md` — concrete example of an approved plan.
+- `references/plan-template.md`
+- `references/architecture-checklist.md`
+- `references/living-plans.md`
+- `examples/feature-plan.md`

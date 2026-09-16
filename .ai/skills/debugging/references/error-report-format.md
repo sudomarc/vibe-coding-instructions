@@ -1,58 +1,45 @@
 # Error Report Format
 
-## Symptom
+## Failure
 
-State exactly what failed, including command, endpoint, test name, exit code, or visible behavior.
+State the exact observable failure.
 
-## Reproduction
+## Reproducer
 
-```text
-Command: <exact command>
-Environment: <relevant context>
-Expected: <expected result>
-Observed: <actual result>
-```
+Record command, input, and relevant environment.
 
-## Evidence
+## Expected
 
-Record the smallest useful logs, stack trace excerpts, or assertions. Never include credentials or secrets.
+State expected behavior.
 
-## Isolation
+## Observed
 
-State what was ruled out and which smallest component still fails.
+State actual output or behavior.
+
+## Localization
+
+Identify the smallest failing surface established so far.
 
 ## Hypothesis
 
-Describe the suspected cause and why the evidence supports it.
+State one falsifiable hypothesis.
 
 ## Test
 
-Describe the discriminating experiment. A good test should distinguish the hypothesis from at least one plausible alternative.
+Describe the check used to distinguish the hypothesis.
+
+## Root Cause
+
+State only what the evidence supports.
 
 ## Fix
 
-State the minimal root-cause correction and why it should resolve the failure.
+Describe the minimal change.
 
 ## Regression
 
-Record the original failing check plus relevant neighboring tests.
+Record original reproducer and related checks.
 
-## Remaining uncertainty
+## Remaining Uncertainty
 
-Use explicit labels:
-
-- `VERIFIED:` confirmed by executed checks.
-- `UNKNOWN:` not observable in the current environment.
-- `HYPOTHESIS:` still unconfirmed.
-
-## Example
-
-```markdown
-## Debug
-Symptom: `npm test -- auth/session.test.ts` fails on expired tokens.
-Isolation: failure occurs only in refresh-token path.
-Hypothesis: expiry timestamp is compared using seconds against milliseconds.
-Test: print parsed values and add a unit assertion for a known epoch.
-Fix: normalize timestamps at the boundary.
-Regression: focused test plus adjacent session tests.
-```
+State anything not established.

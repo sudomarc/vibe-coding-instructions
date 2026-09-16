@@ -2,44 +2,29 @@
 
 ## Goal
 
-<!-- State the observable outcome. -->
-
 ## Scope
 
-### Included
+## Non-goals
 
-- 
+## Repository Evidence
 
-### Excluded
+## Files / Modules
 
-- 
-
-## Files
-
-| Path | Action | Purpose |
+| Path | Change | Reason |
 |---|---|---|
-| | | |
 
 ## Decisions
 
-- 
-
-## Dependencies
-
-- 
+## Alternatives Rejected
 
 ## Risks
 
-- 
+## Dependencies
 
 ## Verification
 
-- 
+## Rollback
 
 ## Approval
 
-- Status: <not required | required and received | required and pending>
-
-## Exit Criteria
-
-- 
+## Status
