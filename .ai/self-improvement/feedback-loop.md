@@ -4,38 +4,56 @@
 
 Record concrete failures, corrections, friction, or successful patterns. Prefer tool output, test results, diffs, and explicit user feedback over interpretation.
 
-## 2. Record
+## 2. Collect
 
-Create a learning record using the repository template. Remove secrets and unnecessary personal data.
+Run deterministic collection when a periodic cycle is active. Gather repository integrity, Git history, GitHub Issues/PRs, workflow results, and existing learning records available to the collector.
 
-## 3. Classify
+## 3. Record
 
-Classify the observation as local implementation, workflow, documentation, skill, provider adaptation, or governance.
+Create an observation or learning record using the structures in `.ai/self-improvement/schemas/` and templates in `.ai/self-improvement/templates/`. Remove secrets and unnecessary personal data.
 
-## 4. Root Cause
+## 4. Classify
 
-Separate the observed symptom from the suspected cause. Identify alternative explanations when evidence is weak.
+Classify the signal as `ONE_OFF_FAILURE`, `RECURRING_FAILURE`, or `SYSTEMIC_FAILURE` only when the evidence supports that classification.
 
-## 5. Propose
+## 5. Root Cause
 
-Create an improvement proposal with a precise scope, expected benefit, risks, and validation plan.
+Separate the observed symptom from the suspected cause. Identify alternative explanations when evidence is weak. Label conclusions as `HYPOTHESIS` until validated.
 
-## 6. Validate
+## 6. Propose
 
-Check instruction precedence, related skills, examples, templates, and automated validation. Add regression coverage when practical.
+Create an improvement proposal with precise scope, expected benefit, risks, regression risk, confidence, approval requirement, and validation plan. Prefer local fixes before governance changes.
 
-## 7. Approve
+## 7. Validate
 
-Apply the approval policy in `rules.md`. Governance-critical changes require explicit human approval.
+Check instruction precedence, related skills, examples, templates, references, and automated validation. Add regression coverage when practical.
 
-## 8. Apply
+## 8. Approve
 
-Make the smallest coherent change. Preserve unrelated work and avoid speculative cleanup.
+Apply `rules.md`. Governance-critical changes require explicit human approval. Confidence is evidence quality, not authorization.
 
-## 9. Regress
+## 9. Apply
 
-Re-run the checks that failed before the improvement and relevant repository-wide validation.
+Make the smallest coherent change. Preserve unrelated work and avoid speculative cleanup. For substantial changes, use a branch and pull request.
 
-## 10. Close the Loop
+## 10. Regress
 
-Record whether the change worked, what evidence supports that conclusion, and any remaining uncertainty.
+Re-run the checks that failed before the improvement and relevant repository-wide validation. Treat a material regression as a reason to reject, revise, or revert.
+
+## 11. Measure
+
+Compare `BEFORE` and `AFTER` when the target signal can be measured. Do not mark an improvement confirmed without supporting post-change evidence.
+
+## 12. Close the Loop
+
+Record the actual outcome, remaining uncertainty, and next measurement window. Useful outcome states include `CONFIRMED`, `PARTIALLY_CONFIRMED`, `INEFFECTIVE`, `REVERTED`, and `AWAITING_EVIDENCE`.
+
+## Evidence Vocabulary
+
+- `FACT` — directly established evidence.
+- `OBSERVED` — directly seen during a run/session.
+- `HYPOTHESIS` — tentative explanation.
+- `INTERPRETATION` — conclusion derived from evidence.
+- `UNKNOWN` — not established.
+- `CONFLICT` — sources disagree.
+- `UNVERIFIED` — not yet tested.
