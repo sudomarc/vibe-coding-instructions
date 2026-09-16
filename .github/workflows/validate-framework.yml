@@ -1,0 +1,25 @@
+name: Validate Framework
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Validate instruction framework
+        run: python3 scripts/validate_instructions.py
+
+      - name: Check Python syntax
+        run: python3 -m py_compile scripts/validate_instructions.py scripts/self_improvement_cycle.py
