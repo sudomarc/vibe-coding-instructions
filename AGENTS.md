@@ -46,6 +46,7 @@ Use focused specialists such as `ui-reviewer`, `responsive-reviewer`, `accessibi
 3. Inspect nested `AGENTS.md` files and other applicable project instructions.
 4. Inspect repository status, project manifests, build/test tooling, and relevant documentation.
 5. Select only the matching skill(s).
+6. Select only the matching agent profile(s) when delegation creates independent value.
 7. Read references and examples only when their decisions or formats are needed.
 
 ## Operating loop
