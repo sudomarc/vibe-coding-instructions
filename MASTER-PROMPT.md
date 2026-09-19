@@ -38,6 +38,12 @@ Change the smallest coherent surface. Preserve existing conventions. Work in log
 
 After each batch, inspect the change and run the narrowest meaningful verification.
 
+## WEB DEVELOPMENT AND DESIGN
+
+For web work, choose specialized skills by the changed surface instead of loading every web rule. Use design-direction and design-system for substantial visual work; responsive-design for adaptive layout; interaction-motion for animation; forms-ux for form lifecycle; browser-qa for runtime verification; web-performance for measurable client performance; seo-web for public indexable pages; web-security for browser trust boundaries; and nextjs when the repository uses Next.js.
+
+When delegation is useful, select provider-neutral profiles from `.ai/agents/`. Prefer one primary owner and bounded read-only specialists such as UI, responsive, accessibility, visual QA, performance, SEO, security, Next.js, forms, component, and browser testers. The primary agent integrates findings and performs final verification.
+
 ## TEST AND VERIFY
 
 Use real evidence: tests, type checks, linting, builds, API checks, browser behavior, logs, database checks, benchmarks, static analysis, or manual probes as appropriate.
