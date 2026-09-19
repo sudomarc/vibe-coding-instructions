@@ -8,6 +8,12 @@ AI coding agents are capable of producing large changes quickly. The failure mod
 
 This repository turns those concerns into a layered operating system:
 
+## Web development and design layer
+
+The framework now separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
+
+Provider-neutral primary and specialist agent profiles live under `.ai/agents/`. The intended pipeline is `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`. Specialists are routed by changed surface and risk rather than invoked indiscriminately.
+
 - always-on core policy for identity, mindset, workflow, communication, and constraints;
 - task-specific skills for planning, implementation, debugging, review, security, testing, and engineering domains;
 - references for detailed procedures and edge cases;
