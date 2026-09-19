@@ -24,11 +24,20 @@ Load only the context needed for the task:
 - Deep guidance: `.ai/skills/<domain>/references/`
 - Concrete patterns: `.ai/skills/<domain>/examples/`
 - Reusable output shapes: `.ai/templates/`
+- Agent profiles: `.ai/agents/`
 - Meta guidance: `.ai/meta/`
 - Provider notes: `docs/codex.md`, `docs/claude-code.md`, `docs/chatgpt.md`, `docs/copilot.md`
 - Self-improvement: `.ai/self-improvement/`
 
-Do not preload every skill or reference unless the task genuinely requires it.
+Do not preload every skill, reference, or agent unless the task genuinely requires it.
+
+## Web development and design
+
+For substantial web work, route by changed surface and risk. Use the skills under `.ai/skills/` and provider-neutral profiles under `.ai/agents/`.
+
+Typical flow: `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`
+
+Use focused specialists such as `ui-reviewer`, `responsive-reviewer`, `accessibility-reviewer`, `visual-qa`, `performance-auditor`, `seo-auditor`, `web-security-reviewer`, `nextjs-specialist`, `forms-ux-reviewer`, `component-reviewer`, and `browser-tester` only when their scope is relevant.
 
 ## Session bootstrap
 
@@ -37,7 +46,7 @@ Do not preload every skill or reference unless the task genuinely requires it.
 3. Inspect nested `AGENTS.md` files and other applicable project instructions.
 4. Inspect repository status, project manifests, build/test tooling, and relevant documentation.
 5. Select only the matching skill(s).
-6. Read references and examples only when their decisions or formats are needed.
+7. Read references and examples only when their decisions or formats are needed.
 
 ## Operating loop
 
