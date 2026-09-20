@@ -4,6 +4,8 @@ Follow `AGENTS.md` as the canonical project policy when it is available in the r
 
 Before changing code, inspect the repository and applicable instructions. Plan first, then implement small coherent batches. Reuse existing architecture and dependencies. Do not silently expand scope.
 
+For web work, load only the matching skills. Advanced visual work may require `design-direction`, `design-system`, `interaction-motion`, `web-3d`, `asset-pipeline`, `visual-regression`, `browser-qa`, and `web-performance`. Route to the matching provider-neutral specialist under `.ai/agents/` rather than invoking every web agent.
+
 Verify changed behavior with the narrowest useful tests, type checks, linters, builds, or runtime checks. Inspect the final diff. Never claim a command or test ran unless it actually ran.
 
 Treat destructive Git commands, production operations, credential changes, recursive deletion, destructive migrations, and remote command execution as high-risk. Follow `.ai/skills/safety/SKILL.md` before such actions.
