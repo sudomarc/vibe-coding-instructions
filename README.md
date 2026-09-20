@@ -4,13 +4,13 @@ A repository-native instruction system for disciplined AI coding agents, with a 
 
 ## Why this exists
 
-AI coding agents are capable of producing large changes quickly. The failure mode is not only bad code. It is also premature coding, misunderstood architecture, silent scope expansion, unverifiable claims, dependency drift, accidental destructive actions, and loss of context across sessions.
+AI coding agents are capable of producing large changes quickly. The failure mode is not only bad code. It is also premature coding, misunderstood architecture, silent scope expansion, unverifiable claims, dependency drift, accidental destructive actions, loss of context across sessions, and brittle dependence on one external tool or provider.
 
 This repository turns those concerns into a layered operating system:
 
 ## Web development and design layer
 
-The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, anti-vibe visual review, legal/compliance review, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
+The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, anti-vibe visual review, legal/compliance review, capability routing for external tools, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
 
 Provider-neutral primary and specialist agent profiles live under .ai/agents/. The intended pipeline is DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF.
 
@@ -20,9 +20,19 @@ The web layer includes .ai/skills/anti-vibe-design/SKILL.md, a contextual checkl
 
 ### Legal/compliance quality
 
-The web layer also includes .ai/skills/legal-compliance/SKILL.md, derived from the attached September 2026 audit prompt. It audits six recurring exposure areas: age-restricted account/data collection, remote third-party resources, analytics/session replay, marketing email, automatic-renewal subscriptions, and user uploads/copyright. It also checks privacy/terms links, processors, consent behavior, secrets and sensitive logs.
+The web layer also includes .ai/skills/legal-compliance/SKILL.md, derived from the attached September 2026 audit prompt. It audits six recurring exposure areas and secondary privacy/security checks. The legal layer is evidence-first and separates engineering remediation from jurisdictional/legal conclusions, registrations and human-owned policy work.
 
-The legal layer is deliberately evidence-first. It does not assume a cited law applies to every app, does not treat penalty figures as universal, and separates engineering remediation from jurisdictional/legal conclusions, registrations and human-owned policy work.
+### Capability resilience
+
+The web/engineering layer includes .ai/skills/capability-routing/SKILL.md, inspired by the reviewed Agent Reach architecture.
+
+It treats external tools as replaceable providers behind stable capabilities:
+
+`CAPABILITY → PRIMARY → FALLBACK → HEALTH CHECK → ACTIVE ROUTE`
+
+The framework now expects real health evidence rather than "the binary exists" checks, explicit fallback ordering, safe diagnostics, dry-run/read-only provisioning, dedicated state directories, strict credential/browser-session boundaries, actionable failure taxonomy and explicit upstream version strategy.
+
+Use .ai/templates/capability-matrix.md when a project has several external providers or interchangeable implementation paths.
 
 ## Core philosophy
 
@@ -51,6 +61,7 @@ Use the narrowest matching capability rather than preloading every rule:
 | Visual direction/UI | design-direction, design-system | ui-reviewer, design-director |
 | Anti-vibe visual quality | anti-vibe-design | anti-vibe-reviewer |
 | Compliance-sensitive flows | legal-compliance | legal-compliance-reviewer |
+| External tool/provider integration | capability-routing | integration-health-reviewer |
 | Responsive behavior | responsive-design | responsive-reviewer |
 | Motion / scroll / micro-interactions | interaction-motion | motion-3d-specialist when advanced |
 | Browser 3D | web-3d | motion-3d-specialist |
@@ -84,7 +95,11 @@ The system explicitly supports ADD, REMOVE, MERGE, SIMPLIFY, and REPLACE. A usef
 
 ## Legal audit reporting
 
-Use .ai/templates/legal-audit.md for the six-item report shape. Each item must end with explicit human follow-up or a documented reason it is not applicable. The source that motivated this layer says its figures are jurisdiction-specific and advises lawyer review for matters involving money; this repository preserves that boundary.
+Use .ai/templates/legal-audit.md for the six-item report shape. Each item must end with explicit human follow-up or a documented reason it is not applicable.
+
+## Capability audit reporting
+
+Use .ai/templates/capability-matrix.md for external-provider integrations. The matrix distinguishes capability presence, configuration, health and active routing, plus authentication, reproducibility and recovery evidence.
 
 ## GitHub integration
 
@@ -106,4 +121,4 @@ It does not guarantee perfect agent behavior. Instruction-following is probabili
 
 ## Further reading
 
-Start with .ai/self-improvement/daily-cycle.md, MASTER-PROMPT.md, AGENTS.md, and the relevant web or engineering skill. For source attribution of the framework's public design references, see docs/sources.md.
+Start with .ai/self-improvement/daily-cycle.md, MASTER-PROMPT.md, AGENTS.md, and the relevant web, engineering, or capability skill. For source attribution, see docs/sources.md.

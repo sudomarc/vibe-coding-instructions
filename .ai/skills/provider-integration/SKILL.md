@@ -1,6 +1,6 @@
 ---
 name: provider-integration
-description: >
+description: >-
   Use when adapting this instruction system to Codex, Claude Code, ChatGPT coding workflows, GitHub Copilot, or another agent host with different discovery and tooling semantics.
 ---
 
@@ -22,6 +22,7 @@ Do not use it to replace the provider's current official documentation or to ass
 4. Map this repository's core, skills, references, and templates to those mechanisms.
 5. Document capability gaps rather than inventing parity.
 6. Verify the integration with a small representative task.
+7. When the provider exposes multiple tools or backend paths, model the required capability separately from the specific provider implementation.
 
 ## Decision Rules
 
@@ -29,6 +30,11 @@ Do not use it to replace the provider's current official documentation or to ass
 - Provider-specific adapters must not silently change the portable core policy.
 - Unsupported automatic skill loading must be handled explicitly.
 - Real task verification outranks claimed compatibility.
+- Prefer observable capability checks over package/configuration presence.
+- When multiple implementation paths exist, use explicit primary/fallback routing and record the reason for ordering.
+- Keep provider state, credentials and caches in dedicated locations rather than the project workspace.
+- Use dry-run/read-only inspection before mutating host state.
+- Pin or constrain volatile provider dependencies when reproducibility matters.
 
 ## Checklists
 
@@ -37,18 +43,28 @@ Do not use it to replace the provider's current official documentation or to ass
 - [ ] Precedence/discovery caveats documented.
 - [ ] Portable fallback available.
 - [ ] Representative verification performed where possible.
+- [ ] Actual capability health distinguished from installation/configuration presence.
+- [ ] Fallback and failure behavior documented when multiple providers exist.
+- [ ] Host mutations are explicitly authorized.
 
 ## Verification
 
 Confirm the provider actually loads the intended instruction entry point and can access the referenced files in the target environment.
 
+For provider-backed capabilities, verify at least one representative operation through the intended public interface when it is safe to do so. Do not perform irreversible actions solely to prove connectivity.
+
 ## Failure Modes
 
-Assuming feature parity, relying on stale platform behavior, duplicating conflicting instructions, and confusing documentation support with runtime compliance.
+Assuming feature parity, relying on stale platform behavior, duplicating conflicting instructions, confusing documentation support with runtime compliance, treating installed metadata as healthy capability, and silently coupling the application to one volatile provider.
 
 ## Reference Files
 
 - `references/provider-matrix.md`
+
+## Related Capability Guidance
+
+- `.ai/skills/capability-routing/SKILL.md`
+- `.ai/templates/capability-matrix.md`
 
 ## Examples
 

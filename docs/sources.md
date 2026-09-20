@@ -40,14 +40,17 @@ This repository is an original synthesis. It does not reproduce source projects 
 - Applitools visual AI testing: https://applitools.com/
 - Blender manual: https://docs.blender.org/
 
-## Research input used for this expansion
+## External capability / integration research
 
-A user-provided design/agent research brief dated 2026-09-20 was used as an input for the web layer expansion. It described patterns such as micro-interactions, scrollytelling, parallax, expressive typography, experimental navigation, lighting/glow and 3D, plus stacks including GSAP/ScrollTrigger, Lottie, Three.js/Babylon.js, Figma/Blender, Playwright and visual-diff services.
+### Agent Reach
 
-The brief is treated as design research input, not as an official specification or authority. The repository's own governance and verification rules remain authoritative.
+Reviewed source: https://github.com/Panniantong/Agent-Reach
 
-## Boundary
+The reviewed repository models a stable capability layer over changing external providers. Relevant observed patterns include ordered primary/fallback backends, a `doctor` diagnostic that distinguishes availability from a healthy active path, safe-by-default installation with explicit system mutation and dry-run modes, dedicated state directories instead of project-workspace pollution, explicit authentication/session boundaries, upstream public-contract usage, and tests for false-positive or half-broken provider states.
 
-The sources establish ecosystem capabilities and public patterns. The rules, wording, structure, safety policy, templates, and engineering heuristics in this repository are original synthesis. They are not presented as official Anthropic, OpenAI, GitHub, Vercel, Three.js, Babylon.js, Playwright, Percy, Applitools or Blender standards.
+These patterns were adapted as general engineering guidance in:
+- `.ai/skills/capability-routing/SKILL.md`
+- `.ai/templates/capability-matrix.md`
+- `.ai/agents/integration-health-reviewer.agent.md`
 
-When a platform behavior is volatile, verify against current primary documentation before implementing platform-specific integrations.
+The source is treated as an external engineering case study, not as an authority or specification for this repository.

@@ -7,7 +7,7 @@ description: This skill should be used before destructive, privileged, irreversi
 
 ## Trigger Examples
 
-Recursive deletion, force push, hard reset, branch deletion, production data mutation, destructive migration, privilege escalation, secret rotation, firewall changes, downloaded-command execution, and broad permission changes.
+Recursive deletion, force push, hard reset, branch deletion, production data mutation, destructive migration, privilege escalation, secret rotation, firewall changes, downloaded-command execution, system package installation, credential provisioning, browser-profile access, and broad permission changes.
 
 ## Workflow
 
@@ -19,6 +19,19 @@ Recursive deletion, force push, hard reset, branch deletion, production data mut
 6. Minimize scope.
 7. Create a rollback or recovery path when possible.
 8. Confirm before execution when required.
+
+## Safe provisioning defaults
+
+When an integration or tool installer can modify the host:
+
+- default to environment inspection or dry-run;
+- require explicit authorization for system-wide installs, elevated permissions, host configuration, firewall/security changes, credential writes, or persistent browser-profile changes;
+- keep downloaded tools, caches and configuration in dedicated locations rather than the project workspace;
+- do not use `sudo` merely to overcome a convenient installation path;
+- never disable security controls to make an integration work;
+- verify the exact files/commands that a provisioning step will create or modify before execution.
+
+A command that installs software or writes configuration is a host mutation even if the application itself is not changed.
 
 ## Hard Stop
 
