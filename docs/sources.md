@@ -19,7 +19,7 @@ This repository is an original synthesis. It does not reproduce source projects 
 ## GitHub Copilot
 
 - Custom instructions: https://docs.github.com/en/copilot/concepts/prompting/response-customization
-- Custom instruction support: https://github.com/docs/copilot/reference/custom-instructions-support
+- Custom instruction support: https://docs.github.com/en/copilot/reference/custom-instructions-support
 - GitHub documents repository-wide `.github/copilot-instructions.md`, path-specific `.github/instructions/**/*.instructions.md`, prompt files, and supported agent instructions.
 
 ## Web development and design
