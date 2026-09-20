@@ -11,6 +11,9 @@ Use multiple agents only when decomposition creates real independent value. Keep
 
 - Visual redesign: `ui-reviewer` + `visual-qa`
 - Responsive layout: `responsive-reviewer` + `visual-qa`
+- Advanced motion or browser 3D: `motion-3d-specialist` + `visual-qa` + `performance-auditor`
+- Asset-heavy visual change: `asset-pipeline-specialist` + `performance-auditor`
+- Screenshot baselines or visual regression: `visual-regression-reviewer` + `browser-tester`
 - Accessibility-sensitive UI: `accessibility-reviewer`
 - Forms or auth: `forms-ux-reviewer` + `accessibility-reviewer` + `browser-tester`
 - Shared components: `component-reviewer` + `ui-reviewer`
@@ -22,6 +25,6 @@ Use multiple agents only when decomposition creates real independent value. Keep
 
 Every delegate receives role, exact scope, relevant files or diff, required inputs, output format, permissions, and stop condition. Run independent read-only reviews in parallel only when the host can isolate them safely. The primary agent remains responsible for final integration.
 
-Useful reviewer roles include correctness, tests, error handling, types, security, comments, and simplification. This mirrors the specialization pattern demonstrated in Anthropic's public PR review tooling while keeping the implementation repository-neutral.
+Useful reviewer roles include correctness, tests, error handling, types, security, comments, simplification, visual fidelity and performance. Specialization should reduce context load, not create unnecessary ceremony.
 
 References: `references/delegation.md`, `references/parallel-review.md`, `examples/delegated-review.md`.
