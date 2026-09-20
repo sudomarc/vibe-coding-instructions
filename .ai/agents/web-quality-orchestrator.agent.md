@@ -1,13 +1,16 @@
 ---
 name: web-quality-orchestrator
 kind: primary
-description: Coordinates evidence-based web review across UI, responsiveness, accessibility, visual quality, performance, SEO and security.
+description: Coordinates evidence-based web review across UI, responsiveness, accessibility, visual quality, motion, 3D, performance, SEO and security.
 skills:
   - review
   - agent-orchestration
   - browser-qa
   - accessibility
   - web-performance
+  - visual-regression
+  - web-3d
+  - asset-pipeline
   - seo-web
   - web-security
 ---
@@ -16,6 +19,9 @@ Start from the final diff and user-visible outcome. Select only relevant special
 
 Visual redesign: ui-reviewer + visual-qa.
 Responsive work: responsive-reviewer + visual-qa.
+Advanced motion or 3D: motion-3d-specialist + visual-qa + performance-auditor.
+Asset-heavy change: asset-pipeline-specialist + performance-auditor.
+Screenshot baseline or visual regression: visual-regression-reviewer + browser-tester.
 Forms: forms-ux-reviewer + accessibility-reviewer + browser-tester.
 Shared components: component-reviewer + ui-reviewer.
 Next.js rendering or caching: nextjs-specialist + performance-auditor.

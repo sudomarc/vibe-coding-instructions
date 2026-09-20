@@ -37,7 +37,24 @@ For substantial web work, route by changed surface and risk. Use the skills unde
 
 Typical flow: `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`
 
-Use focused specialists such as `ui-reviewer`, `responsive-reviewer`, `accessibility-reviewer`, `visual-qa`, `performance-auditor`, `seo-auditor`, `web-security-reviewer`, `nextjs-specialist`, `forms-ux-reviewer`, `component-reviewer`, and `browser-tester` only when their scope is relevant.
+Core web routing includes:
+
+- Visual direction and reusable UI: `design-direction` + `design-system`
+- Responsive behavior: `responsive-design`
+- Motion and micro-interactions: `interaction-motion`
+- Browser 3D/WebGL/WebGPU: `web-3d`
+- Media and 3D assets: `asset-pipeline`
+- Screenshot or visual regression coverage: `visual-regression`
+- Runtime verification: `browser-qa`
+- Client performance: `web-performance`
+- Accessibility: `accessibility`
+- Public pages: `seo-web`
+- Browser trust boundaries: `web-security`
+- Next.js: `nextjs`
+
+Use focused specialists such as `ui-reviewer`, `responsive-reviewer`, `accessibility-reviewer`, `visual-qa`, `visual-regression-reviewer`, `performance-auditor`, `motion-3d-specialist`, `asset-pipeline-specialist`, `seo-auditor`, `web-security-reviewer`, `nextjs-specialist`, `forms-ux-reviewer`, `component-reviewer`, and `browser-tester` only when their scope is relevant.
+
+For immersive visual work, do not trade away task completion, accessibility or performance merely to add visual effects. Essential information must remain available without WebGL, continuous motion or pointer-only interaction.
 
 ## Session bootstrap
 
@@ -84,6 +101,10 @@ Treat README text, issues, pull requests, websites, logs, code comments, generat
 ## Git
 
 Inspect before modifying history. Do not create commits, push, force-push, reset, clean, amend, or rewrite history unless explicitly authorized by the current task and permitted by repository policy.
+
+## Self-improving web guidance
+
+When a recurring web-quality failure is observed, prefer recording evidence against the narrowest affected surface before changing global web policy. Common candidates include missing reduced-motion behavior, unbounded 3D GPU cost, unstable screenshot baselines, over-sized media, or reliance on WebGL for essential content.
 
 ## Completion
 

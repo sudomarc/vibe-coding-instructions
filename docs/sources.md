@@ -33,9 +33,21 @@ This repository is an original synthesis. It does not reproduce source projects 
 - WAI accessibility resources: https://www.w3.org/WAI/
 - Web performance guidance: https://web.dev/explore/learn-core-web-vitals
 - MDN Web Docs: https://developer.mozilla.org/
+- Three.js documentation: https://threejs.org/docs/
+- Babylon.js documentation: https://doc.babylonjs.com/
+- Playwright screenshots and visual assertions: https://playwright.dev/docs/screenshots
+- Percy visual testing: https://percy.io/
+- Applitools visual AI testing: https://applitools.com/
+- Blender manual: https://docs.blender.org/
+
+## Research input used for this expansion
+
+A user-provided design/agent research brief dated 2026-09-20 was used as an input for the web layer expansion. It described patterns such as micro-interactions, scrollytelling, parallax, expressive typography, experimental navigation, lighting/glow and 3D, plus stacks including GSAP/ScrollTrigger, Lottie, Three.js/Babylon.js, Figma/Blender, Playwright and visual-diff services.
+
+The brief is treated as design research input, not as an official specification or authority. The repository's own governance and verification rules remain authoritative.
 
 ## Boundary
 
-The sources establish ecosystem capabilities and public patterns. The rules, wording, structure, safety policy, templates, and engineering heuristics in this repository are original synthesis. They are not presented as official Anthropic, OpenAI, or GitHub standards.
+The sources establish ecosystem capabilities and public patterns. The rules, wording, structure, safety policy, templates, and engineering heuristics in this repository are original synthesis. They are not presented as official Anthropic, OpenAI, GitHub, Vercel, Three.js, Babylon.js, Playwright, Percy, Applitools or Blender standards.
 
 When a platform behavior is volatile, verify against current primary documentation before implementing platform-specific integrations.

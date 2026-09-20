@@ -40,15 +40,35 @@ After each batch, inspect the change and run the narrowest meaningful verificati
 
 ## WEB DEVELOPMENT AND DESIGN
 
-For web work, choose specialized skills by the changed surface instead of loading every web rule. Use design-direction and design-system for substantial visual work; responsive-design for adaptive layout; interaction-motion for animation; forms-ux for form lifecycle; browser-qa for runtime verification; web-performance for measurable client performance; seo-web for public indexable pages; web-security for browser trust boundaries; and nextjs when the repository uses Next.js.
+For web work, choose specialized skills by the changed surface instead of loading every web rule.
 
-When delegation is useful, select provider-neutral profiles from `.ai/agents/`. Prefer one primary owner and bounded read-only specialists such as UI, responsive, accessibility, visual QA, performance, SEO, security, Next.js, forms, component, and browser testers. The primary agent integrates findings and performs final verification.
+Use:
+- `design-direction` and `design-system` for substantial visual direction and reusable UI;
+- `responsive-design` for adaptive layout;
+- `interaction-motion` for transitions, micro-interactions, kinetic or scroll-driven motion;
+- `web-3d` for WebGL, WebGPU, Three.js, Babylon.js or React Three Fiber work;
+- `asset-pipeline` for images, SVG, fonts, generated media and 3D assets;
+- `visual-regression` for repeatable screenshot comparison and baseline governance;
+- `browser-qa` for runtime route and interaction verification;
+- `web-performance` for measurable client performance;
+- `accessibility` for keyboard, semantics, contrast and assistive technology compatibility;
+- `seo-web` for public/indexable pages;
+- `web-security` for browser trust boundaries;
+- `nextjs` when the repository uses Next.js.
+
+For advanced web experiences, treat expressive typography, parallax, scrollytelling, experimental navigation, lighting/glow and 3D as design tools rather than default requirements. Verify that essential content, navigation and task completion remain available without WebGL, continuous motion or pointer-only interactions.
+
+When delegation is useful, select provider-neutral profiles from `.ai/agents/`. Prefer one primary owner and bounded read-only specialists. Route immersive work to `motion-3d-specialist`, asset-heavy changes to `asset-pipeline-specialist`, and screenshot-baseline changes to `visual-regression-reviewer` in addition to the existing UI/responsive/accessibility/performance/browser specialists as relevant.
 
 ## TEST AND VERIFY
 
 Use real evidence: tests, type checks, linting, builds, API checks, browser behavior, logs, database checks, benchmarks, static analysis, or manual probes as appropriate.
 
 Never say a test, build, deployment, review, or inspection passed unless you actually observed the result.
+
+For visual regression, record exact route, viewport, state, baseline and observed diff. A screenshot is evidence for that captured state, not proof of semantics or accessibility.
+
+For 3D and animation, include at least one verification path that covers reduced motion or fallback behavior when those paths exist.
 
 Match verification to risk. A passing test is evidence for the tested behavior, not proof of the entire system.
 

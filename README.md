@@ -10,17 +10,11 @@ This repository turns those concerns into a layered operating system:
 
 ## Web development and design layer
 
-The framework now separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
+The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
 
-Provider-neutral primary and specialist agent profiles live under `.ai/agents/`. The intended pipeline is `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`. Specialists are routed by changed surface and risk rather than invoked indiscriminately.
+Provider-neutral primary and specialist agent profiles live under `.ai/agents/`. The intended pipeline is `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`.
 
-- always-on core policy for identity, mindset, workflow, communication, and constraints;
-- task-specific skills for planning, implementation, debugging, review, security, testing, and engineering domains;
-- references for detailed procedures and edge cases;
-- examples and templates for progressive disclosure;
-- compatibility guides for Codex, Claude Code, ChatGPT Projects, and GitHub Copilot;
-- a master prompt for hosts that cannot reliably load modular repository instructions;
-- a controlled self-improvement system that collects evidence, detects recurrence, proposes bounded changes, validates them, and records outcomes.
+Advanced visual work is treated as a controlled capability set: expressive typography, micro-interactions, scrollytelling, parallax, experimental navigation, lighting/glow, 3D and generated or authored media can be used when they serve the product. The framework explicitly requires graceful degradation, responsive behavior, accessibility and performance evidence.
 
 ## Core philosophy
 
@@ -39,6 +33,24 @@ State unknowns, assumptions, conflicting evidence, and unverified behavior expli
 ### Preserve human control
 
 Self-improvement is controlled evolution, not unrestricted self-modification. Confidence never authorizes a change to governance.
+
+## Web specialist routing
+
+Use the narrowest matching capability rather than preloading every web rule:
+
+| Surface | Skill | Specialist |
+|---|---|---|
+| Visual direction/UI | `design-direction`, `design-system` | `ui-reviewer`, `design-director` |
+| Responsive behavior | `responsive-design` | `responsive-reviewer` |
+| Motion / scroll / micro-interactions | `interaction-motion` | `motion-3d-specialist` when advanced |
+| Browser 3D | `web-3d` | `motion-3d-specialist` |
+| Media / 3D assets | `asset-pipeline` | `asset-pipeline-specialist` |
+| Screenshot regression | `visual-regression` | `visual-regression-reviewer` |
+| Runtime browser checks | `browser-qa` | `browser-tester`, `visual-qa` |
+| Performance | `web-performance` | `performance-auditor` |
+| Accessibility | `accessibility` | `accessibility-reviewer` |
+
+Do not invoke every specialist by default. Use changed surface and risk to determine the review set.
 
 ## Self-improvement system
 
@@ -118,4 +130,4 @@ It does not guarantee perfect agent behavior. Instruction-following is probabili
 
 ## Further reading
 
-Start with `.ai/self-improvement/daily-cycle.md`, `MASTER-PROMPT.md`, `AGENTS.md`, and the relevant skill. For source attribution of the framework's public design references, see `docs/sources.md`.
+Start with `.ai/self-improvement/daily-cycle.md`, `MASTER-PROMPT.md`, `AGENTS.md`, and the relevant web or engineering skill. For source attribution of the framework's public design references, see `docs/sources.md`.

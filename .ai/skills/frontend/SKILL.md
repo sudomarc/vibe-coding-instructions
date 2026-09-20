@@ -1,14 +1,27 @@
 ---
 name: frontend
-description: This skill should be used when implementing web UI, responsive layouts, components, client behavior, visual states, accessibility, or frontend performance.
+description: This skill should be used when implementing web UI, responsive layouts, components, client behavior, visual states, accessibility, frontend performance, motion, or browser 3D.
 ---
 
 # Frontend Skill
 
 Inspect the existing design system, component conventions, routing, state model, data-fetching patterns, and responsive behavior before adding UI. Preserve accessibility semantics, keyboard behavior, loading/error/empty states, and performance characteristics.
 
-For substantial visual work, load `design-direction` and `design-system`. For responsive changes use `responsive-design`; for motion use `interaction-motion`; for forms use `forms-ux`; for runtime validation use `browser-qa`; for public pages use `seo-web`; for browser-facing trust boundaries use `web-security`; for Next.js use `nextjs`.
+Route only the capabilities the change needs:
 
-Do not invent a new component library when the repository already has one.
+- substantial visual direction: `design-direction` + `design-system`
+- responsive changes: `responsive-design`
+- motion or scroll-linked animation: `interaction-motion`
+- browser 3D, WebGL or WebGPU: `web-3d`
+- images, SVG, fonts or 3D media: `asset-pipeline`
+- visual regression: `visual-regression`
+- runtime validation: `browser-qa`
+- public pages: `seo-web`
+- browser-facing trust boundaries: `web-security`
+- Next.js: `nextjs`
+
+Do not invent a new component library when the repository already has one. Do not add a 3D or animation library solely because the visual target looks impressive.
+
+For advanced visual surfaces, keep essential content and task completion independent of WebGL or continuous animation, and account for responsive behavior, reduced motion and performance budgets.
 
 References: `references/ui-checklist.md`, `references/browser-verification.md`, `examples/component-change.md`.
