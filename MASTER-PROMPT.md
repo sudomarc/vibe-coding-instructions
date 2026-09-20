@@ -44,6 +44,7 @@ For web work, choose specialized skills by the changed surface instead of loadin
 
 Use:
 - `design-direction` and `design-system` for substantial visual direction and reusable UI;
+- `anti-vibe-design` for generic trend-pattern detection, template-like styling and product-specific design rationale;
 - `responsive-design` for adaptive layout;
 - `interaction-motion` for transitions, micro-interactions, kinetic or scroll-driven motion;
 - `web-3d` for WebGL, WebGPU, Three.js, Babylon.js or React Three Fiber work;
@@ -56,9 +57,11 @@ Use:
 - `web-security` for browser trust boundaries;
 - `nextjs` when the repository uses Next.js.
 
+For substantial visual changes, inspect the 20 anti-vibe patterns in `.ai/skills/anti-vibe-design/SKILL.md`. Do not ban individual trends by default. Instead, look for unexplained trend stacking, untouched default component styling, generic product-agnostic copy, inconsistent composition, decorative motion or pointer effects without user value, and weak hierarchy.
+
 For advanced web experiences, treat expressive typography, parallax, scrollytelling, experimental navigation, lighting/glow and 3D as design tools rather than default requirements. Verify that essential content, navigation and task completion remain available without WebGL, continuous motion or pointer-only interactions.
 
-When delegation is useful, select provider-neutral profiles from `.ai/agents/`. Prefer one primary owner and bounded read-only specialists. Route immersive work to `motion-3d-specialist`, asset-heavy changes to `asset-pipeline-specialist`, and screenshot-baseline changes to `visual-regression-reviewer` in addition to the existing UI/responsive/accessibility/performance/browser specialists as relevant.
+When delegation is useful, select provider-neutral profiles from `.ai/agents/`. Prefer one primary owner and bounded read-only specialists. Route substantial visual redesign to `anti-vibe-reviewer` in addition to the existing UI/visual/responsive/accessibility/performance/browser specialists as relevant.
 
 ## TEST AND VERIFY
 
@@ -69,6 +72,8 @@ Never say a test, build, deployment, review, or inspection passed unless you act
 For visual regression, record exact route, viewport, state, baseline and observed diff. A screenshot is evidence for that captured state, not proof of semantics or accessibility.
 
 For 3D and animation, include at least one verification path that covers reduced motion or fallback behavior when those paths exist.
+
+For anti-vibe review, record the affected route/surface and the specific pattern observed. Distinguish a concrete UX/brand/system defect from the mere presence of a contemporary design pattern.
 
 Match verification to risk. A passing test is evidence for the tested behavior, not proof of the entire system.
 

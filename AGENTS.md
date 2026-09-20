@@ -40,6 +40,7 @@ Typical flow: `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIF
 Core web routing includes:
 
 - Visual direction and reusable UI: `design-direction` + `design-system`
+- Anti-vibe visual quality: `anti-vibe-design`
 - Responsive behavior: `responsive-design`
 - Motion and micro-interactions: `interaction-motion`
 - Browser 3D/WebGL/WebGPU: `web-3d`
@@ -52,9 +53,11 @@ Core web routing includes:
 - Browser trust boundaries: `web-security`
 - Next.js: `nextjs`
 
-Use focused specialists such as `ui-reviewer`, `responsive-reviewer`, `accessibility-reviewer`, `visual-qa`, `visual-regression-reviewer`, `performance-auditor`, `motion-3d-specialist`, `asset-pipeline-specialist`, `seo-auditor`, `web-security-reviewer`, `nextjs-specialist`, `forms-ux-reviewer`, `component-reviewer`, and `browser-tester` only when their scope is relevant.
+Use focused specialists such as `ui-reviewer`, `anti-vibe-reviewer`, `responsive-reviewer`, `accessibility-reviewer`, `visual-qa`, `visual-regression-reviewer`, `performance-auditor`, `motion-3d-specialist`, `asset-pipeline-specialist`, `seo-auditor`, `web-security-reviewer`, `nextjs-specialist`, `forms-ux-reviewer`, `component-reviewer`, and `browser-tester` only when their scope is relevant.
 
 For immersive visual work, do not trade away task completion, accessibility or performance merely to add visual effects. Essential information must remain available without WebGL, continuous motion or pointer-only interaction.
+
+For substantial visual changes, run an anti-vibe preflight. Treat the 20-pattern catalog in `.ai/skills/anti-vibe-design/SKILL.md` as a contextual heuristic: a listed pattern is not automatically wrong, but unexplained trend stacking, generic copy, untouched defaults or inconsistent composition should trigger simplification or explicit rationale.
 
 ## Session bootstrap
 
@@ -104,11 +107,11 @@ Inspect before modifying history. Do not create commits, push, force-push, reset
 
 ## Self-improving web guidance
 
-When a recurring web-quality failure is observed, prefer recording evidence against the narrowest affected surface before changing global web policy. Common candidates include missing reduced-motion behavior, unbounded 3D GPU cost, unstable screenshot baselines, over-sized media, or reliance on WebGL for essential content.
+When a recurring web-quality failure is observed, prefer recording evidence against the narrowest affected surface before changing global web policy. Common candidates include generic trend stacking, default component styling, weak visual hierarchy, missing reduced-motion behavior, unbounded 3D GPU cost, unstable screenshot baselines, over-sized media, or reliance on WebGL for essential content.
 
 ## Completion
 
-Completion requires an implemented in-scope outcome, appropriate verification, final diff/status inspection, and explicit remaining uncertainty. A command being accepted by a tool is not equivalent to the production system being healthy.
+Completion requires an implemented in-scope outcome, appropriate verification, final diff/status inspection, and explicit remaining uncertainty.
 
 ## Repository-specific instructions
 
@@ -118,6 +121,7 @@ Adapt project commands, framework conventions, deployment requirements, ownershi
 
 - Core: `.ai/core/`
 - Skills: `.ai/skills/`
+- Anti-vibe design: `.ai/skills/anti-vibe-design/SKILL.md`
 - Templates: `.ai/templates/`
 - Meta: `.ai/meta/`
 - Provider guides: `docs/`

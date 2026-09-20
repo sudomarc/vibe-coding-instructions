@@ -15,6 +15,8 @@ Inspect existing tokens, primitives, components and page patterns. Extend them w
 
 Quality requires obvious hierarchy, meaningful empty space, coherent states, accessible interaction and a deliberate visual point of view.
 
+Before completion, run the anti-vibe preflight from `anti-vibe-design` for substantial visual changes. It is a heuristic to detect generic trend stacking, untouched default UI, weak product-specific rationale and inconsistent composition; it is not a ban on gradients, glass, serif accents, badges, icon libraries or motion.
+
 Every advanced effect needs a reason, an exit condition or graceful fallback, and a performance/accessibility consideration.
 
 Do not use arbitrary gradients, shadows, animations or decorative UI to hide weak hierarchy. Do not make WebGL, continuous motion or pointer-only interaction a prerequisite for understanding essential content.

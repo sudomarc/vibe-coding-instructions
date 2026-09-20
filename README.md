@@ -10,11 +10,15 @@ This repository turns those concerns into a layered operating system:
 
 ## Web development and design layer
 
-The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
+The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, anti-vibe visual review, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
 
 Provider-neutral primary and specialist agent profiles live under `.ai/agents/`. The intended pipeline is `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`.
 
-Advanced visual work is treated as a controlled capability set: expressive typography, micro-interactions, scrollytelling, parallax, experimental navigation, lighting/glow, 3D and generated or authored media can be used when they serve the product. The framework explicitly requires graceful degradation, responsive behavior, accessibility and performance evidence.
+### Anti-vibe visual quality
+
+The web layer now includes `.ai/skills/anti-vibe-design/SKILL.md`, a contextual checklist for recognizable AI/web-design patterns: gradient-heavy defaults, generic icon-card layouts, glassmorphism, untouched component-library styling, decorative scroll/cursor effects, inconsistent spacing, generic buzzword copy, fashionable font pairings and texture overlays.
+
+These are not hard bans. The objective is to detect trend stacking and lack of product-specific rationale while preserving legitimate use of contemporary design patterns. Substantial visual changes can route to `anti-vibe-reviewer`.
 
 ## Core philosophy
 
@@ -41,6 +45,7 @@ Use the narrowest matching capability rather than preloading every web rule:
 | Surface | Skill | Specialist |
 |---|---|---|
 | Visual direction/UI | `design-direction`, `design-system` | `ui-reviewer`, `design-director` |
+| Anti-vibe visual quality | `anti-vibe-design` | `anti-vibe-reviewer` |
 | Responsive behavior | `responsive-design` | `responsive-reviewer` |
 | Motion / scroll / micro-interactions | `interaction-motion` | `motion-3d-specialist` when advanced |
 | Browser 3D | `web-3d` | `motion-3d-specialist` |
