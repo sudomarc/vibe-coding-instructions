@@ -10,15 +10,19 @@ This repository turns those concerns into a layered operating system:
 
 ## Web development and design layer
 
-The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, anti-vibe visual review, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
+The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, anti-vibe visual review, legal/compliance review, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
 
-Provider-neutral primary and specialist agent profiles live under `.ai/agents/`. The intended pipeline is `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`.
+Provider-neutral primary and specialist agent profiles live under .ai/agents/. The intended pipeline is DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF.
 
 ### Anti-vibe visual quality
 
-The web layer now includes `.ai/skills/anti-vibe-design/SKILL.md`, a contextual checklist for recognizable AI/web-design patterns: gradient-heavy defaults, generic icon-card layouts, glassmorphism, untouched component-library styling, decorative scroll/cursor effects, inconsistent spacing, generic buzzword copy, fashionable font pairings and texture overlays.
+The web layer includes .ai/skills/anti-vibe-design/SKILL.md, a contextual checklist for recognizable AI/web-design patterns. These are not hard bans. The objective is to detect trend stacking and lack of product-specific rationale while preserving legitimate use of contemporary design patterns.
 
-These are not hard bans. The objective is to detect trend stacking and lack of product-specific rationale while preserving legitimate use of contemporary design patterns. Substantial visual changes can route to `anti-vibe-reviewer`.
+### Legal/compliance quality
+
+The web layer also includes .ai/skills/legal-compliance/SKILL.md, derived from the attached September 2026 audit prompt. It audits six recurring exposure areas: age-restricted account/data collection, remote third-party resources, analytics/session replay, marketing email, automatic-renewal subscriptions, and user uploads/copyright. It also checks privacy/terms links, processors, consent behavior, secrets and sensitive logs.
+
+The legal layer is deliberately evidence-first. It does not assume a cited law applies to every app, does not treat penalty figures as universal, and separates engineering remediation from jurisdictional/legal conclusions, registrations and human-owned policy work.
 
 ## Core philosophy
 
@@ -38,94 +42,61 @@ State unknowns, assumptions, conflicting evidence, and unverified behavior expli
 
 Self-improvement is controlled evolution, not unrestricted self-modification. Confidence never authorizes a change to governance.
 
-## Web specialist routing
+## Specialist routing
 
-Use the narrowest matching capability rather than preloading every web rule:
+Use the narrowest matching capability rather than preloading every rule:
 
 | Surface | Skill | Specialist |
 |---|---|---|
-| Visual direction/UI | `design-direction`, `design-system` | `ui-reviewer`, `design-director` |
-| Anti-vibe visual quality | `anti-vibe-design` | `anti-vibe-reviewer` |
-| Responsive behavior | `responsive-design` | `responsive-reviewer` |
-| Motion / scroll / micro-interactions | `interaction-motion` | `motion-3d-specialist` when advanced |
-| Browser 3D | `web-3d` | `motion-3d-specialist` |
-| Media / 3D assets | `asset-pipeline` | `asset-pipeline-specialist` |
-| Screenshot regression | `visual-regression` | `visual-regression-reviewer` |
-| Runtime browser checks | `browser-qa` | `browser-tester`, `visual-qa` |
-| Performance | `web-performance` | `performance-auditor` |
-| Accessibility | `accessibility` | `accessibility-reviewer` |
+| Visual direction/UI | design-direction, design-system | ui-reviewer, design-director |
+| Anti-vibe visual quality | anti-vibe-design | anti-vibe-reviewer |
+| Compliance-sensitive flows | legal-compliance | legal-compliance-reviewer |
+| Responsive behavior | responsive-design | responsive-reviewer |
+| Motion / scroll / micro-interactions | interaction-motion | motion-3d-specialist when advanced |
+| Browser 3D | web-3d | motion-3d-specialist |
+| Media / 3D assets | asset-pipeline | asset-pipeline-specialist |
+| Screenshot regression | visual-regression | visual-regression-reviewer |
+| Runtime browser checks | browser-qa | browser-tester, visual-qa |
+| Performance | web-performance | performance-auditor |
+| Accessibility | accessibility | accessibility-reviewer |
 
 Do not invoke every specialist by default. Use changed surface and risk to determine the review set.
 
 ## Self-improvement system
 
-```text
-REAL-WORLD USE
-      ↓
-OBSERVE / COLLECT
-      ↓
-ANALYZE / CLASSIFY
-      ↓
-ROOT-CAUSE HYPOTHESIS
-      ↓
-PROPOSE
-      ↓
-VALIDATE
-      ↓
-APPROVE* / APPLY
-      ↓
-TEST / REGRESSION CHECK
-      ↓
-MEASURE
-      ↓
-RECORD OUTCOME
-      └──────────────→ NEXT CYCLE
+REAL-WORLD USE → OBSERVE / COLLECT → ANALYZE / CLASSIFY → ROOT-CAUSE HYPOTHESIS → PROPOSE → VALIDATE → APPROVE* / APPLY → TEST / REGRESSION CHECK → MEASURE → RECORD OUTCOME
 
 * Human approval is mandatory for governed changes.
-```
 
 ### Evidence and memory
 
-The durable record store lives in `.ai/self-improvement/records/`:
+The durable record store lives in .ai/self-improvement/records/:
 
-- `observations/` stores evidence and recurrence classification;
-- `proposals/` stores bounded changes, risks, and validation plans;
-- `outcomes/` stores post-change measurements and regression results.
+- observations/ stores evidence and recurrence classification;
+- proposals/ stores bounded changes, risks, and validation plans;
+- outcomes/ stores post-change measurements and regression results.
 
-The periodic collector at `scripts/self_improvement_cycle.py` produces transient evidence artifacts (`cycle-report.json` and `cycle-report.md`). It does not decide that a rule should change.
+The periodic collector at scripts/self_improvement_cycle.py produces transient evidence artifacts. It does not decide that a rule should change.
 
 ### Anti-drift
 
-The system explicitly supports `ADD`, `REMOVE`, `MERGE`, `SIMPLIFY`, and `REPLACE`. A useful improvement can be deletion or consolidation rather than another rule.
+The system explicitly supports ADD, REMOVE, MERGE, SIMPLIFY, and REPLACE. A useful improvement can be deletion or consolidation rather than another rule.
+
+## Legal audit reporting
+
+Use .ai/templates/legal-audit.md for the six-item report shape. Each item must end with explicit human follow-up or a documented reason it is not applicable. The source that motivated this layer says its figures are jurisdiction-specific and advises lawyer review for matters involving money; this repository preserves that boundary.
 
 ## GitHub integration
 
-The repository contains the repository-level Custom Agent profile at `.github/agents/self-improvement.agent.md`. GitHub's current documentation supports repository custom agents under `.github/agents/` and `.agent.md` profiles with YAML frontmatter:
-
-https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents
-https://docs.github.com/en/copilot/reference/custom-agents-configuration
-
-A weekly GitHub Actions workflow at `.github/workflows/self-improvement.yml` runs deterministic collection, stores the run evidence as an artifact, and creates an issue when candidate signals are found. When `COPILOT_GITHUB_TOKEN` is configured, the workflow can additionally invoke the custom agent in an isolated branch and open a draft pull request after validation. GitHub documents Copilot CLI automation from Actions and recommends minimal tool permissions in automated runs:
-
-https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions
-https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically
-
-Because this is a user-owned repository, the organization-only built-in `GITHUB_TOKEN` Copilot billing path cannot be assumed. The documented personal-token route is `COPILOT_GITHUB_TOKEN`; configuring that secret and an eligible Copilot plan is an external prerequisite that this repository cannot verify by itself:
-
-https://docs.github.com/en/copilot/how-tos/github-agentic-workflows/creating-github-agentic-workflows
-https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli
-
-The workflow uses weekly scheduling plus manual dispatch. GitHub Actions supports scheduled workflows and `workflow_dispatch`; scheduled workflows run from the latest commit on the default branch:
-
-https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax
+The repository contains the repository-level Custom Agent profile at .github/agents/self-improvement.agent.md.
 
 ## Validation
 
-The framework validator is `scripts/validate_instructions.py`. It checks required paths, governance markers, Markdown links, the Custom Agent contract, and explicit workflow permissions. The self-improvement workflow runs this validator before opening an automated draft PR.
+The framework validator is scripts/validate_instructions.py. It checks required paths, governance markers, Markdown links, the Custom Agent contract, and explicit workflow permissions. The self-improvement workflow runs this validator before opening an automated draft PR.
 
 ## Using it in another repository
 
-Copy the policy entry files and the `.ai/` directory into the target repository. Preserve paths so references remain valid. Then adapt only project-specific sections such as runtime, framework, commands, architecture, branching, tests, deployment, and ownership.
+Copy the policy entry files and the .ai/ directory into the target repository. Preserve paths so references remain valid. Then adapt only project-specific sections such as runtime, framework, commands, architecture, branching, tests, deployment, and ownership.
 
 Do not blindly copy project-specific rules from this repository into another project. This repository defines a general operating system, not application-specific truth.
 
@@ -135,4 +106,4 @@ It does not guarantee perfect agent behavior. Instruction-following is probabili
 
 ## Further reading
 
-Start with `.ai/self-improvement/daily-cycle.md`, `MASTER-PROMPT.md`, `AGENTS.md`, and the relevant web or engineering skill. For source attribution of the framework's public design references, see `docs/sources.md`.
+Start with .ai/self-improvement/daily-cycle.md, MASTER-PROMPT.md, AGENTS.md, and the relevant web or engineering skill. For source attribution of the framework's public design references, see docs/sources.md.

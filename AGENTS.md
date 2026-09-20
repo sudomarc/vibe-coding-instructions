@@ -11,7 +11,7 @@ This repository is a portable, provider-neutral governance layer for AI coding a
 5. Verify behavior with real evidence; never fabricate test, build, deployment, review, or inspection results.
 6. Treat secrets, credentials, production systems, destructive Git/database operations, remote execution, and downloaded shell execution as high-risk.
 7. Preserve unrelated user work. Never silently rewrite history or broaden scope.
-8. Surface `FACT`, `OBSERVED`, `VERIFIED`, `INFERENCE`, `ASSUMPTION`, `UNKNOWN`, `CONFLICT`, and `UNVERIFIED` when they affect decisions.
+8. Surface FACT, OBSERVED, VERIFIED, INFERENCE, ASSUMPTION, UNKNOWN, CONFLICT, and UNVERIFIED when they affect decisions.
 9. Review the final diff before reporting completion.
 10. Report what changed, what was verified, what was not verified, and material risks.
 
@@ -19,51 +19,54 @@ This repository is a portable, provider-neutral governance layer for AI coding a
 
 Load only the context needed for the task:
 
-- Core policy: `.ai/core/`
-- Task procedures: `.ai/skills/<domain>/SKILL.md`
-- Deep guidance: `.ai/skills/<domain>/references/`
-- Concrete patterns: `.ai/skills/<domain>/examples/`
-- Reusable output shapes: `.ai/templates/`
-- Agent profiles: `.ai/agents/`
-- Meta guidance: `.ai/meta/`
-- Provider notes: `docs/codex.md`, `docs/claude-code.md`, `docs/chatgpt.md`, `docs/copilot.md`
-- Self-improvement: `.ai/self-improvement/`
+- Core policy: .ai/core/
+- Task procedures: .ai/skills/<domain>/SKILL.md
+- Deep guidance: .ai/skills/<domain>/references/
+- Concrete patterns: .ai/skills/<domain>/examples/
+- Reusable output shapes: .ai/templates/
+- Agent profiles: .ai/agents/
+- Meta guidance: .ai/meta/
+- Provider notes: docs/codex.md, docs/claude-code.md, docs/chatgpt.md, docs/copilot.md
+- Self-improvement: .ai/self-improvement/
 
 Do not preload every skill, reference, or agent unless the task genuinely requires it.
 
 ## Web development and design
 
-For substantial web work, route by changed surface and risk. Use the skills under `.ai/skills/` and provider-neutral profiles under `.ai/agents/`.
+For substantial web work, route by changed surface and risk. Use the skills under .ai/skills/ and provider-neutral profiles under .ai/agents/.
 
-Typical flow: `DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF`
+Typical flow: DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF
 
 Core web routing includes:
 
-- Visual direction and reusable UI: `design-direction` + `design-system`
-- Anti-vibe visual quality: `anti-vibe-design`
-- Responsive behavior: `responsive-design`
-- Motion and micro-interactions: `interaction-motion`
-- Browser 3D/WebGL/WebGPU: `web-3d`
-- Media and 3D assets: `asset-pipeline`
-- Screenshot or visual regression coverage: `visual-regression`
-- Runtime verification: `browser-qa`
-- Client performance: `web-performance`
-- Accessibility: `accessibility`
-- Public pages: `seo-web`
-- Browser trust boundaries: `web-security`
-- Next.js: `nextjs`
+- Visual direction and reusable UI: design-direction + design-system
+- Anti-vibe visual quality: anti-vibe-design
+- Compliance-sensitive web flows: legal-compliance
+- Responsive behavior: responsive-design
+- Motion and micro-interactions: interaction-motion
+- Browser 3D/WebGL/WebGPU: web-3d
+- Media and 3D assets: asset-pipeline
+- Screenshot or visual regression coverage: visual-regression
+- Runtime verification: browser-qa
+- Client performance: web-performance
+- Accessibility: accessibility
+- Public pages: seo-web
+- Browser trust boundaries: web-security
+- Next.js: nextjs
 
-Use focused specialists such as `ui-reviewer`, `anti-vibe-reviewer`, `responsive-reviewer`, `accessibility-reviewer`, `visual-qa`, `visual-regression-reviewer`, `performance-auditor`, `motion-3d-specialist`, `asset-pipeline-specialist`, `seo-auditor`, `web-security-reviewer`, `nextjs-specialist`, `forms-ux-reviewer`, `component-reviewer`, and `browser-tester` only when their scope is relevant.
+Use focused specialists such as ui-reviewer, anti-vibe-reviewer, legal-compliance-reviewer, responsive-reviewer, accessibility-reviewer, visual-qa, visual-regression-reviewer, performance-auditor, motion-3d-specialist, asset-pipeline-specialist, seo-auditor, web-security-reviewer, nextjs-specialist, forms-ux-reviewer, component-reviewer, and browser-tester only when their scope is relevant.
 
 For immersive visual work, do not trade away task completion, accessibility or performance merely to add visual effects. Essential information must remain available without WebGL, continuous motion or pointer-only interaction.
 
-For substantial visual changes, run an anti-vibe preflight. Treat the 20-pattern catalog in `.ai/skills/anti-vibe-design/SKILL.md` as a contextual heuristic: a listed pattern is not automatically wrong, but unexplained trend stacking, generic copy, untouched defaults or inconsistent composition should trigger simplification or explicit rationale.
+For substantial visual changes, run an anti-vibe preflight. Treat the 20-pattern catalog in .ai/skills/anti-vibe-design/SKILL.md as a contextual heuristic: a listed pattern is not automatically wrong, but unexplained trend stacking, generic copy, untouched defaults or inconsistent composition should trigger simplification or explicit rationale.
+
+For compliance-sensitive flows, run a legal-compliance audit when accounts, unauthenticated data collection, analytics/replay, marketing email, subscriptions/trials, uploads, cookies/consent or policy pages are affected. Distinguish engineering remediation from legal applicability and human-owned registration/policy tasks.
 
 ## Session bootstrap
 
 1. Read this file.
-2. Read the applicable `.ai/core/` files when not already available.
-3. Inspect nested `AGENTS.md` files and other applicable project instructions.
+2. Read the applicable .ai/core/ files when not already available.
+3. Inspect nested AGENTS.md files and other applicable project instructions.
 4. Inspect repository status, project manifests, build/test tooling, and relevant documentation.
 5. Select only the matching skill(s).
 6. Select only the matching agent profile(s) when delegation creates independent value.
@@ -71,9 +74,9 @@ For substantial visual changes, run an anti-vibe preflight. Treat the 20-pattern
 
 ## Operating loop
 
-`REQUEST → UNDERSTAND → INSPECT → CLARIFY/ASSUME → PLAN → IMPLEMENT → TEST → REVIEW → VERIFY → DOCUMENT → REPORT`
+REQUEST → UNDERSTAND → INSPECT → CLARIFY/ASSUME → PLAN → IMPLEMENT → TEST → REVIEW → VERIFY → DOCUMENT → REPORT
 
-For debugging: `REPRODUCE → OBSERVE → ISOLATE → HYPOTHESIZE → TEST → ROOT CAUSE → MINIMAL FIX → REGRESSION → REVIEW → REPORT`.
+For debugging: REPRODUCE → OBSERVE → ISOLATE → HYPOTHESIZE → TEST → ROOT CAUSE → MINIMAL FIX → REGRESSION → REVIEW → REPORT.
 
 For complex work, use bounded implementation batches with incremental verification and a living plan or handoff where needed.
 
@@ -81,7 +84,7 @@ For complex work, use bounded implementation batches with incremental verificati
 
 When a failure, correction, repeated friction, or successful pattern appears generalizable, use the controlled loop:
 
-`OBSERVE → RECORD → CLASSIFY → ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION → RECORD OUTCOME`
+OBSERVE → RECORD → CLASSIFY → ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION → RECORD OUTCOME
 
 Record evidence rather than assumptions. Prefer local fixes before global instruction changes. Governance-critical changes require explicit human approval. Never allow the learning loop to weaken security, verification, scope, or instruction-precedence controls.
 
@@ -91,7 +94,7 @@ Apply higher-priority system/developer/user instructions before repository polic
 
 ## Planning threshold
 
-A change is **trivial** only when it is small, local, low-risk, does not alter public behavior or data shape, does not add dependencies, and can be verified with a focused check. Examples include a typo correction, a one-line documentation edit, or a purely mechanical formatting change. When in doubt, plan.
+A change is trivial only when it is small, local, low-risk, does not alter public behavior or data shape, does not add dependencies, and can be verified with a focused check. Examples include a typo correction, a one-line documentation edit, or a purely mechanical formatting change. When in doubt, plan.
 
 ## Verification
 
@@ -107,7 +110,7 @@ Inspect before modifying history. Do not create commits, push, force-push, reset
 
 ## Self-improving web guidance
 
-When a recurring web-quality failure is observed, prefer recording evidence against the narrowest affected surface before changing global web policy. Common candidates include generic trend stacking, default component styling, weak visual hierarchy, missing reduced-motion behavior, unbounded 3D GPU cost, unstable screenshot baselines, over-sized media, or reliance on WebGL for essential content.
+When a recurring web-quality failure is observed, prefer recording evidence against the narrowest affected surface before changing global web policy. Common candidates include generic trend stacking, default component styling, weak visual hierarchy, missing reduced-motion behavior, unbounded 3D GPU cost, unstable screenshot baselines, over-sized media, reliance on WebGL for essential content, or recurring compliance-control gaps.
 
 ## Completion
 
@@ -119,12 +122,13 @@ Adapt project commands, framework conventions, deployment requirements, ownershi
 
 ## Navigation
 
-- Core: `.ai/core/`
-- Skills: `.ai/skills/`
-- Anti-vibe design: `.ai/skills/anti-vibe-design/SKILL.md`
-- Templates: `.ai/templates/`
-- Meta: `.ai/meta/`
-- Provider guides: `docs/`
-- Self-improvement: `.ai/self-improvement/`
-- Master prompt: `MASTER-PROMPT.md`
-- Automated audit: `scripts/validate_instructions.py`
+- Core: .ai/core/
+- Skills: .ai/skills/
+- Anti-vibe design: .ai/skills/anti-vibe-design/SKILL.md
+- Legal/compliance audit: .ai/skills/legal-compliance/SKILL.md
+- Templates: .ai/templates/
+- Meta: .ai/meta/
+- Provider guides: docs/
+- Self-improvement: .ai/self-improvement/
+- Master prompt: MASTER-PROMPT.md
+- Automated audit: scripts/validate_instructions.py

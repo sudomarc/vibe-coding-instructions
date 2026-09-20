@@ -10,11 +10,11 @@ You are not a product owner, not a source of invented requirements, and not enti
 
 ## WORKFLOW
 
-`REQUEST → UNDERSTAND → INSPECT → CLARIFY/ASSUME → PLAN → IMPLEMENT → TEST → REVIEW → VERIFY → DOCUMENT → REPORT`
+REQUEST → UNDERSTAND → INSPECT → CLARIFY/ASSUME → PLAN → IMPLEMENT → TEST → REVIEW → VERIFY → DOCUMENT → REPORT
 
 Debugging uses:
 
-`REPRODUCE → OBSERVE → ISOLATE → HYPOTHESIZE → TEST → ROOT CAUSE → MINIMAL FIX → REGRESSION → REVIEW → REPORT`
+REPRODUCE → OBSERVE → ISOLATE → HYPOTHESIZE → TEST → ROOT CAUSE → MINIMAL FIX → REGRESSION → REVIEW → REPORT
 
 For complex work, use a living plan, bounded batches, and incremental verification.
 
@@ -43,25 +43,26 @@ After each batch, inspect the change and run the narrowest meaningful verificati
 For web work, choose specialized skills by the changed surface instead of loading every web rule.
 
 Use:
-- `design-direction` and `design-system` for substantial visual direction and reusable UI;
-- `anti-vibe-design` for generic trend-pattern detection, template-like styling and product-specific design rationale;
-- `responsive-design` for adaptive layout;
-- `interaction-motion` for transitions, micro-interactions, kinetic or scroll-driven motion;
-- `web-3d` for WebGL, WebGPU, Three.js, Babylon.js or React Three Fiber work;
-- `asset-pipeline` for images, SVG, fonts, generated media and 3D assets;
-- `visual-regression` for repeatable screenshot comparison and baseline governance;
-- `browser-qa` for runtime route and interaction verification;
-- `web-performance` for measurable client performance;
-- `accessibility` for keyboard, semantics, contrast and assistive technology compatibility;
-- `seo-web` for public/indexable pages;
-- `web-security` for browser trust boundaries;
-- `nextjs` when the repository uses Next.js.
+- design-direction and design-system for substantial visual direction and reusable UI;
+- anti-vibe-design for generic trend-pattern detection, template-like styling and product-specific design rationale;
+- legal-compliance for compliance-sensitive flows and legal-exposure engineering audits;
+- responsive-design for adaptive layout;
+- interaction-motion for transitions, micro-interactions, kinetic or scroll-driven motion;
+- web-3d for WebGL, WebGPU, Three.js, Babylon.js or React Three Fiber work;
+- asset-pipeline for images, SVG, fonts, generated media and 3D assets;
+- visual-regression for repeatable screenshot comparison and baseline governance;
+- browser-qa for runtime route and interaction verification;
+- web-performance for measurable client performance;
+- accessibility for keyboard, semantics, contrast and assistive technology compatibility;
+- seo-web for public/indexable pages;
+- web-security for browser trust boundaries;
+- nextjs when the repository uses Next.js.
 
-For substantial visual changes, inspect the 20 anti-vibe patterns in `.ai/skills/anti-vibe-design/SKILL.md`. Do not ban individual trends by default. Instead, look for unexplained trend stacking, untouched default component styling, generic product-agnostic copy, inconsistent composition, decorative motion or pointer effects without user value, and weak hierarchy.
+For substantial visual changes, inspect the 20 anti-vibe patterns in .ai/skills/anti-vibe-design/SKILL.md. Do not ban individual trends by default. Instead, look for unexplained trend stacking, untouched default component styling, generic product-agnostic copy, inconsistent composition, decorative motion or pointer effects without user value, and weak hierarchy.
 
-For advanced web experiences, treat expressive typography, parallax, scrollytelling, experimental navigation, lighting/glow and 3D as design tools rather than default requirements. Verify that essential content, navigation and task completion remain available without WebGL, continuous motion or pointer-only interactions.
+For compliance-sensitive changes, inspect the six source-informed legal holes plus secondary privacy/security checks. Do not assume a cited law applies. Determine applicability from actual app behavior, users, jurisdictions and current authoritative evidence.
 
-When delegation is useful, select provider-neutral profiles from `.ai/agents/`. Prefer one primary owner and bounded read-only specialists. Route substantial visual redesign to `anti-vibe-reviewer` in addition to the existing UI/visual/responsive/accessibility/performance/browser specialists as relevant.
+When delegation is useful, select provider-neutral profiles from .ai/agents/. Prefer one primary owner and bounded read-only specialists. Route compliance-sensitive flows to legal-compliance-reviewer plus the relevant technical reviewer. The reviewer remains read-only; the primary agent owns implementation and final verification.
 
 ## TEST AND VERIFY
 
@@ -75,6 +76,8 @@ For 3D and animation, include at least one verification path that covers reduced
 
 For anti-vibe review, record the affected route/surface and the specific pattern observed. Distinguish a concrete UX/brand/system defect from the mere presence of a contemporary design pattern.
 
+For legal/compliance review, use the Found / Changed / Verified / You still need to / Applicability / Evidence structure. Never report a legal item as resolved solely because engineering code changed.
+
 Match verification to risk. A passing test is evidence for the tested behavior, not proof of the entire system.
 
 ## REVIEW
@@ -87,7 +90,7 @@ Separate severity from confidence. Prefer actionable findings over speculative s
 
 When a failure, user correction, repeated friction, or successful pattern appears generalizable, use the bounded loop:
 
-`OBSERVE → RECORD → CLASSIFY → ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION → RECORD OUTCOME`
+OBSERVE → RECORD → CLASSIFY → ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION → RECORD OUTCOME
 
 Treat self-improvement as controlled proposal generation, not unrestricted self-modification. Prefer local fixes before global instruction changes. Require explicit human approval for changes to core governance, safety, security, verification, instruction precedence, or provider trust boundaries. Never treat confidence as authorization.
 
@@ -103,14 +106,14 @@ Never expose secrets or sensitive values in logs, prompts, diffs, commits, or re
 
 Use explicit evidence labels when they matter:
 
-- `FACT`
-- `OBSERVED`
-- `VERIFIED`
-- `INFERENCE`
-- `ASSUMPTION`
-- `UNKNOWN`
-- `CONFLICT`
-- `UNVERIFIED`
+- FACT
+- OBSERVED
+- VERIFIED
+- INFERENCE
+- ASSUMPTION
+- UNKNOWN
+- CONFLICT
+- UNVERIFIED
 
 If verification is impossible, report the limitation rather than substituting confidence for evidence.
 

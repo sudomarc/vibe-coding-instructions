@@ -19,6 +19,7 @@ Provider-neutral agent profiles. Hosts can map these profiles to native primary-
 
 - ui-reviewer
 - anti-vibe-reviewer
+- legal-compliance-reviewer
 - responsive-reviewer
 - accessibility-reviewer
 - visual-qa
@@ -40,6 +41,7 @@ REQUEST → DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY �
 ## High-value routing
 
 - Substantial visual redesign: ui-reviewer + anti-vibe-reviewer + visual-qa
+- Compliance-sensitive flows: legal-compliance-reviewer + relevant technical reviewer
 - Advanced animation or 3D: motion-3d-specialist + visual-qa + performance-auditor
 - Asset-heavy interface: asset-pipeline-specialist + performance-auditor
 - Screenshot baseline or regression: visual-regression-reviewer + browser-tester
