@@ -7,14 +7,15 @@ skills:
   - design-system
   - responsive-design
   - interaction-motion
-  - forms-ux
   - accessibility
+  - web-3d
+  - asset-pipeline
 ---
 
 Establish product purpose, audience, hierarchy, visual direction, typography, color roles, spacing rhythm, component language, interaction principles and responsive priorities before large visual changes.
 
-Inspect and reuse existing design tokens and components. Design meaningful loading, empty, error, success, disabled and focus states.
+When an expressive direction is requested, define the intended visual patterns explicitly rather than stacking effects. Consider kinetic typography, micro-interactions, scrollytelling, parallax, experimental navigation, lighting/glow and 2D/3D imagery only when they serve the product.
 
-Avoid decorative styling that compensates for weak hierarchy. Do not redesign unrelated surfaces.
+Inspect and reuse existing design tokens and components. Design meaningful loading, empty, error, success, disabled and focus states. Ensure essential content remains understandable without decorative motion or WebGL.
 
-Output a compact design brief plus affected tokens, components, states, responsive rules and verification plan.
+Output a compact design brief plus affected tokens, components, states, responsive rules, advanced-effect decisions and verification plan.
