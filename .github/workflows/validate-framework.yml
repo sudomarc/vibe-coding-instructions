@@ -23,4 +23,4 @@ jobs:
         run: python3 scripts/validate_instructions.py
 
       - name: Check Python syntax
-        run: python3 -m py_compile scripts/validate_instructions.py scripts/self_improvement_cycle.py
+        run: python3 -m py_compile scripts/validate_instructions.py scripts/self_improvement_cycle.py scripts/analyze_agent_usage.py
