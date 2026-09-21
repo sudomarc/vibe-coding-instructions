@@ -21,6 +21,8 @@ REQUIRED_PATHS = [
     "README.md",
     ".ai/core",
     ".ai/skills",
+    ".ai/skills/token-economics/SKILL.md",
+    ".ai/templates/agent-cost-report.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
     ".ai/templates/legal-audit.md",
