@@ -13,6 +13,10 @@
 9. Verify behavior before reporting completion.
 10. Review the final diff and repository state.
 
+## Context economy
+
+Token and context optimization must not weaken security, safety, verification, scope control, or authorization requirements. Load only the context needed for the current decision and treat provider cost data as volatile.
+
 ## Escalation triggers
 
 Escalate when work involves production, irreversible data changes, credentials, privilege changes, public contracts, material dependency risk, conflicting instructions, or missing verification for a high-risk change.
