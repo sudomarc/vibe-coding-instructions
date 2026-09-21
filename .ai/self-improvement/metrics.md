@@ -15,6 +15,24 @@ Metrics are descriptive signals, not success guarantees.
 | `regression_count` | Post-change regressions detected. |
 | `confirmed_improvements` | Changes whose target signal improved with supporting evidence. |
 
+## Agent economics signals
+
+| Metric | Meaning |
+|---|---|
+| `input_tokens_total` | Total model input tokens observed for a task/session. |
+| `cached_input_tokens` | Input tokens reported as served from cache, when available. |
+| `output_tokens` | Model output tokens, including reasoning where the provider bills/reports it as output. |
+| `reasoning_tokens` | Provider-reported reasoning tokens, when exposed separately. |
+| `tool_calls` | Number of tool invocations. |
+| `tool_result_tokens` | Tokens entering model context from tool results, when measurable. |
+| `retry_count` | Repeated attempts after failures. |
+| `compaction_count` | Context compaction/pruning operations. |
+| `subagent_count` | Delegated agents used. |
+| `estimated_cost` | Provider-reported or calculated cost; label source and uncertainty. |
+| `cost_per_verified_success` | Cost divided by tasks that reached the defined verified outcome. |
+
+These metrics should be interpreted together. Lower token usage is not an improvement if retries, defects, or verification failures increase.
+
 ## Before / after
 
 When a measurable signal exists, record:
