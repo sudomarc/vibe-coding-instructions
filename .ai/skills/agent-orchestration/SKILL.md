@@ -22,6 +22,10 @@ Use multiple agents only when decomposition creates real independent value. Keep
 - Browser-facing security: `web-security-reviewer`
 - External CLIs, MCPs, SaaS providers or multi-backend integrations: `integration-health-reviewer` + `security` or `provider-integration` specialist as relevant
 
+## Delegation economics
+
+Delegation is justified only when independent analysis, context isolation, or parallelism creates net value after accounting for the delegated prompt, context, tool calls, and returned output. Prefer one primary owner plus narrow read-only reviewers. Do not delegate work that simply rereads the same evidence without independent value.
+
 ## Delegation contract
 
 Every delegate receives role, exact scope, relevant files or diff, required inputs, output format, permissions, and stop condition. Run independent read-only reviews in parallel only when the host can isolate them safely. The primary agent remains responsible for final integration.
