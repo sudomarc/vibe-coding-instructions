@@ -10,7 +10,9 @@ Verify changed behavior with the narrowest useful tests, type checks, linters, b
 
 Treat destructive Git commands, production operations, credential changes, recursive deletion, destructive migrations, and remote command execution as high-risk. Follow .ai/skills/safety/SKILL.md before such actions.
 
-Use the matching skill under .ai/skills/ for planning, implementation, review, debugging, security, testing, database, API, frontend, backend, Git, dependencies, documentation, refactoring, performance, accessibility, release, research, incident response, agent orchestration, and legal/compliance audits.
+Use the matching skill under .ai/skills/ for planning, implementation, review, debugging, security, testing, database, API, frontend, backend, Git, dependencies, documentation, refactoring, performance, accessibility, release, research, incident response, agent orchestration, legal/compliance audits, and token/context economics.
+
+For long-running or tool-heavy work, use `.ai/skills/token-economics/` to control context retrieval, tool-result size, retries, compaction, delegation, and model/effort routing. Do not sacrifice verification or safety for cost savings.
 
 For legal/compliance audits, inspect the six source-informed items and secondary privacy/security checks. Separate engineering fixes from legal applicability, registrations and policy ownership. Use .ai/templates/legal-audit.md.
 

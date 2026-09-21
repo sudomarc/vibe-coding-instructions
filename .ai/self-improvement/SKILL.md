@@ -85,6 +85,12 @@ Persist durable learning under `.ai/self-improvement/records/`:
 
 The periodic collector's `cycle-report.json` is a transient evidence artifact. Do not treat it as durable memory without review.
 
+## Token and context efficiency
+
+When repeated work shows context bloat, redundant tool calls, unnecessary delegation, retry loops, or avoidable model cost, use `.ai/skills/token-economics/` to measure and propose a bounded improvement. Record observed usage when telemetry exists and distinguish provider-reported values from estimates.
+
+Token optimization is subordinate to correctness, security, safety, verification, scope, and authorization. A cheaper workflow is not an improvement if the verified outcome regresses.
+
 ## Verification
 
 Before applying a proposed improvement:

@@ -17,6 +17,9 @@ A good coding-agent prompt specifies the desired observable outcome, the constra
 
 ## Layering
 
+Layer durable policy, task procedures, references, examples, and project facts separately. This progressive-disclosure structure reduces context pressure and avoids paying repeatedly for irrelevant detail.
+
+
 Put durable behavior into repository instructions. Put task-specific procedures into skills. Put detailed reference material into references. Put reusable output shapes into templates. Put concrete patterns into examples.
 
 This reduces context pressure and avoids duplicating rules across every prompt.

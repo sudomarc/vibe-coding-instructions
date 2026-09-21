@@ -73,6 +73,12 @@ Use the narrowest matching capability rather than preloading every rule:
 
 Do not invoke every specialist by default. Use changed surface and risk to determine the review set.
 
+## Token economy
+
+The framework includes `.ai/skills/token-economics/SKILL.md` for context budgeting, targeted retrieval, tool-result control, compaction, retry discipline, delegation economics, model/effort routing, prompt caching, and provider-aware cost measurement. It is intentionally modular so token policy does not become another large always-loaded prompt.
+
+Use `.ai/templates/agent-cost-report.md` when a task needs a usage record. Provider-specific pricing and semantics live under `.ai/skills/token-economics/references/providers/` and must be rechecked against current official documentation.
+
 ## Self-improvement system
 
 REAL-WORLD USE → OBSERVE / COLLECT → ANALYZE / CLASSIFY → ROOT-CAUSE HYPOTHESIS → PROPOSE → VALIDATE → APPROVE* / APPLY → TEST / REGRESSION CHECK → MEASURE → RECORD OUTCOME

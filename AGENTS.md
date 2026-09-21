@@ -17,6 +17,13 @@ This repository is a portable, provider-neutral governance layer for AI coding a
 
 ## Progressive disclosure
 
+## Token economy
+
+Treat context and agent usage as finite engineering resources. Load the minimum sufficient context, prefer targeted retrieval and bounded tool results, prune or compact stale trajectory state, and avoid repeated retries or redundant delegation. Use `.ai/skills/token-economics/` when a task can create significant context, tool, model, retry, or long-horizon cost.
+
+Cost optimization never overrides correctness, safety, security, scope, or required verification. Provider prices, cache behavior, context limits, and billing semantics are volatile; verify them against current provider documentation rather than hard-coding them into core policy.
+
+
 Load only the context needed for the task:
 
 - Core policy: .ai/core/

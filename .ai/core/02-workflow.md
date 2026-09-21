@@ -20,6 +20,10 @@ Clarify only decisions that materially change the result. Otherwise make the sma
 
 For significant work, record objective, scope, non-goals, affected files, decisions, dependencies, risks, verification, rollback, and completion criteria. Trivial work may use a one-line plan.
 
+## CONTEXT ECONOMY
+
+During INSPECT and IMPLEMENT, load only context needed for the current decision. Prefer targeted searches and bounded reads, keep tool results small, and prune or compact stale trajectory state. Do not retry unchanged failures or delegate work without independent value. Cost optimization is subordinate to verification and safety.
+
 ## IMPLEMENT
 
 Use logical batches. Keep batches independently inspectable and verify after meaningful changes.

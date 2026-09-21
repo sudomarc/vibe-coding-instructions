@@ -40,6 +40,40 @@ This repository is an original synthesis. It does not reproduce source projects 
 - Applitools visual AI testing: https://applitools.com/
 - Blender manual: https://docs.blender.org/
 
+## Token economics and agent context research
+
+### OpenAI
+
+- Prompt caching: https://developers.openai.com/api/docs/guides/prompt-caching
+- Pricing: https://developers.openai.com/api/docs/pricing
+- Agents observability: https://developers.openai.com/api/docs/guides/agents-api/observability
+- Compaction: https://developers.openai.com/api/docs/guides/compaction
+
+### Anthropic
+
+- Manage tool context: https://platform.claude.com/docs/en/agents-and-tools/tool-use/manage-tool-context
+- Pricing: https://platform.claude.com/docs/en/about-claude/pricing
+- Tool search: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
+- Programmatic tool calling: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+- Prompt caching: https://platform.claude.com/docs/en/build-with-claude/prompt-caching/overview
+
+### Google
+
+- Gemini pricing: https://ai.google.dev/gemini-api/docs/pricing
+- Context caching: https://ai.google.dev/gemini-api/docs/caching
+
+### OpenCode
+
+- Compaction: https://opencode.ai/v2/docs/compaction
+- Configuration: https://dev.opencode.ai/docs/config/
+
+### Research
+
+- Trajectory reduction / AgentDiet: https://arxiv.org/abs/2509.23586
+- Measuring token consumption in LLM coding agents: https://arxiv.org/abs/2604.22750
+
+These sources support engineering guidance around context minimization, tool-result control, prompt caching, compaction, delegation economics, and usage measurement. Current prices and provider behavior are volatile and are not treated as permanent framework facts.
+
 ## External capability / integration research
 
 ### Agent Reach

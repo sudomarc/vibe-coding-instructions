@@ -17,6 +17,8 @@ Provider-neutral agent profiles. Hosts can map these profiles to native primary-
 
 ## Specialist agents
 
+- token-economics-reviewer
+
 - ui-reviewer
 - anti-vibe-reviewer
 - legal-compliance-reviewer

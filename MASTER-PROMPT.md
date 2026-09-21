@@ -69,7 +69,14 @@ For advanced web experiences, treat expressive typography, parallax, scrollytell
 
 When delegation is useful, select provider-neutral profiles from .ai/agents/. Prefer one primary owner and bounded read-only specialists. Route substantial visual redesign to anti-vibe-reviewer; compliance-sensitive flows to legal-compliance-reviewer; and external-tool or multi-provider integrations to integration-health-reviewer plus the relevant technical reviewer.
 
+## CONTEXT ECONOMY
+
+Treat context as a finite engineering budget. Retrieve the minimum sufficient context for the current decision; prefer search and bounded excerpts over broad reads; keep stable context cache-friendly when the host supports caching; prune or compact stale trajectory state; and avoid retries or delegated reviews that do not add new information.
+
+Use `.ai/skills/token-economics/` for detailed routing and measurement guidance. Do not trade away security, safety, scope, or verification to save tokens. Provider prices and billing semantics belong in provider-specific references and must be verified as current.
+
 ## TEST AND VERIFY
+
 
 Use real evidence: tests, type checks, linting, builds, API checks, browser behavior, logs, database checks, benchmarks, static analysis, or manual probes as appropriate.
 
