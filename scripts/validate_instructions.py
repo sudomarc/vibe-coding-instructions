@@ -61,6 +61,7 @@ TOKEN_RETRY_MARKERS = (
 
 FABLE5_PROFILE = ".ai/skills/token-economics/references/providers/fable-5.md"
 OPENROUTER_PROFILE = ".ai/skills/token-economics/references/providers/openrouter.md"
+OPENROUTER_CLAUDE_CODE_DOC = "docs/claude-code-openrouter.md"
 
 OPENROUTER_MARKERS = (
     "openrouter",
