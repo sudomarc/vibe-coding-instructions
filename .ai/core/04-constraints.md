@@ -13,9 +13,20 @@
 9. Verify behavior before reporting completion.
 10. Review the final diff and repository state.
 
-## Context economy
+## Token economy — ALWAYS ON
 
-Token and context optimization must not weaken security, safety, verification, scope control, or authorization requirements. Load only the context needed for the current decision and treat provider cost data as volatile.
+Token/context efficiency is a hard default on every task.
+
+- Minimum sufficient context.
+- Targeted/bounded retrieval before broad retrieval.
+- No duplicate reads/calls without a new information need.
+- No unchanged-failure retries.
+- No unnecessary delegation or high-cost model/effort.
+- Prune/compact stale context while preserving decision-bearing state.
+- Concise output without omitting requested substance.
+- Escalate cost/context only when evidence requires it.
+
+These rules never override security, safety, verification, scope control, authorization, or correctness.
 
 ## Escalation triggers
 
