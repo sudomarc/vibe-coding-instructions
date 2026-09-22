@@ -34,7 +34,9 @@ At the start of every new project:
 7. Keep the project cache TTL at `5m` by default. Use `1h` only when a session contains a large reusable context and the user routinely returns within an hour; the 1-hour write costs more.
 8. Keep subagent cache TTL at `5m` by default.
 9. Use Haiku for simple bounded subagent work when quality is sufficient; keep Sonnet for tasks requiring meaningful coding judgment.
-10. Do not use agent teams for ordinary work. Each teammate is a separate Claude Code instance and materially increases token consumption.
+10. For direct Anthropic API calls, set max_tokens explicitly for bounded-output requests. Treat it as the maximum output budget, and choose a value comfortably above the expected completion so normal work does not truncate.
+11. Do not infer that an omitted output cap creates a hidden limiter or silently wastes tokens. The cap constrains maximum generated output; input, reasoning, cache, and tool-use accounting remain governed by their respective API semantics.
+12. Do not use agent teams for ordinary work. Each teammate is a separate Claude Code instance and materially increases token consumption.
 11. Use `/clear` between unrelated tasks rather than carrying stale context forward.
 12. Use `/compact` at natural task boundaries when the history contains obsolete exploration.
 13. Check `/usage` after expensive sessions and inspect cache hit rate before concluding that an optimization helped.
