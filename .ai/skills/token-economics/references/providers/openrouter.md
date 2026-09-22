@@ -6,7 +6,7 @@ Use this profile when an agent runs Claude Sonnet 4.x through OpenRouter. It sup
 
 ## Verified OpenRouter facts — 2026-09-22
 
-- Claude Sonnet 4: `anthropic/claude-sonnet-4`, $3/M input and $15/M output.
+- Claude Sonnet 4 is retired by Anthropic as of June 15, 2026. Do not build new Claude Code configurations around it.
 - Claude Sonnet 4.6: `anthropic/claude-sonnet-4.6`, $3/M input and $15/M output.
 - Sonnet 4.x has a 1M-token context window.
 - Anthropic cache reads are $0.30/M; Sonnet 4.x cache writes are 1.25x input for the default 5-minute TTL or 2x for the 1-hour TTL.
@@ -16,6 +16,10 @@ Use this profile when an agent runs Claude Sonnet 4.x through OpenRouter. It sup
 - OpenRouter can route the same model across multiple provider endpoints; sticky routing exists to keep a session on the warm provider and can fall back when that provider is unavailable.
 
 Verify these facts again before using them for a financial calculation because pricing, limits, and provider behavior can change.
+
+## Claude Code + OpenRouter host boundary
+
+When Claude Code is the host, do not assume repository instructions can inject OpenRouter top-level fields such as `session_id`, `cache_control`, or `usage.include` into every request. Use only controls the actual Claude Code/OpenRouter integration exposes and verify them at runtime. Prefer Claude Code's native session/context management and stable instruction prefixes. See `docs/claude-code-openrouter.md`.
 
 ## Mandatory project/session bootstrap
 
@@ -108,7 +112,6 @@ Illustrative arithmetic only:
 
 ## Official references
 
-- OpenRouter model: https://openrouter.ai/anthropic/claude-sonnet-4
 - OpenRouter Sonnet 4.6: https://openrouter.ai/anthropic/claude-sonnet-4.6
 - Prompt caching: https://openrouter.ai/docs/guides/best-practices/prompt-caching
 - OpenRouter plugins: https://openrouter.ai/docs/guides/features/plugins/overview
