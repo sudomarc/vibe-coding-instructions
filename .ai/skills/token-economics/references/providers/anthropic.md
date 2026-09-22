@@ -10,6 +10,8 @@ Relevant official documentation:
 - Programmatic tool calling: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
 - Prompt caching: https://platform.claude.com/docs/en/build-with-claude/prompt-caching/overview
 
+Fable 5 profile: see `fable-5.md` for model-specific token-economy guidance around effort, long-running trajectories, caching, context editing, and tool-result control.
+
 Implementation implications:
 
 - large toolsets can create substantial tool-definition context overhead;
