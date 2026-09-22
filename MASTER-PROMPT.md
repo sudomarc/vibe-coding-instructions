@@ -100,6 +100,17 @@ Apply token economy to every task, including trivial tasks. This is a default op
 - When the model/API exposes an output-token control, set an explicit cap for bounded-output tasks and size it above the expected completion to avoid routine truncation.
 - Do not describe an uncapped request as suffering from a hidden API limiter that wastes tokens. An output cap limits maximum generated output; input, reasoning, and tool-use consumption follow their own provider semantics.
 - Prefer provider-native controls such as max_output_tokens, max_tokens, or the provider equivalent at the integration boundary.
+- Treat incoming context as a first-class budget: optimize input/context consumption, not only output.
+- Classify context as HOT/WARM/COLD and load only what is required for the current decision.
+- Never reread unchanged files, instructions, diffs, logs or tool results when existing evidence is sufficient.
+- Prefer bounded search, metadata, exact matches, line ranges, pagination, summaries and filtered diffs over broad repository dumps.
+- Keep tool results bounded; narrow the query before calling tools when no server-side limit exists.
+- After large results, extract decision-bearing facts and compact/prune stale raw context before another expensive call.
+- Default substantial coding work to one focused inspection pass, one coherent implementation pass, then one focused verification pass; add iterations only when new evidence warrants them.
+- Do not paste/restate whole files or prior context in prompts or handoffs when a path, section or concise summary is sufficient.
+- Do not delegate work that only rereads the same context; delegation must add independent value.
+- When context usage becomes materially high, compact before the next expensive call and use /context only to diagnose growth.
+
 
 Token savings never override correctness, security, safety, scope, authorization, or required verification.
 
