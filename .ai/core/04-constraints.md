@@ -25,8 +25,9 @@ Token/context efficiency is a hard default on every task.
 - Prune/compact stale context while preserving decision-bearing state.
 - Concise output without omitting requested substance.
 - Escalate cost/context only when evidence requires it.
+- Do not retry unchanged failures.
 
-These rules never override security, safety, verification, scope control, authorization, or correctness.
+Token savings never override security, safety, verification, scope control, authorization, or correctness.
 
 ## Escalation triggers
 
