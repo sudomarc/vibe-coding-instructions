@@ -27,6 +27,19 @@ These rules apply whenever this skill is loaded; the compact invariant in core p
 10. Route low-risk bounded work to an appropriately capable lower-cost model/effort when the host supports routing.
 11. Never weaken tests, security, safety, or required verification merely to save tokens.
 12. Measure token/cost efficiency from provider telemetry when available; otherwise label estimates as estimates.
+13. For bounded-output model calls, prefer an explicit provider-side output-token cap. Choose the cap from the task's expected output plus safety margin; do not use an artificially small global cap that causes truncation or retries.
+
+## Output Budgeting
+
+Use an explicit output budget when the provider/API exposes one and the expected completion is bounded.
+
+- OpenAI-style APIs: use the provider's output-token field such as max_output_tokens when supported.
+- Anthropic-style Messages API: use max_tokens as the maximum output budget; it is an API request parameter and should be sized to the task.
+- Other providers: use the documented equivalent rather than inventing a generic parameter.
+
+The purpose is to bound worst-case generated output and control cost variance. Do not claim that omitting the field causes a hidden limiter or that the API throws away tokens. Usage accounting, reasoning-token behavior, tool-use consumption, and billing semantics remain provider-specific.
+
+Do not set a low blanket cap across all tasks. Increase the cap for code generation, migrations, long-form analysis, or other tasks where truncation would create retries or incorrect output. Prefer an appropriate cap over no cap when a reasonable upper bound is known.
 
 ## Claude Fable 5 adaptation
 
