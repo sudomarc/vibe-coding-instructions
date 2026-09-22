@@ -7,3 +7,14 @@ Anthropic's public tooling also demonstrates specialized agent roles for review 
 Claude Code-specific behavior can change between releases. For current behavior, consult the official Anthropic documentation or repository before relying on remembered details.
 
 Sources: `docs/sources.md`.
+
+
+## Claude Code + OpenRouter
+
+When Claude Code is the host and OpenRouter is the gateway, use `docs/claude-code-openrouter.md` for the integration bootstrap, model verification, cache/session limitations, tool-search guidance, and $5 budget controls.
+
+Claude Code remains the host: do not encode undocumented OpenRouter request fields such as `session_id` as though `AGENTS.md` can inject them into every request. Treat such controls as active only when the actual host/gateway exposes runtime evidence.
+
+Current model selection must be verified. Anthropic currently lists Claude Sonnet 4 as retired and Claude Sonnet 4.6 as active, so "Sonnet 4.x" should normally resolve to Sonnet 4.6.
+
+Sources: `docs/claude-code-openrouter.md`, `docs/sources.md`.
