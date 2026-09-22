@@ -8,13 +8,8 @@ Claude Code-specific behavior can change between releases. For current behavior,
 
 Sources: `docs/sources.md`.
 
+## Claude Code + Anthropic API
 
-## Claude Code + OpenRouter
+Use `docs/claude-code-anthropic.md` as the provider-specific profile when Claude Code connects directly to Anthropic. Claude Code automatically uses prompt caching; the default for API-key billing is a 5-minute cache TTL. Keep the model/effort stable during substantial tasks to preserve cache reuse.
 
-When Claude Code is the host and OpenRouter is the gateway, use `docs/claude-code-openrouter.md` for the integration bootstrap, model verification, cache/session limitations, tool-search guidance, and $5 budget controls.
-
-Claude Code remains the host: do not encode undocumented OpenRouter request fields such as `session_id` as though `AGENTS.md` can inject them into every request. Treat such controls as active only when the actual host/gateway exposes runtime evidence.
-
-Current model selection must be verified. Anthropic currently lists Claude Sonnet 4 as retired and Claude Sonnet 4.6 as active, so "Sonnet 4.x" should normally resolve to Sonnet 4.6.
-
-Sources: `docs/claude-code-openrouter.md`, `docs/sources.md`.
+Sources: `docs/claude-code-anthropic.md`, `docs/sources.md`.
