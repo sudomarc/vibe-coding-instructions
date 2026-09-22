@@ -67,6 +67,15 @@ This repository is an original synthesis. It does not reproduce source projects 
 - Compaction: https://opencode.ai/v2/docs/compaction
 - Configuration: https://dev.opencode.ai/docs/config/
 
+### Claude Fable 5
+
+- Prompting Claude Fable 5: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5
+- Effort: https://platform.claude.com/docs/en/build-with-claude/effort
+- Prompt caching: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
+- Task budgets: https://platform.claude.com/docs/en/build-with-claude/task-budgets
+- Introducing Claude Fable 5 and Claude Mythos 5: https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5
+- Context management: https://platform.claude.com/docs/en/agents-and-tools/tool-use/manage-tool-context
+
 ### Research
 
 - Trajectory reduction / AgentDiet: https://arxiv.org/abs/2509.23586
