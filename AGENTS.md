@@ -70,23 +70,20 @@ Load only the context needed for the task:
 
 Do not preload every skill, reference, or agent unless the task genuinely requires it.
 
-## Project/session cost bootstrap — MANDATORY
+## Claude Code + Anthropic API — mandatory cost bootstrap
 
-At the start of every new project, and at the start of every new agent workflow inside that project:
+When the coding host is Claude Code and authentication is a direct Anthropic API key:
 
-1. Detect the active provider, model, and host capabilities.
-2. When using OpenRouter with Claude Sonnet 4.x and the host exposes request controls, initialize one stable `session_id` for the project/workflow unit and reuse it on every turn.
-3. Enable prompt caching when the host exposes it. Keep stable instructions, tool definitions, schemas, and durable reference material before mutable task state.
-4. Prefer Anthropic `cache_control: {"type":"ephemeral"}` for the normal multi-turn case. Use the 1-hour TTL only when the workflow's idle periods justify the higher cache-write cost.
-5. Do not create a new session ID every turn. Do not pad prompts to reach cache minimums.
-6. Verify caching from provider telemetry (`cached_tokens`, `cache_write_tokens`, `cache_discount`) when available.
-7. Do not enable paid or unnecessary OpenRouter plugins by default. The deprecated Web Search plugin/`:online` path must not be used for new integrations; use `openrouter:web_search` only when fresh web information is required and bound its result volume.
-8. Use context compression, PDF parsing, response healing, or multi-model/Fusion capabilities only when the task requires them; never enable every available capability automatically.
-9. If the host does not expose the required request-level controls, apply ordinary context/tool/output minimization and report `UNVERIFIED` rather than pretending the provider optimization is active.
+1. Start new projects on `claude-sonnet-4-6` unless another model is explicitly justified.
+2. Use `medium` effort for routine work; escalate only when the task warrants deeper reasoning.
+3. Leave prompt caching enabled. Claude Code manages it automatically.
+4. Prefer a `5m` cache TTL by default. Use `1h` only when large reusable context is likely to be reused after idle periods; 1h cache writes cost more.
+5. Keep model, effort, core instructions and tool configuration stable during a task because cache invalidations can create an uncached rebuild.
+6. Use Haiku for simple bounded subagent work when quality is sufficient; avoid agent teams unless the task genuinely benefits from parallel independent contexts.
+7. Use `/clear` between unrelated tasks, `/compact` at natural boundaries, `/usage` to inspect spend/cache, and `/context` to identify context-heavy components.
+8. Do not claim cache or cost savings without runtime evidence.
 
-For the exact OpenRouter/Sonnet 4.x mechanics and current pricing, load `.ai/skills/token-economics/references/providers/openrouter.md` before making provider-specific billing decisions.
-
-When the host is Claude Code and OpenRouter is the gateway, read `docs/claude-code-openrouter.md` before making provider-specific cost or model-routing decisions. Do not assume repository instructions can inject undocumented OpenRouter request fields; verify effective model, caching and sticky-routing behavior from the actual runtime.
+Load `docs/claude-code-anthropic.md` for the exact current Claude Code/API cost profile and project settings template.
 
 ## Web development and design
 
