@@ -62,9 +62,9 @@ Do not invoke every specialist by default. Route by changed surface and risk.
 
 The framework also defines runtime-neutral role contracts used by the CHAD ecosystem:
 
-- orchestrator
-- researcher
-- coder
-- analyst
+- orchestrator (`.ai/contracts/orchestrator.contract.md`)
+- researcher (`.ai/contracts/researcher.contract.md`)
+- coder (`.ai/contracts/coder.contract.md`)
+- analyst (`.ai/contracts/analyst.contract.md`)
 
-See docs/agent-runtime-contract.md. These contracts define responsibilities, evidence, permissions and stop conditions without coupling the framework to a particular model or runtime.
+See `.ai/contracts/README.md` and `docs/agent-runtime-contract.md`. These contracts define responsibilities, evidence, permission levels, and stop conditions without coupling the framework to a particular model or runtime.

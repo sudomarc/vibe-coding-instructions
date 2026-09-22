@@ -21,6 +21,11 @@ REQUIRED_PATHS = [
     "README.md",
     ".ai/core",
     ".ai/skills",
+    ".ai/contracts/README.md",
+    ".ai/contracts/orchestrator.contract.md",
+    ".ai/contracts/researcher.contract.md",
+    ".ai/contracts/coder.contract.md",
+    ".ai/contracts/analyst.contract.md",
     ".ai/skills/token-economics/SKILL.md",
     ".ai/skills/token-economics/references/providers/fable-5.md",
     ".ai/templates/agent-cost-report.md",
@@ -60,6 +65,14 @@ TOKEN_RETRY_MARKERS = (
 )
 
 FABLE5_PROFILE = ".ai/skills/token-economics/references/providers/fable-5.md"
+OPENROUTER_PROFILE = ".ai/skills/token-economics/references/providers/openrouter.md"
+
+OPENROUTER_MARKERS = (
+    "openrouter",
+    "claude sonnet",
+    "prompt caching",
+    "session_id",
+)
 
 CLAUDE_CODE_ANTHROPIC_DOC = "docs/claude-code-anthropic.md"
 

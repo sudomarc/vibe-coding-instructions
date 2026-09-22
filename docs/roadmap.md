@@ -13,17 +13,17 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Controlled self-improvement.
 - [x] Provider-neutral integration guidance.
 
-## Phase 1 — Agent-role contracts
+## Phase 1 — Agent-role contracts [completed]
 
-- [ ] Orchestrator role contract.
-- [ ] Researcher role contract.
-- [ ] Coder role contract.
-- [ ] Analyst role contract.
-- [ ] Shared handoff schema.
-- [ ] Shared evidence schema.
-- [ ] Stop-condition conventions.
-- [ ] Permission-level vocabulary.
-- [ ] Runtime-neutral role examples.
+- [x] Orchestrator role contract (`.ai/contracts/orchestrator.contract.md`).
+- [x] Researcher role contract (`.ai/contracts/researcher.contract.md`).
+- [x] Coder role contract (`.ai/contracts/coder.contract.md`).
+- [x] Analyst role contract (`.ai/contracts/analyst.contract.md`).
+- [x] Shared handoff schema (`.ai/contracts/README.md`).
+- [x] Shared evidence schema (`.ai/contracts/README.md`).
+- [x] Stop-condition conventions (`.ai/contracts/README.md`).
+- [x] Permission-level vocabulary (`.ai/contracts/README.md`).
+- [x] Runtime-neutral role examples (`.ai/contracts/`).
 
 ## Phase 2 — Agent orchestration governance
 

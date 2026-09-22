@@ -36,10 +36,16 @@ Each role must specify:
 | purpose | observable responsibility |
 | inputs | required context |
 | tools | allowed capabilities |
-| permissions | allowed side-effect level |
-| stop_conditions | bounded completion/failure conditions |
+| permissions | allowed side-effect level (`READ_ONLY`, `WORKSPACE_WRITE`, `ISOLATED_EXECUTE`, `NETWORK_ACCESS`, `PRIVILEGED_MUTATION`) |
+| stop_conditions | bounded completion/failure conditions (`SUCCESS_VERIFIED`, `MAX_BUDGET_REACHED`, `GOAL_BLOCKED`, `SAFETY_TRIGGERED`, `HUMAN_CHECKPOINT_REQUIRED`) |
 | evidence | required verification |
 | output | structured handoff/final result |
+
+Concrete role contracts live in `.ai/contracts/`:
+- [.ai/contracts/orchestrator.contract.md](../.ai/contracts/orchestrator.contract.md)
+- [.ai/contracts/researcher.contract.md](../.ai/contracts/researcher.contract.md)
+- [.ai/contracts/coder.contract.md](../.ai/contracts/coder.contract.md)
+- [.ai/contracts/analyst.contract.md](../.ai/contracts/analyst.contract.md)
 
 ## Orchestrator
 
