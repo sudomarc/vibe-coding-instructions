@@ -1,6 +1,8 @@
-# Web Development & Design Agent Catalog
+# Provider-neutral Agent Catalog
 
-Provider-neutral agent profiles. Hosts can map these profiles to native primary-agent and subagent systems.
+Provider-neutral agent profiles for coding and specialist review. Hosts can map these profiles to native primary-agent and subagent systems.
+
+Runtime role contracts for CHAD live in docs/agent-runtime-contract.md; this catalog is for engineering-agent profiles and must not be confused with the CHAD runtime implementation.
 
 ## Kinds
 
@@ -55,3 +57,14 @@ REQUEST → DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY �
 - Browser trust boundary: web-security-reviewer
 
 Do not invoke every specialist by default. Route by changed surface and risk.
+
+## Agentic ecosystem roles
+
+The framework also defines runtime-neutral role contracts used by the CHAD ecosystem:
+
+- orchestrator
+- researcher
+- coder
+- analyst
+
+See docs/agent-runtime-contract.md. These contracts define responsibilities, evidence, permissions and stop conditions without coupling the framework to a particular model or runtime.

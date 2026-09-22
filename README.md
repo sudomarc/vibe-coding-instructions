@@ -1,5 +1,12 @@
 # Vibe Coding Instructions
 
+> **Ecosystem role:** portable governance and policy layer for the CHAD + LapisLLM agentic AI system.
+
+The three-repository architecture is documented in [docs/ecosystem.md](docs/ecosystem.md). Vibe Coding Instructions defines reusable policies, skills and role contracts; CHAD executes the agent runtime; LapisLLM provides model/runtime capabilities.
+
+See the [ecosystem roadmap](docs/roadmap.md) and [agent runtime contract](docs/agent-runtime-contract.md).
+
+
 A repository-native instruction system for disciplined AI coding agents, with a controlled evidence-driven self-improvement loop.
 
 ## Why this exists
