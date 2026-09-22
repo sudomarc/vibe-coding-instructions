@@ -76,7 +76,7 @@ Apply token economy to every task, including trivial tasks. This is a default op
 - Retrieve the minimum sufficient context for the next decision.
 - Prefer search/metadata, bounded excerpts, filters, line ranges, pagination, and summaries over full outputs.
 - Reuse unchanged evidence; do not reread files or repeat tool calls without a concrete information need.
-- Before an expensive tool/model/delegate call, state the exact decision it supports and choose the smallest suitable call.
+- Before an expensive tool/model/delegate call, identify the exact decision it supports and choose the smallest suitable call.
 - Retry only after a changed hypothesis, input, code/environment, provider/tool, or diagnostic scope.
 - Compact/prune stale trajectory state before context becomes unreliable. Preserve objective, confirmed facts, decisions, failures, verification, risks, and next actions.
 - Keep responses and handoffs compact by default; do not restate context the host already has. Follow requested output detail when it is part of the task.
