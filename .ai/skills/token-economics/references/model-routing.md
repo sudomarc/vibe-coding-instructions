@@ -46,3 +46,7 @@ Never compare providers using list price alone. Consider:
 - actual success and retry rates.
 
 Provider pricing and capabilities change; verify current official documentation before routing on price.
+
+## Claude Fable 5
+
+For Fable 5, treat effort as the primary cost/latency control: use `medium`/`low` for routine bounded work, `high` for normal complex work, and `xhigh`/`max` only when additional reasoning is likely to change the verified outcome. Fable 5 can over-invest in routine work at high effort, including extra context gathering and deliberation. Use the dedicated provider profile for cache-sensitive controls and long-run trajectory management.
