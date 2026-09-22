@@ -23,7 +23,6 @@ REQUIRED_PATHS = [
     ".ai/skills",
     ".ai/skills/token-economics/SKILL.md",
     ".ai/skills/token-economics/references/providers/fable-5.md",
-    ".ai/skills/token-economics/references/providers/openrouter.md",
     ".ai/templates/agent-cost-report.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
@@ -60,16 +59,31 @@ TOKEN_RETRY_MARKERS = (
 )
 
 FABLE5_PROFILE = ".ai/skills/token-economics/references/providers/fable-5.md"
-OPENROUTER_PROFILE = ".ai/skills/token-economics/references/providers/openrouter.md"
-OPENROUTER_CLAUDE_CODE_DOC = "docs/claude-code-openrouter.md"
 
-OPENROUTER_MARKERS = (
-    "openrouter",
-    "session_id",
-    "cache_control",
-    "cached_tokens",
-    "claude sonnet 4",
+CLAUDE_CODE_ANTHROPIC_DOC = "docs/claude-code-anthropic.md"
+
+CLAUDE_CODE_ANTHROPIC_MARKERS = (
+    "claude code",
+    "anthropic api",
+    "claude-sonnet-4-6",
+    "prompt caching",
+    "promptcachettl",
+    "/usage",
+    "5m",
 )
+
+def validate_claude_code_anthropic_doc(failures: list[str]) -> None:
+    path = ROOT / CLAUDE_CODE_ANTHROPIC_DOC
+    if not path.exists():
+        failures.append(f"missing Claude Code + Anthropic API guide: {CLAUDE_CODE_ANTHROPIC_DOC}")
+        return
+    text = path.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in CLAUDE_CODE_ANTHROPIC_MARKERS if marker not in text]
+    if missing:
+        failures.append(
+            f"{CLAUDE_CODE_ANTHROPIC_DOC} is missing marker(s): {', '.join(missing)}"
+        )
+
 
 FABLE5_MARKERS = (
     "claude fable 5",
@@ -200,6 +214,7 @@ def main() -> int:
     validate_required_paths(failures)
     validate_governance_markers(failures)
     validate_token_economy(failures)
+    validate_claude_code_anthropic_doc(failures)
     validate_openrouter_profile(failures)
     validate_links(failures)
     validate_custom_agent(failures)
