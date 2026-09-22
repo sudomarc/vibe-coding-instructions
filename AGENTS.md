@@ -70,6 +70,22 @@ Load only the context needed for the task:
 
 Do not preload every skill, reference, or agent unless the task genuinely requires it.
 
+## Project/session cost bootstrap — MANDATORY
+
+At the start of every new project, and at the start of every new agent workflow inside that project:
+
+1. Detect the active provider, model, and host capabilities.
+2. When using OpenRouter with Claude Sonnet 4.x and the host exposes request controls, initialize one stable `session_id` for the project/workflow unit and reuse it on every turn.
+3. Enable prompt caching when the host exposes it. Keep stable instructions, tool definitions, schemas, and durable reference material before mutable task state.
+4. Prefer Anthropic `cache_control: {"type":"ephemeral"}` for the normal multi-turn case. Use the 1-hour TTL only when the workflow's idle periods justify the higher cache-write cost.
+5. Do not create a new session ID every turn. Do not pad prompts to reach cache minimums.
+6. Verify caching from provider telemetry (`cached_tokens`, `cache_write_tokens`, `cache_discount`) when available.
+7. Do not enable paid or unnecessary OpenRouter plugins by default. The deprecated Web Search plugin/`:online` path must not be used for new integrations; use `openrouter:web_search` only when fresh web information is required and bound its result volume.
+8. Use context compression, PDF parsing, response healing, or multi-model/Fusion capabilities only when the task requires them; never enable every available capability automatically.
+9. If the host does not expose the required request-level controls, apply ordinary context/tool/output minimization and report `UNVERIFIED` rather than pretending the provider optimization is active.
+
+For the exact OpenRouter/Sonnet 4.x mechanics and current pricing, load `.ai/skills/token-economics/references/providers/openrouter.md` before making provider-specific billing decisions.
+
 ## Web development and design
 
 For substantial web work, route by changed surface and risk. Use the skills under .ai/skills/ and provider-neutral profiles under .ai/agents/.
