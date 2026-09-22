@@ -52,7 +52,10 @@ Token economy is a mandatory invariant for every task, not an optional optimizat
 6. Prune or compact stale trajectory state; preserve only objective, facts, decisions, failures, verification evidence, risks, and next actions.
 7. Keep agent outputs concise by default: no restating known context, no verbose narration, and no duplicate reports. Still satisfy the user's requested format and level of detail.
 8. Use `.ai/skills/token-economics/` only when the task has material context, tool, retry, delegation, model, or long-horizon cost; do not load it merely to obey this rule.
-9. Cost optimization never overrides correctness, safety, security, scope, authorization, or required verification.
+9. When an API/model call exposes an output-token limit, set an explicit cap when the expected output is bounded; size the cap above the expected output so truncation remains an exception, not the normal control path.
+10. Do not assume an API inserts a hidden token limiter that causes tokens to be lost. An explicit output cap controls the maximum output budget; it does not reduce input, reasoning, or tool-use tokens unless the provider documents that effect.
+11. Prefer provider-native output controls (max_output_tokens, max_tokens, or the provider's equivalent) at the API/adapter boundary. Keep provider-specific names and semantics in provider guidance.
+12. Cost optimization never overrides correctness, safety, security, scope, authorization, or required verification.
 
 When the runtime model is Claude Fable 5, load `.ai/skills/token-economics/references/providers/fable-5.md` for model-specific effort, trajectory, caching, tool-result, and long-run controls.
 
