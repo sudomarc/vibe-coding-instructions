@@ -10,7 +10,8 @@ Recommended behavior:
 2. Inspect the repository before editing.
 3. Select the skill matching the task.
 4. Read only the references required by that skill.
-5. Plan, implement in bounded batches, verify, review, and report evidence.
+5. Apply the always-on token-economy rule: minimum sufficient context, targeted reads, no duplicate calls, no unchanged-failure retries, and concise outputs.
+6. Plan, implement in bounded batches, verify, review, and report evidence.
 
 For Claude Code-specific commands, permission behavior, hooks, subagents, skills, plugins, and platform details, consult `docs/claude-code.md` and current Anthropic documentation before relying on remembered behavior.
 
