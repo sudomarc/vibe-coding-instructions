@@ -2,6 +2,27 @@
 
 This repository is a portable, provider-neutral governance layer for AI coding agents. It defines an evidence-driven operating loop for changing real repositories safely and verifiably.
 
+## Ecosystem role
+
+This repository is the governance/policy layer for the CHAD + LapisLLM ecosystem.
+
+~~~text
+Vibe Coding Instructions
+  -> skills / evidence / security / token economy / role contracts
+  -> CHAD agent runtime
+  -> LapisLLM model runtime
+~~~
+
+It must remain portable and provider-neutral. CHAD executes agents; LapisLLM executes model/runtime responsibilities.
+
+Shared ecosystem references:
+
+- docs/ecosystem.md
+- docs/agent-runtime-contract.md
+- docs/ecosystem-compatibility.md
+- https://github.com/sudomarc/CHAD
+- https://github.com/sudomarc/LapisLLM
+
 ## Highest-value rules
 
 1. Inspect the repository and applicable instructions before editing.
