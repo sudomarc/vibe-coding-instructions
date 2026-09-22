@@ -20,9 +20,19 @@ Clarify only decisions that materially change the result. Otherwise make the sma
 
 For significant work, record objective, scope, non-goals, affected files, decisions, dependencies, risks, verification, rollback, and completion criteria. Trivial work may use a one-line plan.
 
-## CONTEXT ECONOMY
+## CONTEXT ECONOMY — ALWAYS ON
 
-During INSPECT and IMPLEMENT, load only context needed for the current decision. Prefer targeted searches and bounded reads, keep tool results small, and prune or compact stale trajectory state. Do not retry unchanged failures or delegate work without independent value. Cost optimization is subordinate to verification and safety.
+Apply this during every workflow stage, not only large tasks.
+
+- Use the minimum sufficient context for the next decision.
+- Prefer structure/search, targeted lines, filtering, pagination, and bounded results before full reads.
+- Reuse unchanged evidence; combine compatible tool calls; never repeat a call without a new information need.
+- Escalate context size, model effort, tool breadth, or delegation only when evidence shows the narrower path is insufficient.
+- Retry only after a changed hypothesis, input, environment/provider, or diagnostic scope.
+- Prune/compact stale history while preserving objective, facts, decisions, failures, verification, risks, and next actions.
+- Keep plans, reports, and handoffs concise and non-redundant while still meeting the requested detail.
+
+Token savings never weaken security, safety, authorization, scope, correctness, or required verification.
 
 ## IMPLEMENT
 
