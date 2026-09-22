@@ -34,6 +34,20 @@ Apply this during every workflow stage, not only large tasks.
 
 Token savings never weaken security, safety, authorization, scope, correctness, or required verification.
 
+## PROVIDER / SESSION BOOTSTRAP — MANDATORY WHEN AVAILABLE
+
+At the beginning of each project/workflow, identify the active provider, model, and host capabilities. For OpenRouter + Claude Sonnet 4.x:
+
+- establish one stable `session_id` for the project/workflow unit and reuse it across turns;
+- enable prompt caching when exposed;
+- keep stable instructions/tools/schemas/reference material before mutable state;
+- verify cache telemetry when available;
+- do not enable unnecessary paid plugins;
+- use current web search only when needed, and prefer `openrouter:web_search` over the deprecated Web Search plugin/`:online` path;
+- mark `UNVERIFIED` when the host cannot expose the required controls.
+
+Load `.ai/skills/token-economics/references/providers/openrouter.md` for provider-specific details.
+
 ## IMPLEMENT
 
 Use logical batches. Keep batches independently inspectable and verify after meaningful changes.
