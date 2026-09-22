@@ -37,10 +37,10 @@ At the start of every new project:
 10. For direct Anthropic API calls, set max_tokens explicitly for bounded-output requests. Treat it as the maximum output budget, and choose a value comfortably above the expected completion so normal work does not truncate.
 11. Do not infer that an omitted output cap creates a hidden limiter or silently wastes tokens. The cap constrains maximum generated output; input, reasoning, cache, and tool-use accounting remain governed by their respective API semantics.
 12. Do not use agent teams for ordinary work. Each teammate is a separate Claude Code instance and materially increases token consumption.
-11. Use `/clear` between unrelated tasks rather than carrying stale context forward.
-12. Use `/compact` at natural task boundaries when the history contains obsolete exploration.
-13. Check `/usage` after expensive sessions and inspect cache hit rate before concluding that an optimization helped.
-14. Never claim a dollar saving from cache/effort changes without observed usage evidence.
+13. Use `/clear` between unrelated tasks rather than carrying stale context forward.
+14. Use `/compact` at natural task boundaries when the history contains obsolete exploration.
+15. Check `/usage` after expensive sessions and inspect cache hit rate before concluding that an optimization helped.
+16. Never claim a dollar saving from cache/effort changes without observed usage evidence.
 
 ## Cache-preservation rules
 
