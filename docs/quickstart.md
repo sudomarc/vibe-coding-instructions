@@ -8,15 +8,14 @@ Copy `AGENTS.md`, `CLAUDE.md`, `.ai/`, and the desired `.github/` files into the
 
 Open the project from its repository root. Read `AGENTS.md`. Inspect the target repository's own rules and tooling. Load only the skill matching the active task.
 
-## Provider/session cost bootstrap
+## Claude Code + Anthropic API bootstrap
 
-At the first session of each project, detect the active provider/model and host capabilities.
+At the first session of each project, use the direct Anthropic API configuration documented in `docs/claude-code-anthropic.md`.
 
-When the project uses OpenRouter + Claude Sonnet 4.x, configure one stable `session_id` for the project/workflow unit, enable prompt caching when supported, keep the stable prompt prefix unchanged, and verify `cached_tokens`/cache telemetry when available.
+Recommended project settings are `.claude/settings.json` with Sonnet 4.6, `medium` effort, and `5m` prompt-cache TTL. Claude Code manages prompt caching automatically. Use `1h` only when the reusable context justifies the higher cache-write cost.
 
-Do not enable every OpenRouter plugin by default. Use paid or context-heavy capabilities only when the task requires them. The deprecated Web Search plugin/`:online` path should not be used for new integrations; use `openrouter:web_search` only for genuinely current information.
+Use `/status`, `/usage`, `/context`, and `/insights` to verify configuration, spend, cache behavior, context pressure, and recurring waste.
 
-Read `.ai/skills/token-economics/references/providers/openrouter.md` before making OpenRouter-specific cost decisions.
 
 ## First Feature
 
