@@ -23,6 +23,7 @@ REQUIRED_PATHS = [
     ".ai/skills",
     ".ai/skills/token-economics/SKILL.md",
     ".ai/skills/token-economics/references/providers/fable-5.md",
+    ".ai/skills/token-economics/references/providers/openrouter.md",
     ".ai/templates/agent-cost-report.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
@@ -59,6 +60,15 @@ TOKEN_RETRY_MARKERS = (
 )
 
 FABLE5_PROFILE = ".ai/skills/token-economics/references/providers/fable-5.md"
+OPENROUTER_PROFILE = ".ai/skills/token-economics/references/providers/openrouter.md"
+
+OPENROUTER_MARKERS = (
+    "openrouter",
+    "session_id",
+    "cache_control",
+    "cached_tokens",
+    "claude sonnet 4",
+)
 
 FABLE5_MARKERS = (
     "claude fable 5",
@@ -130,6 +140,18 @@ def validate_token_economy(failures: list[str]) -> None:
             )
 
 
+def validate_openrouter_profile(failures: list[str]) -> None:
+    profile = ROOT / OPENROUTER_PROFILE
+    if not profile.exists():
+        failures.append(f"missing OpenRouter token-economy profile: {OPENROUTER_PROFILE}")
+        return
+    text = profile.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in OPENROUTER_MARKERS if marker not in text]
+    if missing:
+        failures.append(
+            f"{OPENROUTER_PROFILE} is missing OpenRouter marker(s): {', '.join(missing)}"
+        )
+
 def validate_links(failures: list[str]) -> None:
     for path in ROOT.rglob("*.md"):
         if ".git" in path.parts:
@@ -177,6 +199,7 @@ def main() -> int:
     validate_required_paths(failures)
     validate_governance_markers(failures)
     validate_token_economy(failures)
+    validate_openrouter_profile(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)
