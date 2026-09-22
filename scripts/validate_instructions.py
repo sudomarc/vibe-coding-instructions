@@ -24,6 +24,7 @@ REQUIRED_PATHS = [
     ".ai/skills/token-economics/SKILL.md",
     ".ai/skills/token-economics/references/providers/fable-5.md",
     ".ai/templates/agent-cost-report.md",
+    ".ai/templates/claude-code-settings.json",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
     ".ai/templates/legal-audit.md",
