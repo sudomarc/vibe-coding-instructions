@@ -39,6 +39,21 @@ GOVERNANCE_MARKERS = (
     "not authorization",
 )
 
+TOKEN_ECONOMY_FILES = (
+    "AGENTS.md",
+    "MASTER-PROMPT.md",
+    ".ai/core/02-workflow.md",
+    ".ai/core/04-constraints.md",
+    ".ai/skills/token-economics/SKILL.md",
+)
+
+TOKEN_ECONOMY_MARKERS = (
+    "always on",
+    "minimum sufficient context",
+    "do not retry",
+    "token savings never override",
+)
+
 def fail(message: str) -> None:
     print(f"FAIL: {message}")
 
@@ -62,6 +77,20 @@ def validate_governance_markers(failures: list[str]) -> None:
         missing = [marker for marker in GOVERNANCE_MARKERS if marker not in text]
         if missing:
             failures.append(f"{rel} is missing governance marker(s): {', '.join(missing)}")
+
+def validate_token_economy(failures: list[str]) -> None:
+    for rel in TOKEN_ECONOMY_FILES:
+        path = ROOT / rel
+        if not path.exists():
+            failures.append(f"token-economy policy file missing: {rel}")
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in TOKEN_ECONOMY_MARKERS if marker not in text]
+        if missing:
+            failures.append(
+                f"{rel} is missing token-economy marker(s): {', '.join(missing)}"
+            )
+
 
 def validate_links(failures: list[str]) -> None:
     for path in ROOT.rglob("*.md"):
@@ -109,6 +138,7 @@ def main() -> int:
     failures: list[str] = []
     validate_required_paths(failures)
     validate_governance_markers(failures)
+    validate_token_economy(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)
