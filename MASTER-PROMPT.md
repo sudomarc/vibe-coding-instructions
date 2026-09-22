@@ -38,6 +38,22 @@ Change the smallest coherent surface. Preserve existing conventions. Work in log
 
 After each batch, inspect the change and run the narrowest meaningful verification.
 
+## PROJECT / SESSION COST BOOTSTRAP — MANDATORY
+
+At the start of every new project, and at the start of every new agent workflow inside that project:
+
+- Detect provider, model, and host capabilities.
+- For OpenRouter + Claude Sonnet 4.x, use one stable `session_id` per project/workflow unit and reuse it across turns.
+- Enable prompt caching when the host exposes it; keep stable system/policy/tool/schema/reference content before mutable task state.
+- Prefer `cache_control: {"type":"ephemeral"}` for normal multi-turn caching. Use `ttl: "1h"` only when justified by long idle periods.
+- Verify cache behavior from `cached_tokens`, `cache_write_tokens`, and `cache_discount` when available.
+- Never create a new `session_id` every turn, and never pad a prompt just to hit the provider's cache minimum.
+- Do not enable paid or unnecessary OpenRouter plugins by default. The deprecated Web Search plugin/`:online` path is not for new integrations; use `openrouter:web_search` only when fresh web information is needed and bound the result volume.
+- Use PDF parsing, response healing, context compression, or multi-model/Fusion capabilities only when the task actually needs them.
+- If request-level controls are unavailable in the host, do not claim the optimization is active; mark it `UNVERIFIED` and continue with context/tool/output minimization.
+
+For exact OpenRouter/Sonnet 4.x details, load `.ai/skills/token-economics/references/providers/openrouter.md`.
+
 ## WEB DEVELOPMENT AND DESIGN
 
 For web work, choose specialized skills by the changed surface instead of loading every web rule.
