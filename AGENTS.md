@@ -33,6 +33,8 @@ Token economy is a mandatory invariant for every task, not an optional optimizat
 8. Use `.ai/skills/token-economics/` only when the task has material context, tool, retry, delegation, model, or long-horizon cost; do not load it merely to obey this rule.
 9. Cost optimization never overrides correctness, safety, security, scope, authorization, or required verification.
 
+When the runtime model is Claude Fable 5, load `.ai/skills/token-economics/references/providers/fable-5.md` for model-specific effort, trajectory, caching, tool-result, and long-run controls.
+
 Load only the context needed for the task:
 
 - Core policy: .ai/core/
