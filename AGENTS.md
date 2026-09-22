@@ -56,6 +56,18 @@ Token economy is a mandatory invariant for every task, not an optional optimizat
 10. Do not assume an API inserts a hidden token limiter that causes tokens to be lost. An explicit output cap controls the maximum output budget; it does not reduce input, reasoning, or tool-use tokens unless the provider documents that effect.
 11. Prefer provider-native output controls (max_output_tokens, max_tokens, or the provider's equivalent) at the API/adapter boundary. Keep provider-specific names and semantics in provider guidance.
 12. Cost optimization never overrides correctness, safety, security, scope, authorization, or required verification.
+13. Treat incoming context as a first-class cost budget. Optimize input/context consumption, not only generated output.
+14. Classify context as HOT (required now), WARM (possibly useful later), or COLD (not needed now). Load HOT context first; defer WARM/COLD.
+15. Never reread unchanged instructions, files, diffs, logs, search results, or tool output when the existing evidence is already sufficient.
+16. Prefer bounded retrieval: search, metadata, exact matches, line ranges, pagination, summaries, and filtered diffs. Avoid repository-wide dumps and recursive reads unless they are the actual task.
+17. Keep tool results small enough for the next decision. When a tool supports limits, filters, or pagination, use them. If it does not, narrow the query before calling it.
+18. After a large tool result, extract only decision-bearing facts and compact/prune the raw result before starting another large retrieval.
+19. For substantial coding work, default to one focused inspection pass → one coherent implementation pass → one focused verification pass. Add another pass only when new evidence justifies it.
+20. Do not paste or restate whole files, instructions, logs, or prior analysis into prompts/handoffs when a path, section, or concise summary is sufficient.
+21. Delegate only when the delegate provides independent information or execution value. Never delegate a reread of the same context merely to obtain another opinion.
+22. When context usage becomes materially high, compact before the next expensive tool/model call. Use /context to locate the source of growth when needed.
+23. Treat explicit output-token caps as output controls only. They do not solve input-token, reasoning, tool-result, or caching costs; reduce unnecessary incoming context separately.
+
 
 When the runtime model is Claude Fable 5, load `.ai/skills/token-economics/references/providers/fable-5.md` for model-specific effort, trajectory, caching, tool-result, and long-run controls.
 

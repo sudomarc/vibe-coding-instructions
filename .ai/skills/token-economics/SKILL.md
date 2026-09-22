@@ -46,6 +46,21 @@ Do not set a low blanket cap across all tasks. Increase the cap for code generat
 When the runtime model is Claude Fable 5, use `references/providers/fable-5.md` for the model-specific policy. In particular: start routine bounded work at `medium` or `low` effort; keep tool results and trajectory state bounded; preserve cacheable prefixes; avoid unnecessary subagents and rereads; and use context editing/compaction/tool search/programmatic tool calling when the host exposes them. Do not trade verification for token savings.
 
 ## Context Budget
+## Context-sprawl guardrails
+
+Input/context consumption is a budget, not free background.
+
+1. Use HOT/WARM/COLD context classification and retrieve only HOT context first.
+2. Prefer search, metadata, exact matches, line ranges, pagination and bounded summaries over broad reads.
+3. Do not repeat unchanged reads or pass unchanged large results through multiple steps.
+4. Set practical tool-result bounds whenever the tool exposes them; otherwise narrow the query before execution.
+5. After any unusually large result, retain only the facts needed for the next decision and compact/prune stale raw context.
+6. For substantial implementation, prefer one inspection batch, one implementation batch and one verification batch unless evidence requires another.
+7. Avoid delegating duplicate rereads. A delegate must contribute independent information, execution, or isolated expertise.
+8. Treat prompts, handoffs and reports as data transfer: use references/pathnames and concise state summaries instead of embedding source text already available to the agent.
+9. When context growth is driven by repeated tool output, fix the retrieval pattern before adding model effort, retries or extra agents.
+10. An output-token cap cannot compensate for excessive input context. Optimize input, tool results, reasoning effort, caching and retries independently.
+
 
 Classify the task as MICRO, STANDARD, DEEP, or LONG_HORIZON.
 
