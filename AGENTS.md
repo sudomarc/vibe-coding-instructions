@@ -17,12 +17,21 @@ This repository is a portable, provider-neutral governance layer for AI coding a
 
 ## Progressive disclosure
 
-## Token economy
+Load only the context needed for the current task. Prefer structure/search → targeted excerpt → full file → broader repository. Do not preload unrelated skills, references, examples, agents, or provider notes.
 
-Treat context and agent usage as finite engineering resources. Load the minimum sufficient context, prefer targeted retrieval and bounded tool results, prune or compact stale trajectory state, and avoid repeated retries or redundant delegation. Use `.ai/skills/token-economics/` when a task can create significant context, tool, model, retry, or long-horizon cost.
+## Token economy — ALWAYS ON
 
-Cost optimization never overrides correctness, safety, security, scope, or required verification. Provider prices, cache behavior, context limits, and billing semantics are volatile; verify them against current provider documentation rather than hard-coding them into core policy.
+Token economy is a mandatory invariant for every task, not an optional optimization.
 
+1. Retrieve the minimum sufficient context for the next decision.
+2. Prefer metadata, search, filters, line ranges, pagination, and bounded tool results over broad reads.
+3. Combine compatible tool calls; never reread unchanged evidence unless exact source text is required.
+4. Before an expensive tool, model, or delegation step, identify the exact decision it will support and use the smallest suitable option.
+5. Retry only when the hypothesis, input, environment/provider, or diagnostic scope changed.
+6. Prune or compact stale trajectory state; preserve only objective, facts, decisions, failures, verification evidence, risks, and next actions.
+7. Keep agent outputs concise by default: no restating known context, no verbose narration, and no duplicate reports. Still satisfy the user's requested format and level of detail.
+8. Use `.ai/skills/token-economics/` only when the task has material context, tool, retry, delegation, model, or long-horizon cost; do not load it merely to obey this rule.
+9. Cost optimization never overrides correctness, safety, security, scope, authorization, or required verification.
 
 Load only the context needed for the task:
 
