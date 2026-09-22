@@ -46,7 +46,7 @@ Do not set a low blanket cap across all tasks. Increase the cap for code generat
 When the runtime model is Claude Fable 5, use `references/providers/fable-5.md` for the model-specific policy. In particular: start routine bounded work at `medium` or `low` effort; keep tool results and trajectory state bounded; preserve cacheable prefixes; avoid unnecessary subagents and rereads; and use context editing/compaction/tool search/programmatic tool calling when the host exposes them. Do not trade verification for token savings.
 
 ## Context Budget
-## Context-sprawl guardrails
+### Context-sprawl guardrails
 
 Input/context consumption is a budget, not free background.
 
