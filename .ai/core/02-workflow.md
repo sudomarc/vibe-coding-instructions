@@ -36,17 +36,19 @@ Token savings never weaken security, safety, authorization, scope, correctness, 
 
 ## PROVIDER / SESSION BOOTSTRAP — MANDATORY WHEN AVAILABLE
 
-At the beginning of each project/workflow, identify the active provider, model, and host capabilities. For OpenRouter + Claude Sonnet 4.x:
+When the coding host is Claude Code and authentication is a direct Anthropic API key:
 
-- establish one stable `session_id` for the project/workflow unit and reuse it across turns;
-- enable prompt caching when exposed;
-- keep stable instructions/tools/schemas/reference material before mutable state;
-- verify cache telemetry when available;
-- do not enable unnecessary paid plugins;
-- use current web search only when needed, and prefer `openrouter:web_search` over the deprecated Web Search plugin/`:online` path;
-- mark `UNVERIFIED` when the host cannot expose the required controls.
+1. Start new projects on `claude-sonnet-4-6` unless another model is explicitly justified.
+2. Use `medium` effort for routine work; escalate only when the task warrants deeper reasoning.
+3. Leave prompt caching enabled. Claude Code manages it automatically.
+4. Prefer a `5m` cache TTL by default. Use `1h` only when large reusable context is likely to be reused after idle periods; 1h cache writes cost more.
+5. Keep model, effort, core instructions and tool configuration stable during a task because cache invalidations can create an uncached rebuild.
+6. Use Haiku for simple bounded subagent work when quality is sufficient; avoid agent teams unless the task genuinely benefits from parallel independent contexts.
+7. Use `/clear` between unrelated tasks, `/compact` at natural boundaries, `/usage` to inspect spend/cache, and `/context` to identify context-heavy components.
+8. Do not claim cache or cost savings without runtime evidence.
 
-Load `.ai/skills/token-economics/references/providers/openrouter.md` for provider-specific details.
+Load `docs/claude-code-anthropic.md` for the exact current Claude Code/API cost profile and project settings template.
+
 
 ## IMPLEMENT
 
