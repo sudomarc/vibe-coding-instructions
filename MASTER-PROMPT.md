@@ -84,6 +84,8 @@ Apply token economy to every task, including trivial tasks. This is a default op
 
 Token savings never override correctness, security, safety, scope, authorization, or required verification.
 
+When the runtime model is Claude Fable 5, load `.ai/skills/token-economics/references/providers/fable-5.md` for model-specific effort, trajectory, caching, tool-result, and long-run controls.
+
 ## TEST AND VERIFY
 
 
