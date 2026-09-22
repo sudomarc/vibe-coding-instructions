@@ -86,6 +86,8 @@ At the start of every new project, and at the start of every new agent workflow 
 
 For the exact OpenRouter/Sonnet 4.x mechanics and current pricing, load `.ai/skills/token-economics/references/providers/openrouter.md` before making provider-specific billing decisions.
 
+When the host is Claude Code and OpenRouter is the gateway, read `docs/claude-code-openrouter.md` before making provider-specific cost or model-routing decisions. Do not assume repository instructions can inject undocumented OpenRouter request fields; verify effective model, caching and sticky-routing behavior from the actual runtime.
+
 ## Web development and design
 
 For substantial web work, route by changed surface and risk. Use the skills under .ai/skills/ and provider-neutral profiles under .ai/agents/.
