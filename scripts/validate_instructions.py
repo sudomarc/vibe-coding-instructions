@@ -22,6 +22,7 @@ REQUIRED_PATHS = [
     ".ai/core",
     ".ai/skills",
     ".ai/skills/token-economics/SKILL.md",
+    ".ai/skills/token-economics/references/providers/fable-5.md",
     ".ai/templates/agent-cost-report.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
@@ -57,6 +58,17 @@ TOKEN_RETRY_MARKERS = (
     "retry only",
 )
 
+FABLE5_PROFILE = ".ai/skills/token-economics/references/providers/fable-5.md"
+
+FABLE5_MARKERS = (
+    "claude fable 5",
+    "medium",
+    "low",
+    "xhigh",
+    "prompt caching",
+    "task budgets",
+)
+
 TOKEN_GUARD_MARKERS = (
     "token savings never",
     "cost optimization never",
@@ -88,6 +100,17 @@ def validate_governance_markers(failures: list[str]) -> None:
             failures.append(f"{rel} is missing governance marker(s): {', '.join(missing)}")
 
 def validate_token_economy(failures: list[str]) -> None:
+    profile = ROOT / FABLE5_PROFILE
+    if not profile.exists():
+        failures.append(f"missing Fable 5 token-economy profile: {FABLE5_PROFILE}")
+    else:
+        profile_text = profile.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in FABLE5_MARKERS if marker not in profile_text]
+        if missing:
+            failures.append(
+                f"{FABLE5_PROFILE} is missing Fable 5 token-economy marker(s): {', '.join(missing)}"
+            )
+
     for rel in TOKEN_ECONOMY_FILES:
         path = ROOT / rel
         if not path.exists():

@@ -28,6 +28,10 @@ These rules apply whenever this skill is loaded; the compact invariant in core p
 11. Never weaken tests, security, safety, or required verification merely to save tokens.
 12. Measure token/cost efficiency from provider telemetry when available; otherwise label estimates as estimates.
 
+## Claude Fable 5 adaptation
+
+When the runtime model is Claude Fable 5, use `references/providers/fable-5.md` for the model-specific policy. In particular: start routine bounded work at `medium` or `low` effort; keep tool results and trajectory state bounded; preserve cacheable prefixes; avoid unnecessary subagents and rereads; and use context editing/compaction/tool search/programmatic tool calling when the host exposes them. Do not trade verification for token savings.
+
 ## Context Budget
 
 Classify the task as MICRO, STANDARD, DEEP, or LONG_HORIZON.
