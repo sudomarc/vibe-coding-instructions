@@ -7,11 +7,13 @@ description: Use when an agent task can create significant context, tool, model,
 
 ## Purpose
 
-Treat context and model usage as finite engineering resources. Optimize for the lowest reasonable token and monetary cost that still achieves a verified outcome.
+This skill operationalizes the repository's always-on token-economy invariant.
 
-The objective is not minimum tokens. It is maximum useful information and verified progress per unit of token/cost budget.
+Optimize for the lowest reasonable token and monetary cost that still achieves a verified outcome. The target is not minimum tokens at any cost; it is maximum useful information and verified progress per unit of budget.
 
-## Core Rules
+## Core Rules — ALWAYS ON
+
+These rules apply whenever this skill is loaded; the compact invariant in core policy applies even when this skill is not loaded.
 
 1. Load the minimum sufficient context for the current decision.
 2. Discover before retrieving; search before reading large files.
@@ -176,4 +178,4 @@ Agent reports should prefer compact evidence:
 
 Status / Changed / Verified / Not Verified / Cost Signals / Next
 
-Do not produce verbose narrative when a small evidence table is sufficient.
+Do not repeat repository context, tool output, or prior reasoning. Use the smallest output that completely satisfies the requested deliverable. Expand only when the task explicitly requires depth, explanation, or a full artifact.
