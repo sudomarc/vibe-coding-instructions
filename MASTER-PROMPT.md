@@ -97,6 +97,9 @@ Apply token economy to every task, including trivial tasks. This is a default op
 - Compact/prune stale trajectory state before context becomes unreliable. Preserve objective, confirmed facts, decisions, failures, verification, risks, and next actions.
 - Keep responses and handoffs compact by default; do not restate context the host already has. Follow requested output detail when it is part of the task.
 - Load `.ai/skills/token-economics/` only for materially expensive or long-horizon tasks; the always-on rule must remain cheap to follow.
+- When the model/API exposes an output-token control, set an explicit cap for bounded-output tasks and size it above the expected completion to avoid routine truncation.
+- Do not describe an uncapped request as suffering from a hidden API limiter that wastes tokens. An output cap limits maximum generated output; input, reasoning, and tool-use consumption follow their own provider semantics.
+- Prefer provider-native controls such as max_output_tokens, max_tokens, or the provider equivalent at the integration boundary.
 
 Token savings never override correctness, security, safety, scope, authorization, or required verification.
 
