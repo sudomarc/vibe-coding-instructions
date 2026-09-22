@@ -69,11 +69,20 @@ For advanced web experiences, treat expressive typography, parallax, scrollytell
 
 When delegation is useful, select provider-neutral profiles from .ai/agents/. Prefer one primary owner and bounded read-only specialists. Route substantial visual redesign to anti-vibe-reviewer; compliance-sensitive flows to legal-compliance-reviewer; and external-tool or multi-provider integrations to integration-health-reviewer plus the relevant technical reviewer.
 
-## CONTEXT ECONOMY
+## TOKEN ECONOMY — ALWAYS ON
 
-Treat context as a finite engineering budget. Retrieve the minimum sufficient context for the current decision; prefer search and bounded excerpts over broad reads; keep stable context cache-friendly when the host supports caching; prune or compact stale trajectory state; and avoid retries or delegated reviews that do not add new information.
+Apply token economy to every task, including trivial tasks. This is a default operating invariant, not a conditional skill.
 
-Use `.ai/skills/token-economics/` for detailed routing and measurement guidance. Do not trade away security, safety, scope, or verification to save tokens. Provider prices and billing semantics belong in provider-specific references and must be verified as current.
+- Retrieve the minimum sufficient context for the next decision.
+- Prefer search/metadata, bounded excerpts, filters, line ranges, pagination, and summaries over full outputs.
+- Reuse unchanged evidence; do not reread files or repeat tool calls without a concrete information need.
+- Before an expensive tool/model/delegate call, state the exact decision it supports and choose the smallest suitable call.
+- Retry only after a changed hypothesis, input, code/environment, provider/tool, or diagnostic scope.
+- Compact/prune stale trajectory state before context becomes unreliable. Preserve objective, confirmed facts, decisions, failures, verification, risks, and next actions.
+- Keep responses and handoffs compact by default; do not restate context the host already has. Follow requested output detail when it is part of the task.
+- Load `.ai/skills/token-economics/` only for materially expensive or long-horizon tasks; the always-on rule must remain cheap to follow.
+
+Token savings never override correctness, security, safety, scope, authorization, or required verification.
 
 ## TEST AND VERIFY
 
