@@ -50,8 +50,17 @@ TOKEN_ECONOMY_FILES = (
 TOKEN_ECONOMY_MARKERS = (
     "always on",
     "minimum sufficient context",
+)
+
+TOKEN_RETRY_MARKERS = (
     "do not retry",
-    "token savings never override",
+    "retry only",
+)
+
+TOKEN_GUARD_MARKERS = (
+    "token savings never",
+    "cost optimization never",
+    "never weaken",
 )
 
 def fail(message: str) -> None:
@@ -86,6 +95,12 @@ def validate_token_economy(failures: list[str]) -> None:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore").lower()
         missing = [marker for marker in TOKEN_ECONOMY_MARKERS if marker not in text]
+        retry_ok = any(marker in text for marker in TOKEN_RETRY_MARKERS)
+        guard_ok = any(marker in text for marker in TOKEN_GUARD_MARKERS)
+        if not retry_ok:
+            missing.append("retry discipline")
+        if not guard_ok:
+            missing.append("cost-savings safety guard")
         if missing:
             failures.append(
                 f"{rel} is missing token-economy marker(s): {', '.join(missing)}"
