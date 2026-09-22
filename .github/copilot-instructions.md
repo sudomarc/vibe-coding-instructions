@@ -12,7 +12,7 @@ Treat destructive Git commands, production operations, credential changes, recur
 
 Use the matching skill under .ai/skills/ for planning, implementation, review, debugging, security, testing, database, API, frontend, backend, Git, dependencies, documentation, refactoring, performance, accessibility, release, research, incident response, agent orchestration, legal/compliance audits, and token/context economics.
 
-For long-running or tool-heavy work, use `.ai/skills/token-economics/` to control context retrieval, tool-result size, retries, compaction, delegation, and model/effort routing. Do not sacrifice verification or safety for cost savings.
+Token economy is always on, including small tasks: use minimum sufficient context, targeted/bounded retrieval, no duplicate calls, no unchanged-failure retries, and concise outputs. Load `.ai/skills/token-economics/` only when the task has material context/tool/model/retry/delegation cost. Never sacrifice verification or safety for savings.
 
 For legal/compliance audits, inspect the six source-informed items and secondary privacy/security checks. Separate engineering fixes from legal applicability, registrations and policy ownership. Use .ai/templates/legal-audit.md.
 
