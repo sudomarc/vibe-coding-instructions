@@ -38,21 +38,21 @@ Change the smallest coherent surface. Preserve existing conventions. Work in log
 
 After each batch, inspect the change and run the narrowest meaningful verification.
 
-## PROJECT / SESSION COST BOOTSTRAP — MANDATORY
+## Claude Code + Anthropic API — mandatory cost bootstrap
 
-At the start of every new project, and at the start of every new agent workflow inside that project:
+When the coding host is Claude Code and authentication is a direct Anthropic API key:
 
-- Detect provider, model, and host capabilities.
-- For OpenRouter + Claude Sonnet 4.x, use one stable `session_id` per project/workflow unit and reuse it across turns.
-- Enable prompt caching when the host exposes it; keep stable system/policy/tool/schema/reference content before mutable task state.
-- Prefer `cache_control: {"type":"ephemeral"}` for normal multi-turn caching. Use `ttl: "1h"` only when justified by long idle periods.
-- Verify cache behavior from `cached_tokens`, `cache_write_tokens`, and `cache_discount` when available.
-- Never create a new `session_id` every turn, and never pad a prompt just to hit the provider's cache minimum.
-- Do not enable paid or unnecessary OpenRouter plugins by default. The deprecated Web Search plugin/`:online` path is not for new integrations; use `openrouter:web_search` only when fresh web information is needed and bound the result volume.
-- Use PDF parsing, response healing, context compression, or multi-model/Fusion capabilities only when the task actually needs them.
-- If request-level controls are unavailable in the host, do not claim the optimization is active; mark it `UNVERIFIED` and continue with context/tool/output minimization.
+1. Start new projects on `claude-sonnet-4-6` unless another model is explicitly justified.
+2. Use `medium` effort for routine work; escalate only when the task warrants deeper reasoning.
+3. Leave prompt caching enabled. Claude Code manages it automatically.
+4. Prefer a `5m` cache TTL by default. Use `1h` only when large reusable context is likely to be reused after idle periods; 1h cache writes cost more.
+5. Keep model, effort, core instructions and tool configuration stable during a task because cache invalidations can create an uncached rebuild.
+6. Use Haiku for simple bounded subagent work when quality is sufficient; avoid agent teams unless the task genuinely benefits from parallel independent contexts.
+7. Use `/clear` between unrelated tasks, `/compact` at natural boundaries, `/usage` to inspect spend/cache, and `/context` to identify context-heavy components.
+8. Do not claim cache or cost savings without runtime evidence.
 
-For exact OpenRouter/Sonnet 4.x details, load `.ai/skills/token-economics/references/providers/openrouter.md`.
+Load `docs/claude-code-anthropic.md` for the exact current Claude Code/API cost profile and project settings template.
+
 
 ## WEB DEVELOPMENT AND DESIGN
 
