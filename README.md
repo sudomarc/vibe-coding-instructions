@@ -17,9 +17,15 @@ This repository turns those concerns into a layered operating system:
 
 ## Web development and design layer
 
-The framework separates web concerns that benefit from independent reasoning: design direction, design systems, responsive behavior, motion, anti-vibe visual review, legal/compliance review, capability routing for external tools, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
+The framework separates web concerns that benefit from independent reasoning: project completeness baseline, design direction, design systems, responsive behavior, motion, anti-vibe visual review, legal/compliance review, capability routing for external tools, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
 
-Provider-neutral primary and specialist agent profiles live under .ai/agents/. The intended pipeline is DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF.
+For new public web projects, the baseline starts with .ai/skills/web-project-baseline/SKILL.md and its applicability matrix. Provider-neutral primary and specialist agent profiles live under .ai/agents/. The intended pipeline is BASELINE → DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF.
+
+### Production web baseline
+
+The web-project-baseline skill turns lessons from Amplio Web into a reusable launch discipline: shared shell, route inventory, content/data source of truth, form lifecycle, cookies and browser storage audit, consent when applicable, privacy/legal surfaces, SEO, accessibility, responsive behavior, motion and 3D fallbacks, assets and third-party resource governance, browser security, performance, failure states, hosting state and evidence-backed release verification. It does not require every feature on every project; it classifies each capability as required, applicable, not applicable, deferred or unknown.
+
+The framework deliberately does not require a cookie banner by default. It requires storage/tracking inventory first, then consent controls only when the actual project behavior and applicable rules call for them.
 
 ### Anti-vibe visual quality
 
@@ -65,6 +71,7 @@ Use the narrowest matching capability rather than preloading every rule:
 
 | Surface | Skill | Specialist |
 |---|---|---|
+| Public web project / launch baseline | web-project-baseline | web-project-auditor |
 | Visual direction/UI | design-direction, design-system | ui-reviewer, design-director |
 | Anti-vibe visual quality | anti-vibe-design | anti-vibe-reviewer |
 | Compliance-sensitive flows | legal-compliance | legal-compliance-reviewer |
