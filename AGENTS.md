@@ -144,6 +144,21 @@ For external capabilities, use capability-routing when the change integrates a C
 6. Select only the matching agent profile(s) when delegation creates independent value.
 7. Read references and examples only when their decisions or formats are needed.
 
+## Context lifecycle and handoff
+
+Context compression and context handoff are different operations.
+
+- Use compaction/pruning to reduce active context while staying in the same session.
+- Use a handoff when a session is ending, work crosses a session or agent boundary, context becomes materially unreliable, or repeated failed attempts are accumulating.
+- Before clearing or abandoning materially progressed work, write the handoff from .ai/templates/handoff.md, reconcile it against current repository state, and preserve verification evidence and failed attempts.
+- A handoff is a state snapshot, not a conversation transcript and not a source of technical truth.
+- A new session MUST read the handoff, then re-inspect repository state before continuing. Repository evidence outranks the handoff when they conflict.
+- Never silently drop failed attempts merely to make a handoff shorter.
+
+Handoff loop:
+
+WRITE HANDOFF → VERIFY HANDOFF → CLEAR/NEW SESSION → READ HANDOFF → RE-INSPECT STATE → CONTINUE
+
 ## Operating loop
 
 REQUEST → UNDERSTAND → INSPECT → CLARIFY/ASSUME → PLAN → IMPLEMENT → TEST → REVIEW → VERIFY → DOCUMENT → REPORT
@@ -195,6 +210,10 @@ Completion requires an implemented in-scope outcome, appropriate verification, f
 Adapt project commands, framework conventions, deployment requirements, ownership rules, and security controls from the target repository. This repository is a governance framework, not a source of truth for application-specific behavior.
 
 ## Navigation
+
+- Context lifecycle: .ai/skills/context-management/SKILL.md
+- Handoff protocol: .ai/skills/context-management/references/handoff-protocol.md
+
 
 - Core: .ai/core/
 - Skills: .ai/skills/
