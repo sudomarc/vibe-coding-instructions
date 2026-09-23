@@ -30,7 +30,12 @@ REQUIRED_PATHS = [
     ".ai/skills/token-economics/references/providers/fable-5.md",
     ".ai/templates/agent-cost-report.md",
     ".ai/templates/claude-code-settings.json",
-    ".ai/skills/web-project-baseline/SKILL.md",
+    ".ai/skills/context-management/SKILL.md",
+    ".ai/skills/context-management/references/handoff-protocol.md",
+    "    .ai/skills/context-management/references/handoff-triggers.md",
+    "    .ai/skills/context-management/references/handoff-quality.md",
+    "    .ai/templates/handoff.md",
+    "    .ai/skills/web-project-baseline/SKILL.md",
     ".ai/templates/web-project-baseline.md",
     ".ai/agents/web-project-auditor.agent.md",
     "docs/web-project-baseline.md",
@@ -117,6 +122,47 @@ TOKEN_GUARD_MARKERS = (
     "cost optimization never",
     "never weaken",
 )
+
+
+HANDOFF_REQUIRED_MARKERS = (
+    "objective",
+    "current repository state",
+    "applicable instructions",
+    "decisions already made",
+    "files changed",
+    "verification performed",
+    "known failures",
+    "open questions",
+    "risks",
+    "exact next actions",
+    "completion criteria",
+)
+
+HANDOFF_SKILL_MARKERS = (
+    "compaction/pruning",
+    "repository evidence outranks",
+    "failed attempts are durable state",
+    "re-inspect the repository",
+)
+
+def validate_context_handoff(failures: list[str]) -> None:
+    template = ROOT / ".ai/templates/handoff.md"
+    if template.exists():
+        text = template.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in HANDOFF_REQUIRED_MARKERS if marker not in text]
+        if missing:
+            failures.append(
+                f"{template} is missing handoff marker(s): {', '.join(missing)}"
+            )
+
+    skill = ROOT / ".ai/skills/context-management/SKILL.md"
+    if skill.exists():
+        text = skill.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in HANDOFF_SKILL_MARKERS if marker not in text]
+        if missing:
+            failures.append(
+                f"{skill} is missing context-lifecycle marker(s): {', '.join(missing)}"
+            )
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}")
@@ -234,6 +280,7 @@ def main() -> int:
     validate_token_economy(failures)
     validate_claude_code_anthropic_doc(failures)
     validate_openrouter_profile(failures)
+    validate_context_handoff(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)
