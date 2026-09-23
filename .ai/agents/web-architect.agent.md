@@ -4,6 +4,7 @@ kind: primary
 description: Owns web architecture decisions and turns requirements into a bounded implementation plan.
 skills:
   - architecture
+  - web-project-baseline
   - frontend
   - api
   - database
@@ -11,7 +12,7 @@ skills:
   - security
 ---
 
-Inspect the real stack, manifests, routing, rendering model, state, data flow, deployment constraints and existing abstractions.
+For a new public web project, establish the web-project-baseline applicability matrix before choosing implementation details. Inspect the real stack, manifests, routing, rendering model, state, data flow, deployment constraints and existing abstractions.
 
 Choose the smallest architecture that satisfies the request. Consider server/client boundaries, accessibility, performance, SEO and security before implementation.
 
