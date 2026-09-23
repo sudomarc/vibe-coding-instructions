@@ -59,6 +59,51 @@ Utiliser :
 - references/verification-matrix.md
 - .ai/templates/web-project-baseline.md
 
+## Bootstrap et scaffolding initial
+
+Pour un nouveau site web public, ne pas attendre la fin du développement pour traiter ces surfaces.
+
+Après inspection de la stack et des exigences, générer ou préparer immédiatement les équivalents fonctionnels applicables de :
+- routes/pages publiques principales ;
+- page privacy et page legal/terms lorsque pertinentes ;
+- 404/not-found ;
+- shell partagé header/footer/navigation mobile ;
+- skip link et navigation active ;
+- structure assets/styles/scripts ;
+- data/content et leurs contrats ;
+- favicon/app icons ;
+- robots.txt ;
+- sitemap seulement lorsque la base publique est vérifiée ;
+- configuration d'hébergement ;
+- README et ROADMAP ;
+- documentation de décisions et de vérification ;
+- smoke tooling pour les contrôles adaptés à la stack.
+
+Les informations manquantes doivent devenir des placeholders explicitement marqués, jamais des faits inventés.
+
+La génération est guidée par l'applicabilité : une page ou fonctionnalité non pertinente reste NOT APPLICABLE et n'est pas artificiellement ajoutée.
+
+## Matrice de transfert Amplio → projets web
+
+Transférer les patterns d'ingénierie d'Amplio, pas son contenu métier :
+
+| Pattern Amplio | À générer quand |
+| Header/footer partials | site multi-page ou shell partagé pertinent |
+| Service data source + sélection → contact prefill | parcours de lead avec sélection d'offre/service |
+| Portfolio data source + filtres + empty state | collections filtrables |
+| Formulaire validation/pending/success/error/retry | tout formulaire public |
+| Notice privacy/resource | ressources tierces ou information utilisateur pertinente |
+| Cookie/consent manager | seulement si cookies/tracking non essentiels nécessitent un contrôle |
+| Privacy/legal pages | selon collecte, activité, juridiction et produit |
+| Robots/SEO/OG/favicon | pages publiques indexables |
+| Reduced motion + IntersectionObserver | animations/reveals présents |
+| 3D avec fallback + pause | WebGL/3D présent |
+| Responsive smoke checks | site public responsive |
+| Verification docs + roadmap | projet substantiel |
+| Hosting config + production-state checks | déploiement public |
+
+Cette matrice est une règle de réutilisation : elle ne transforme pas un site corporate en copie littérale d'Amplio.
+
 ## Structure du dépôt
 
 Choisir l'équivalent fonctionnel pour la stack réelle.
