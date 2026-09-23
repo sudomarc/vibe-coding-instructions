@@ -1,11 +1,11 @@
 ---
 name: agent-orchestration
-description: This skill should be used when a task benefits from multiple specialized agents, parallel analysis, delegated review, or explicit agent handoffs.
+description: This skill should be used when a task benefits from multiple specialized agents, parallel analysis, delegated review, explicit agent handoffs, bounded autonomy gating, or multi-agent failure escalation.
 ---
 
 # Agent Orchestration Skill
 
-Use multiple agents only when decomposition creates real independent value. Keep one agent responsible for final integration. Give each delegate a narrow scope, inputs, expected output, and stop condition. Do not allow parallel agents to make overlapping writes without coordination.
+Use multiple agents only when decomposition creates real independent value. Keep one orchestrator agent responsible for overall plan execution and final integration. Give each delegate a narrow scope, context inputs, expected output format, permission tier, and stop condition. Do not allow parallel agents to make overlapping writes without coordination.
 
 ## Routing
 
@@ -22,16 +22,26 @@ Use multiple agents only when decomposition creates real independent value. Keep
 - Browser-facing security: `web-security-reviewer`
 - External CLIs, MCPs, SaaS providers or multi-backend integrations: `integration-health-reviewer` + `security` or `provider-integration` specialist as relevant
 
-## Delegation economics
+## Delegation Economics
 
 Delegation is justified only when independent analysis, context isolation, or parallelism creates net value after accounting for the delegated prompt, context, tool calls, and returned output. Prefer one primary owner plus narrow read-only reviewers. Do not delegate work that simply rereads the same evidence without independent value.
 
-## Delegation contract
+## Delegation Contract & Bounded Autonomy
 
-Every delegate receives role, exact scope, relevant files or diff, required inputs, output format, permissions, and stop condition. Run independent read-only reviews in parallel only when the host can isolate them safely. The primary agent remains responsible for final integration.
+Every delegate receives role, exact scope, relevant files or diff, required inputs, output format, permission tier (`READ_ONLY`, `WORKSPACE_WRITE`, `ISOLATED_EXECUTE`, `NETWORK_ACCESS`, `PRIVILEGED_MUTATION`), and stop condition.
 
-For external integrations, give the reviewer the actual provider paths, capability contract, health evidence, authentication boundary and fallback behavior under review. Do not ask a reviewer to infer provider health from names or documentation alone.
+- **Bounded Autonomy Tiers**: Operate strictly within granted autonomy tiers (L0 `READ_ONLY` to L4 `RESTRICTED`).
+- **Human Checkpoints**: Immediately pause and transition to `HUMAN_CHECKPOINT_REQUIRED` state upon requesting `PRIVILEGED_MUTATION`, breaching >=80% budget, performing irreversible state changes, or encountering contradictory goal states (`GOAL_BLOCKED`).
+- **Retry & Circuit Breaker**: Enforce a maximum of 3 retries per failed step with required context changes. Activate circuit breaker on 3 consecutive identical tool/model errors.
+- **Traceability**: Propagate `trace_id` and `parent_agent_id` across all inter-agent communications and tool invocations.
 
-Useful reviewer roles include correctness, tests, error handling, types, security, comments, simplification, visual fidelity, performance, provider health and capability routing. Specialization should reduce context load, not create unnecessary ceremony.
+## Failure Escalation Protocol
 
-References: `references/delegation.md`, `references/parallel-review.md`, `examples/delegated-review.md`.
+When a subagent reaches a stop condition other than `SUCCESS_VERIFIED` (such as `GOAL_BLOCKED`, `MAX_BUDGET_REACHED`, or `SAFETY_TRIGGERED`), it escalates execution back to the Orchestrator with structured diagnostic evidence. If the Orchestrator cannot safely resolve or replan the task, it formats an Escalation Report (`.ai/templates/escalation-report.md`) and requests a human checkpoint.
+
+References:
+- `references/delegation.md`
+- `references/parallel-review.md`
+- `references/bounded-autonomy-escalation.md`
+- `.ai/templates/escalation-report.md`
+- `examples/delegated-review.md`

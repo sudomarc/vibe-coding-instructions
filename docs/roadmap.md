@@ -25,16 +25,16 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Permission-level vocabulary (`.ai/contracts/README.md`).
 - [x] Runtime-neutral role examples (`.ai/contracts/`).
 
-## Phase 2 — Agent orchestration governance
+## Phase 2 — Agent orchestration governance [completed]
 
-- [ ] Delegation policy.
-- [ ] Parallelism policy.
-- [ ] Retry/loop policy.
-- [ ] Bounded autonomy policy.
-- [ ] Human checkpoint policy.
-- [ ] Failure escalation rules.
-- [ ] Agent identity and correlation guidance.
-- [ ] Multi-agent audit conventions.
+- [x] Delegation policy (`.ai/skills/agent-orchestration/references/delegation.md`).
+- [x] Parallelism policy (`.ai/skills/agent-orchestration/references/parallel-review.md`).
+- [x] Retry/loop policy (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
+- [x] Bounded autonomy policy (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
+- [x] Human checkpoint policy (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
+- [x] Failure escalation rules (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
+- [x] Agent identity and correlation guidance (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
+- [x] Multi-agent audit conventions (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
 
 ## Phase 3 — Tool governance
 
