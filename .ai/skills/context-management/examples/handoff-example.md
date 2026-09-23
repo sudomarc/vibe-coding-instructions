@@ -3,21 +3,36 @@
 ## Objective
 Finish cursor pagination for the orders endpoint.
 
-## State
-Feature code and focused tests are implemented. The final diff has not yet been reviewed after the last test fix.
+## Current Repository State
+Feature code and focused tests are implemented. Final diff review remains open.
 
-## Changed Files
-`src/http/orders.ts`
-`src/http/orders.test.ts`
+## Applicable Instructions
+AGENTS.md, .ai/skills/api/SKILL.md, and repository-local API test conventions.
 
-## Verification
-Focused tests pass. Type checking passes.
+## Decisions Already Made
+Use cursor pagination with the existing response envelope; do not add a dependency.
 
-## Open
-Run the final diff review and the broader integration suite if the environment provides the required service.
+## Files Changed
+src/http/orders.ts
+src/http/orders.test.ts
 
-## Risk
-Integration behavior remains unverified locally.
+## Verification Performed
+npm test -- orders — PASS.
+Type checking — PASS.
 
-## Next Action
-Inspect `git diff`, then run the integration command documented in the repository.
+## Known Failures
+Integration suite not run because the required service is unavailable locally.
+
+## Open Questions
+Whether the CI integration environment exposes the required service contract.
+
+## Risks
+The integration behavior remains unverified locally.
+
+## Exact Next Actions
+1. Inspect git diff.
+2. Run the documented integration suite if the service is available.
+3. Verify the final response shape against the existing API contract.
+
+## Completion Criteria
+Focused tests, type checking, final diff review, and the applicable integration verification are complete.
