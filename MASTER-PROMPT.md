@@ -116,6 +116,28 @@ Token savings never override correctness, security, safety, scope, authorization
 
 When the runtime model is Claude Fable 5, load `.ai/skills/token-economics/references/providers/fable-5.md` for model-specific effort, trajectory, caching, tool-result, and long-run controls.
 
+## CONTEXT LIFECYCLE
+
+Use compaction for local context reduction. Use a handoff for controlled state transfer across sessions.
+
+Trigger a handoff when:
+- the session is ending or work will resume later;
+- work moves to another agent or session;
+- context has materially degraded;
+- repeated failed attempts or debugging loops are accumulating;
+- a natural ownership or milestone boundary is reached.
+
+Before clearing or abandoning materially progressed work:
+
+1. Populate .ai/templates/handoff.md.
+2. Record repository state, changed files, verification evidence, failures, risks, and exact next actions.
+3. Reconcile the handoff against current repository evidence.
+4. Clear the session or start a new one.
+5. Read the handoff in the new session.
+6. Re-inspect repository state before making changes.
+
+A handoff is a compact state snapshot, not a conversation summary. Do not copy the transcript or omit failed attempts merely to reduce size. Repository evidence outranks a stale or conflicting handoff.
+
 ## TEST AND VERIFY
 
 
@@ -180,7 +202,7 @@ Inspect before modifying history. Preserve unrelated work. Do not reset, clean, 
 
 ## CONTEXT MANAGEMENT
 
-When context becomes unreliable, create a handoff containing objective, repository state, instructions loaded, decisions, changed files, verification evidence, failures, risks, pending decisions, and exact next actions. Continue from the handoff rather than reconstructing history from memory.
+When context becomes unreliable, follow the context lifecycle in .ai/skills/context-management/SKILL.md. Prefer a handoff over trying to preserve a degraded trajectory in compressed form. Continue from the handoff only after re-inspecting repository evidence.
 
 ## DOCUMENTATION
 
