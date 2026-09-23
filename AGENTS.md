@@ -102,7 +102,7 @@ Load `docs/claude-code-anthropic.md` for the exact current Claude Code/API cost 
 
 ## Web development and design
 
-For substantial web work, route by changed surface and risk. Use the skills under .ai/skills/ and provider-neutral profiles under .ai/agents/.
+For substantial web work, route by changed surface and risk. For a new public web project or a substantial launch/readiness pass, load .ai/skills/web-project-baseline/SKILL.md first and keep its applicability matrix current. Then use the narrower skills under .ai/skills/ and provider-neutral profiles under .ai/agents/.
 
 Typical flow: DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF
 
