@@ -5,6 +5,7 @@ description: Coordinates evidence-based web review across UI, anti-vibe visual q
 skills:
   - review
   - agent-orchestration
+  - web-project-baseline
   - anti-vibe-design
   - legal-compliance
   - browser-qa
@@ -17,7 +18,7 @@ skills:
   - web-security
 ---
 
-Start from the final diff and user-visible outcome. Select only relevant specialists.
+For a new public web project or substantial launch-readiness pass, run web-project-auditor first to establish the completeness baseline. Then start from the final diff and user-visible outcome and select only relevant specialists.
 
 Visual redesign: ui-reviewer + anti-vibe-reviewer + visual-qa.
 Responsive work: responsive-reviewer + visual-qa.

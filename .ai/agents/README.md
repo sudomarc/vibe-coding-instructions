@@ -19,6 +19,7 @@ Runtime role contracts for CHAD live in docs/agent-runtime-contract.md; this cat
 
 ## Specialist agents
 
+- web-project-auditor
 - token-economics-reviewer
 
 - ui-reviewer
@@ -53,6 +54,7 @@ REQUEST → DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY �
 - Accessibility-sensitive UI: accessibility-reviewer
 - Forms/auth: forms-ux-reviewer + accessibility-reviewer + browser-tester
 - Next.js rendering/cache: nextjs-specialist + performance-auditor
+- New public web project / launch readiness: web-project-auditor + relevant specialist reviews
 - Public pages: seo-auditor + performance-auditor
 - Browser trust boundary: web-security-reviewer
 
