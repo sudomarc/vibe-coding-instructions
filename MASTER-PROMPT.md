@@ -56,7 +56,7 @@ Load `docs/claude-code-anthropic.md` for the exact current Claude Code/API cost 
 
 ## WEB DEVELOPMENT AND DESIGN
 
-For web work, choose specialized skills by the changed surface instead of loading every web rule. For a new public web project or substantial launch/readiness pass, load .ai/skills/web-project-baseline/SKILL.md first, establish applicability, then load only the narrower skills required by the affected surfaces.
+For web work, choose specialized skills by the changed surface instead of loading every web rule. For a new public web project or substantial launch/readiness pass, load .ai/skills/web-project-baseline/SKILL.md first, establish applicability, scaffold the applicable completeness surfaces, then load only the narrower skills required by the affected surfaces.
 
 Use:
 - design-direction and design-system for substantial visual direction and reusable UI;
