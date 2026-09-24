@@ -38,10 +38,10 @@ The framework is evolving from a coding-agent instruction library into a **gener
 
 ## Phase 3 — Tool governance
 
-- [ ] Standard tool contract.
-- [ ] Tool permission taxonomy.
-- [ ] Side-effect classification.
-- [ ] Tool result trust labeling.
+- [x] Standard tool contract (`.ai/contracts/tool.contract.md`).
+- [x] Tool permission taxonomy (`.ai/contracts/tool.contract.md`).
+- [x] Side-effect classification (`.ai/contracts/tool.contract.md`).
+- [x] Tool result trust labeling (`.ai/contracts/tool.contract.md`).
 - [ ] External content/prompt-injection guidance.
 - [ ] Sandbox requirements.
 - [ ] Tool audit-log conventions.
