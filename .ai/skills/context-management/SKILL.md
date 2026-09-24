@@ -79,7 +79,7 @@ Compaction/pruning reduces active context while continuing the same trajectory.
 
 Handoff intentionally terminates the current trajectory and transfers only durable state to a fresh context.
 
-Do not use a compacted transcript as a substitute for a handoff at a session boundary.
+Do not use a compacted transcript as a substitute for a handoff at a session boundary. Remember that repository evidence outranks a stale or conflicting handoff, and a new session must re-inspect the repository before continuing.
 
 ## Failed attempts are durable state
 

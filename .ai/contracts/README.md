@@ -10,7 +10,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Orchestrator Contract (orchestrator.contract.md)
   ├─ Researcher Contract (researcher.contract.md)
   ├─ Coder Contract (coder.contract.md)
-  └─ Analyst Contract (analyst.contract.md)
+  ├─ Analyst Contract (analyst.contract.md)
+  └─ Tool Governance Contract (tool.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -61,7 +62,11 @@ Every agent execution loop must terminate predictably under one of five standard
 
 ---
 
-## 3. Evidence Protocol Schema
+## 3. Tool Governance & Trust Schema
+
+All tools available to agents follow `.ai/contracts/tool.contract.md` which categorizes tools by permission levels (`READ_ONLY`, `WORKSPACE_WRITE`, `ISOLATED_EXECUTE`, `NETWORK_ACCESS`, `PRIVILEGED_MUTATION`), side-effect risk (`NO_EFFECT`, `REVERSIBLE_FILE_CHANGE`, `IRREVERSIBLE_HOST_MUTATION`, `NETWORK_TRANSACTION`), and result trust labeling (`VERIFIED_LOCAL`, `UNTRUSTED_REMOTE`, `ISOLATED_SANDBOXED`).
+
+## 4. Evidence Protocol Schema
 
 All facts, results, and claims reported in agent handoffs must use the standardized evidence labels:
 
@@ -91,7 +96,7 @@ All facts, results, and claims reported in agent handoffs must use the standardi
 
 ---
 
-## 4. Ecosystem Compatibility (CHAD & LapisLLM)
+## 5. Ecosystem Compatibility (CHAD & LapisLLM)
 
 ### CHAD Runtime Layer
 - CHAD enforces contract permissions dynamically at the tool dispatch boundary.
