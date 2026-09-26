@@ -40,6 +40,7 @@ REQUIRED_PATHS = [
     ".ai/templates/web-project-baseline.md",
     ".ai/agents/web-project-auditor.agent.md",
     "docs/web-project-baseline.md",
+    ".ai/skills/security/references/sandbox-requirements.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
     ".ai/templates/legal-audit.md",
