@@ -42,7 +42,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Tool permission taxonomy (`.ai/contracts/tool.contract.md`).
 - [x] Side-effect classification (`.ai/contracts/tool.contract.md`).
 - [x] Tool result trust labeling (`.ai/contracts/tool.contract.md`).
-- [ ] External content/prompt-injection guidance.
+- [x] External content/prompt-injection guidance (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [ ] Sandbox requirements.
 - [ ] Tool audit-log conventions.
 - [ ] Capability/fallback templates.
@@ -68,9 +68,9 @@ The framework is evolving from a coding-agent instruction library into a **gener
 
 ## Phase 6 — Agent security
 
-- [ ] Prompt-injection threat model.
-- [ ] Tool-confusion threat model.
-- [ ] Data-exfiltration patterns.
+- [x] Prompt-injection threat model (`.ai/skills/security/references/prompt-injection-threat-model.md`).
+- [x] Tool-confusion threat model (`.ai/skills/security/references/prompt-injection-threat-model.md`).
+- [x] Data-exfiltration patterns (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [ ] Permission escalation controls.
 - [ ] Sandbox escape test guidance.
 - [ ] Secret-handling guidance for agent runtimes.
