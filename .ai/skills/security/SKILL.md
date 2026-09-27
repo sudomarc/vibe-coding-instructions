@@ -9,4 +9,4 @@ Threat-model the changed surface. Identify trust boundaries, attacker-controlled
 
 Do not claim a system is secure from a narrow test. Report the tested threat surface and residual risk.
 
-References: `references/threat-model.md`, `references/secure-coding.md`, `references/prompt-injection-threat-model.md`, `examples/security-review.md`.
+References: `references/threat-model.md`, `references/secure-coding.md`, `references/prompt-injection-threat-model.md`, `references/sandbox-requirements.md`, `examples/security-review.md`.
