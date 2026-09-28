@@ -76,16 +76,16 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [ ] Secret-handling guidance for agent runtimes.
 - [ ] Security review playbooks.
 
-## Phase 7 — Evaluation and observability
+## Phase 7 — Evaluation and observability [completed]
 
-- [ ] Agent-task benchmark format.
-- [ ] Tool-call reliability metrics.
-- [ ] Plan quality metrics.
-- [ ] Completion/recovery metrics.
-- [ ] Cost-per-verified-success metric.
-- [ ] Trace schema guidance.
-- [ ] Release-gate templates.
-- [ ] Incident-analysis templates.
+- [x] Agent-task benchmark format (`.ai/skills/evaluation/SKILL.md`).
+- [x] Tool-call reliability metrics (`.ai/skills/evaluation/SKILL.md`).
+- [x] Plan quality metrics (`.ai/skills/evaluation/SKILL.md`).
+- [x] Completion/recovery metrics (`.ai/skills/evaluation/SKILL.md`).
+- [x] Cost-per-verified-success metric (`.ai/skills/evaluation/SKILL.md`).
+- [x] Trace schema guidance (`.ai/skills/evaluation/SKILL.md`).
+- [x] Release-gate templates (`.ai/skills/evaluation/SKILL.md`, `.ai/templates/agent-evaluation-report.md`).
+- [x] Incident-analysis templates (`.ai/skills/evaluation/SKILL.md`).
 
 ## Phase 8 — CHAD/Lapis integration reference
 
