@@ -56,15 +56,15 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [ ] Knowledge-source provenance contract.
 - [ ] Long-running task compaction policy.
 
-## Phase 5 — Model/provider governance
+## Phase 5 — Model/provider governance [completed]
 
-- [ ] Provider-neutral model capability schema.
-- [ ] Routing-policy guidance.
-- [ ] Provider health-state definitions.
-- [ ] Fallback semantics.
-- [ ] Cost/latency/privacy routing guidance.
-- [ ] Model evaluation reporting format.
-- [ ] Contract-testing guidance for model backends.
+- [x] Provider-neutral model capability schema (`.ai/contracts/model-provider.contract.md`).
+- [x] Routing-policy guidance (`.ai/skills/model-governance/SKILL.md`).
+- [x] Provider health-state definitions (`.ai/skills/model-governance/SKILL.md`).
+- [x] Fallback semantics (`.ai/contracts/model-provider.contract.md`).
+- [x] Cost/latency/privacy routing guidance (`.ai/skills/model-governance/SKILL.md`).
+- [x] Model evaluation reporting format (`.ai/templates/model-evaluation-report.md`).
+- [x] Contract-testing guidance for model backends (`.ai/skills/model-governance/references/contract-testing.md`).
 
 ## Phase 6 — Agent security
 

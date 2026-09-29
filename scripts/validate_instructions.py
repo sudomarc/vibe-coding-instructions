@@ -27,6 +27,8 @@ REQUIRED_PATHS = [
     ".ai/contracts/coder.contract.md",
     ".ai/contracts/analyst.contract.md",
     ".ai/contracts/tool.contract.md",
+    ".ai/contracts/model-provider.contract.md",
+    ".ai/skills/model-governance/SKILL.md",
     ".ai/skills/token-economics/SKILL.md",
     ".ai/skills/token-economics/references/providers/fable-5.md",
     ".ai/templates/agent-cost-report.md",

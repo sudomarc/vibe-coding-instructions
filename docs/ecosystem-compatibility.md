@@ -31,11 +31,13 @@ CHAD must not infer unsupported capabilities from the underlying Python runtime.
 
 ## Vibe -> CHAD compatibility
 
-Vibe Coding Instructions currently provides portable skills and agent-role governance. CHAD's planned runtime adapter will consume selected policy/role contracts.
+Vibe Coding Instructions currently provides portable skills, agent-role governance, tool governance, and model provider contracts. CHAD's planned runtime adapter will consume selected policy/role contracts.
 
 State:
 
 - role policy: PRESENT;
+- tool governance contract: PRESENT;
+- model provider contract: PRESENT (`.ai/contracts/model-provider.contract.md`);
 - runtime adapter: PLANNED;
 - automatic synchronization of arbitrary framework files: NOT REQUIRED.
 

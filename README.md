@@ -76,6 +76,7 @@ Use the narrowest matching capability rather than preloading every rule:
 | Anti-vibe visual quality | anti-vibe-design | anti-vibe-reviewer |
 | Compliance-sensitive flows | legal-compliance | legal-compliance-reviewer |
 | External tool/provider integration | capability-routing | integration-health-reviewer |
+| Model provider & LLM routing | model-governance | - |
 | Responsive behavior | responsive-design | responsive-reviewer |
 | Motion / scroll / micro-interactions | interaction-motion | motion-3d-specialist when advanced |
 | Browser 3D | web-3d | motion-3d-specialist |
