@@ -18,6 +18,10 @@ REPRODUCE → OBSERVE → ISOLATE → HYPOTHESIZE → TEST → ROOT CAUSE → MI
 
 For complex work, use a living plan, bounded batches, and incremental verification.
 
+For substantial visual work, activate Creative Design Mode when the task requires a distinctive identity or major redesign:
+
+RESEARCH → 3+ DIRECTIONS → CRITIQUE → SYNTHESIZE → DESIGN BRIEF → IMPLEMENT → BROWSER VERIFY → VISUAL CRITIQUE → REVISE → FINAL REVIEW
+
 ## UNDERSTAND
 
 Convert the request into an observable outcome. Separate confirmed requirements from inference, assumptions, unknowns, and conflicts. Do not invent APIs, schemas, commands, repository structure, production state, or tool capabilities.
@@ -60,6 +64,7 @@ For web work, choose specialized skills by the changed surface instead of loadin
 
 Use:
 - design-direction and design-system for substantial visual direction and reusable UI;
+- creative-design for deliberate multi-direction exploration, cross-domain references and distinctive UI before implementation;
 - anti-vibe-design for generic trend-pattern detection, template-like styling and product-specific design rationale;
 - legal-compliance for compliance-sensitive flows and legal-exposure engineering audits;
 - capability-routing for external CLIs, MCP servers, SaaS/API providers, browser integrations, data sources and interchangeable backends;
@@ -75,7 +80,7 @@ Use:
 - web-security for browser trust boundaries;
 - nextjs when the repository uses Next.js.
 
-For substantial visual changes, inspect the 20 anti-vibe patterns in .ai/skills/anti-vibe-design/SKILL.md. Do not ban individual trends by default. Instead, look for unexplained trend stacking, untouched default component styling, generic product-agnostic copy, inconsistent composition, decorative motion or pointer effects without user value, and weak hierarchy.
+For substantial visual changes, inspect the anti-vibe catalog and run the anti-AI-slop gate. For Creative Design Mode, require a design brief with 3+ directions, rejected alternatives, 3+ differentiators and verification constraints before implementation. Do not ban individual trends by default. Instead, look for unexplained trend stacking, untouched default component styling, generic product-agnostic copy, inconsistent composition, decorative motion or pointer effects without user value, and weak hierarchy.
 
 For compliance-sensitive changes, inspect the six source-informed legal holes plus secondary privacy/security checks. Do not assume a cited law applies. Determine applicability from actual app behavior, users, jurisdictions and current authoritative evidence.
 
@@ -83,7 +88,7 @@ For external capability changes, separate the capability contract from the provi
 
 For advanced web experiences, treat expressive typography, parallax, scrollytelling, experimental navigation, lighting/glow and 3D as design tools rather than default requirements. Verify that essential content, navigation and task completion remain available without WebGL, continuous motion or pointer-only interactions.
 
-When delegation is useful, select provider-neutral profiles from .ai/agents/. Prefer one primary owner and bounded read-only specialists. Route substantial visual redesign to anti-vibe-reviewer; compliance-sensitive flows to legal-compliance-reviewer; and external-tool or multi-provider integrations to integration-health-reviewer plus the relevant technical reviewer.
+When delegation is useful, select provider-neutral profiles from .ai/agents/. Prefer one primary owner and bounded read-only specialists. In Creative Design Mode, use at least 5 distinct pre-implementation roles: design/art direction, visual-reference research, product UX, creative interaction design, and anti-vibe critique. Do not have one agent impersonate all five. Add visual-qa and risk-based reviewers after implementation. Route substantial visual redesign to anti-vibe-reviewer; compliance-sensitive flows to legal-compliance-reviewer; and external-tool or multi-provider integrations to integration-health-reviewer plus the relevant technical reviewer.
 
 ## TOKEN ECONOMY — ALWAYS ON
 
