@@ -125,11 +125,11 @@ Core web routing includes:
 - Browser trust boundaries: web-security
 - Next.js: nextjs
 
-Use focused specialists such as design-director, creative-art-director, visual-reference-researcher, creative-interaction-designer, ui-reviewer, anti-vibe-reviewer, legal-compliance-reviewer, integration-health-reviewer, responsive-reviewer, accessibility-reviewer, visual-qa, visual-regression-reviewer, performance-auditor, motion-3d-specialist, asset-pipeline-specialist, seo-auditor, web-security-reviewer, nextjs-specialist, forms-ux-reviewer, component-reviewer, and browser-tester only when their scope is relevant.
+Use focused specialists such as design-director, creative-art-director, visual-reference-researcher, product-ux-specialist, creative-interaction-designer, ui-reviewer, anti-vibe-reviewer, legal-compliance-reviewer, integration-health-reviewer, responsive-reviewer, accessibility-reviewer, visual-qa, visual-regression-reviewer, performance-auditor, motion-3d-specialist, asset-pipeline-specialist, seo-auditor, web-security-reviewer, nextjs-specialist, forms-ux-reviewer, component-reviewer, and browser-tester only when their scope is relevant.
 
 For immersive visual work, do not trade away task completion, accessibility or performance merely to add visual effects. Essential information must remain available without WebGL, continuous motion or pointer-only interaction.
 
-For substantial visual changes, first determine whether Creative Design Mode is active. In Creative Design Mode, complete the 5+ role design exploration and design brief before implementation. Then run an anti-vibe preflight. Treat the 20-pattern catalog in .ai/skills/anti-vibe-design/SKILL.md as a contextual heuristic: a listed pattern is not automatically wrong, but unexplained trend stacking, generic copy, untouched defaults or inconsistent composition should trigger simplification or explicit rationale.
+For substantial visual changes, first determine whether Creative Design Mode is active. In Creative Design Mode, complete the 5+ role design exploration and design brief before implementation. Then run an anti-vibe preflight. Treat the anti-vibe pattern catalog in .ai/skills/anti-vibe-design/SKILL.md as a contextual heuristic: a listed pattern is not automatically wrong, but unexplained trend stacking, generic copy, untouched defaults or inconsistent composition should trigger simplification or explicit rationale.
 
 For compliance-sensitive flows, run a legal-compliance audit when accounts, unauthenticated data collection, analytics/replay, marketing email, subscriptions/trials, uploads, cookies/consent or policy pages are affected. Distinguish engineering remediation from legal applicability and human-owned registration/policy tasks.
 
