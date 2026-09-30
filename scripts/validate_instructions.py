@@ -44,6 +44,7 @@ REQUIRED_PATHS = [
     ".ai/agents/creative-art-director.agent.md",
     ".ai/agents/visual-reference-researcher.agent.md",
     ".ai/agents/creative-interaction-designer.agent.md",
+    ".ai/agents/product-ux-specialist.agent.md",
     ".ai/templates/web-project-baseline.md",
     ".ai/agents/web-project-auditor.agent.md",
     "docs/web-project-baseline.md",
