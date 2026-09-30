@@ -43,6 +43,8 @@ REQUIRED_PATHS = [
     ".ai/agents/web-project-auditor.agent.md",
     "docs/web-project-baseline.md",
     ".ai/skills/security/references/sandbox-requirements.md",
+    ".ai/skills/security/references/secret-handling.md",
+    ".ai/skills/security/references/security-review-playbook.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
     ".ai/templates/legal-audit.md",
@@ -148,6 +150,32 @@ HANDOFF_SKILL_MARKERS = (
     "failed attempts are durable state",
     "re-inspect the repository",
 )
+
+SECRET_HANDLING_MARKERS = (
+    "secret classification",
+    "zero raw secrets",
+    "redaction",
+)
+
+PLAYBOOK_MARKERS = (
+    "security review workflow",
+    "verification checklists",
+)
+
+def validate_security_references(failures: list[str]) -> None:
+    sec_file = ROOT / ".ai/skills/security/references/secret-handling.md"
+    if sec_file.exists():
+        text = sec_file.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in SECRET_HANDLING_MARKERS if marker not in text]
+        if missing:
+            failures.append(f"{sec_file.relative_to(ROOT)} is missing secret handling marker(s): {', '.join(missing)}")
+
+    pb_file = ROOT / ".ai/skills/security/references/security-review-playbook.md"
+    if pb_file.exists():
+        text = pb_file.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in PLAYBOOK_MARKERS if marker not in text]
+        if missing:
+            failures.append(f"{pb_file.relative_to(ROOT)} is missing playbook marker(s): {', '.join(missing)}")
 
 def validate_context_handoff(failures: list[str]) -> None:
     template = ROOT / ".ai/templates/handoff.md"
@@ -285,6 +313,7 @@ def main() -> int:
     validate_claude_code_anthropic_doc(failures)
     validate_openrouter_profile(failures)
     validate_context_handoff(failures)
+    validate_security_references(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)

@@ -73,8 +73,8 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Data-exfiltration patterns (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [ ] Permission escalation controls.
 - [ ] Sandbox escape test guidance.
-- [ ] Secret-handling guidance for agent runtimes.
-- [ ] Security review playbooks.
+- [x] Secret-handling guidance for agent runtimes (`.ai/skills/security/references/secret-handling.md`).
+- [x] Security review playbooks (`.ai/skills/security/references/security-review-playbook.md`).
 
 ## Phase 7 — Evaluation and observability [completed]
 
