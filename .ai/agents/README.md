@@ -24,6 +24,9 @@ Runtime role contracts for CHAD live in docs/agent-runtime-contract.md; this cat
 
 - ui-reviewer
 - anti-vibe-reviewer
+- creative-art-director
+- visual-reference-researcher
+- creative-interaction-designer
 - legal-compliance-reviewer
 - responsive-reviewer
 - accessibility-reviewer
@@ -39,13 +42,17 @@ Runtime role contracts for CHAD live in docs/agent-runtime-contract.md; this cat
 - component-reviewer
 - browser-tester
 
+## Creative Design Mode
+
+For distinctive public web design or substantial visual redesign, require at least 5 independent pre-implementation roles: design/art direction, visual reference research, product UX, creative interaction design, and anti-vibe critique. Produce 3+ directions and a design brief before implementation. After implementation, run visual-qa and risk-based reviewers.
+
 ## Default pipeline
 
 REQUEST → DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → INTEGRATE → FINAL DIFF
 
 ## High-value routing
 
-- Substantial visual redesign: ui-reviewer + anti-vibe-reviewer + visual-qa
+- Substantial visual redesign: design-director + creative-art-director + visual-reference-researcher + creative-interaction-designer + anti-vibe-reviewer before implementation; then ui-reviewer + visual-qa + risk-based reviewers
 - Compliance-sensitive flows: legal-compliance-reviewer + relevant technical reviewer
 - Advanced animation or 3D: motion-3d-specialist + visual-qa + performance-auditor
 - Asset-heavy interface: asset-pipeline-specialist + performance-auditor
