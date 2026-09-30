@@ -27,6 +27,7 @@ Runtime role contracts for CHAD live in docs/agent-runtime-contract.md; this cat
 - creative-art-director
 - visual-reference-researcher
 - creative-interaction-designer
+- product-ux-specialist
 - legal-compliance-reviewer
 - responsive-reviewer
 - accessibility-reviewer
@@ -52,7 +53,7 @@ REQUEST → DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY �
 
 ## High-value routing
 
-- Substantial visual redesign: design-director + creative-art-director + visual-reference-researcher + creative-interaction-designer + anti-vibe-reviewer before implementation; then ui-reviewer + visual-qa + risk-based reviewers
+- Substantial visual redesign: design-director + creative-art-director + visual-reference-researcher + product-ux-specialist + creative-interaction-designer + anti-vibe-reviewer before implementation; then ui-reviewer + visual-qa + risk-based reviewers
 - Compliance-sensitive flows: legal-compliance-reviewer + relevant technical reviewer
 - Advanced animation or 3D: motion-3d-specialist + visual-qa + performance-auditor
 - Asset-heavy interface: asset-pipeline-specialist + performance-auditor
