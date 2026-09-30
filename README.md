@@ -17,9 +17,15 @@ This repository turns those concerns into a layered operating system:
 
 ## Web development and design layer
 
+The framework includes a Creative Design Mode for substantial visual work. It separates visual exploration from implementation, requires multiple independent perspectives, uses cross-domain reference research, records a design brief, and adds a rendered-output critique loop.
+
 The framework separates web concerns that benefit from independent reasoning: project completeness baseline, design direction, design systems, responsive behavior, motion, anti-vibe visual review, legal/compliance review, capability routing for external tools, browser 3D, asset pipelines, visual regression, forms UX, accessibility, browser QA, performance, SEO, browser-facing security, and Next.js-specific work.
 
 For new public web projects, the baseline starts with .ai/skills/web-project-baseline/SKILL.md and its applicability matrix. Provider-neutral primary and specialist agent profiles live under .ai/agents/. The intended pipeline is BASELINE → DESIGN DIRECTION → ARCHITECTURE → IMPLEMENT → BROWSER VERIFY → SPECIALIST REVIEW → FINAL DIFF.
+
+### Creative Design Mode
+
+When active, use the sequence RESEARCH → 3+ DIRECTIONS → CRITIQUE → SYNTHESIZE → DESIGN BRIEF → IMPLEMENT → BROWSER VERIFY → VISUAL CRITIQUE → REVISE. The 5-role minimum is limited to this mode and does not apply to trivial fixes. Use .ai/templates/design-brief.md as the normalized handoff.
 
 ### Production web baseline
 
@@ -71,8 +77,10 @@ Use the narrowest matching capability rather than preloading every rule:
 
 | Surface | Skill | Specialist |
 |---|---|---|
+| Creative UI exploration | creative-design | creative-art-director, visual-reference-researcher, creative-interaction-designer + product UX + anti-vibe roles |
 | Public web project / launch baseline | web-project-baseline | web-project-auditor |
 | Visual direction/UI | design-direction, design-system | ui-reviewer, design-director |
+| Substantial creative redesign | creative-design | 5+ pre-implementation roles + visual-qa |
 | Anti-vibe visual quality | anti-vibe-design | anti-vibe-reviewer |
 | Compliance-sensitive flows | legal-compliance | legal-compliance-reviewer |
 | External tool/provider integration | capability-routing | integration-health-reviewer |
