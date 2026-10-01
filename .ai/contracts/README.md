@@ -12,6 +12,7 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Coder Contract (coder.contract.md)
   ├─ Analyst Contract (analyst.contract.md)
   ├─ Tool Governance Contract (tool.contract.md)
+  ├─ Tool Audit Contract (tool-audit.contract.md)
   └─ Model Provider Contract (model-provider.contract.md)
         │
         ▼ (Enforced at Runtime)
@@ -66,6 +67,10 @@ Every agent execution loop must terminate predictably under one of five standard
 ## 3. Tool Governance & Trust Schema
 
 All tools available to agents follow `.ai/contracts/tool.contract.md` which categorizes tools by permission levels (`READ_ONLY`, `WORKSPACE_WRITE`, `ISOLATED_EXECUTE`, `NETWORK_ACCESS`, `PRIVILEGED_MUTATION`), side-effect risk (`NO_EFFECT`, `REVERSIBLE_FILE_CHANGE`, `IRREVERSIBLE_HOST_MUTATION`, `NETWORK_TRANSACTION`), and result trust labeling (`VERIFIED_LOCAL`, `UNTRUSTED_REMOTE`, `ISOLATED_SANDBOXED`).
+
+## 3.1 Tool Audit Logging Schema
+
+Tool executions across the runtime emit standardized, redacted JSONL audit records conforming to `.ai/contracts/tool-audit.contract.md`. Audit records correlate execution traces (`trace_id`), agent identity (`agent_id`), permission tiers, side-effect classes, redacted parameter payloads, and verification evidence references (`verification_evidence_ref`).
 
 ## 4. Model & Provider Governance Schema
 

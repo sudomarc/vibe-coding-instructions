@@ -27,6 +27,7 @@ REQUIRED_PATHS = [
     ".ai/contracts/coder.contract.md",
     ".ai/contracts/analyst.contract.md",
     ".ai/contracts/tool.contract.md",
+    ".ai/contracts/tool-audit.contract.md",
     ".ai/contracts/model-provider.contract.md",
     ".ai/skills/model-governance/SKILL.md",
     ".ai/skills/token-economics/SKILL.md",
@@ -162,6 +163,23 @@ SECRET_HANDLING_MARKERS = (
     "zero raw secrets",
     "redaction",
 )
+
+TOOL_AUDIT_MARKERS = (
+    "tool_name",
+    "side_effect_class",
+    "redaction",
+    "trace_id",
+)
+
+def validate_tool_audit_contract(failures: list[str]) -> None:
+    audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
+    if not audit_file.exists():
+        failures.append(f"missing tool audit contract: .ai/contracts/tool-audit.contract.md")
+        return
+    text = audit_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in TOOL_AUDIT_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"tool-audit.contract.md is missing marker(s): {', '.join(missing)}")
 
 PLAYBOOK_MARKERS = (
     "security review workflow",
@@ -320,6 +338,7 @@ def main() -> int:
     validate_openrouter_profile(failures)
     validate_context_handoff(failures)
     validate_security_references(failures)
+    validate_tool_audit_contract(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)

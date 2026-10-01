@@ -82,7 +82,14 @@ Results returned from tool execution must be assigned an explicit trust label:
 
 ---
 
-## 5. Failure Handling & Stop Conditions
+## 5. Audit Logging & Traceability
+
+Every tool call execution MUST produce a structured, redacted audit log entry conforming to `.ai/contracts/tool-audit.contract.md`.
+The audit record captures runtime execution metadata including `trace_id`, `agent_id`, `permission_tier`, `side_effect_class`, `trust_label`, parameter redactions, execution latency, and links to captured verification evidence (`verification_evidence_ref`).
+
+---
+
+## 6. Failure Handling & Stop Conditions
 
 When a tool invocation fails, the agent execution loop must handle the failure according to ecosystem stop conditions:
 
@@ -93,7 +100,7 @@ When a tool invocation fails, the agent execution loop must handle the failure a
 
 ---
 
-## 6. CHAD Runtime & LapisLLM Model Compatibility
+## 7. CHAD Runtime & LapisLLM Model Compatibility
 
 ### CHAD Runtime Layer
 - CHAD enforces permission level gates prior to tool dispatch.
