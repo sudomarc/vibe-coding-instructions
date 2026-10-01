@@ -44,7 +44,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Tool result trust labeling (`.ai/contracts/tool.contract.md`).
 - [x] External content/prompt-injection guidance (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [x] Sandbox requirements (`.ai/skills/security/references/sandbox-requirements.md`).
-- [ ] Tool audit-log conventions.
+- [x] Tool audit-log conventions (`.ai/contracts/tool-audit.contract.md`).
 - [ ] Capability/fallback templates.
 
 ## Phase 4 — Context, memory and knowledge governance
