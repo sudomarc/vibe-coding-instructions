@@ -28,6 +28,8 @@ REQUIRED_PATHS = [
     ".ai/contracts/analyst.contract.md",
     ".ai/contracts/tool.contract.md",
     ".ai/contracts/tool-audit.contract.md",
+    ".ai/contracts/memory.contract.md",
+    ".ai/skills/memory-governance/SKILL.md",
     ".ai/contracts/model-provider.contract.md",
     ".ai/skills/model-governance/SKILL.md",
     ".ai/skills/token-economics/SKILL.md",
@@ -170,6 +172,29 @@ TOOL_AUDIT_MARKERS = (
     "redaction",
     "trace_id",
 )
+
+MEMORY_GOVERNANCE_MARKERS = (
+    "short_term_trajectory",
+    "episodic_record",
+    "long_term_semantic",
+    "entity_knowledge",
+    "soft_delete",
+    "purge_hard_delete",
+    "ttl_expiration",
+    "privacy_tombstone",
+    "verified_episodic",
+    "untrusted_external_knowledge",
+)
+
+def validate_memory_contract(failures: list[str]) -> None:
+    mem_file = ROOT / ".ai/contracts/memory.contract.md"
+    if not mem_file.exists():
+        failures.append("missing memory governance contract: .ai/contracts/memory.contract.md")
+        return
+    text = mem_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in MEMORY_GOVERNANCE_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"memory.contract.md is missing marker(s): {', '.join(missing)}")
 
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
@@ -339,6 +364,7 @@ def main() -> int:
     validate_context_handoff(failures)
     validate_security_references(failures)
     validate_tool_audit_contract(failures)
+    validate_memory_contract(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)
