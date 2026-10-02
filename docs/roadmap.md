@@ -47,14 +47,14 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Tool audit-log conventions (`.ai/contracts/tool-audit.contract.md`).
 - [ ] Capability/fallback templates.
 
-## Phase 4 — Context, memory and knowledge governance
+## Phase 4 — Context, memory and knowledge governance [completed]
 
-- [ ] Context composition policy.
-- [ ] Memory write policy.
-- [ ] Memory deletion semantics.
-- [ ] Retrieval evidence contract.
-- [ ] Knowledge-source provenance contract.
-- [ ] Long-running task compaction policy.
+- [x] Context composition policy (`.ai/skills/memory-governance/SKILL.md`).
+- [x] Memory write policy (`.ai/contracts/memory.contract.md`).
+- [x] Memory deletion semantics (`.ai/contracts/memory.contract.md`).
+- [x] Retrieval evidence contract (`.ai/contracts/memory.contract.md`).
+- [x] Knowledge-source provenance contract (`.ai/contracts/memory.contract.md`).
+- [x] Long-running task compaction policy (`.ai/skills/memory-governance/SKILL.md`).
 
 ## Phase 5 — Model/provider governance [completed]
 

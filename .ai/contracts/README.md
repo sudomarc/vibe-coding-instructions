@@ -13,6 +13,7 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Analyst Contract (analyst.contract.md)
   ├─ Tool Governance Contract (tool.contract.md)
   ├─ Tool Audit Contract (tool-audit.contract.md)
+  ├─ Memory Governance Contract (memory.contract.md)
   └─ Model Provider Contract (model-provider.contract.md)
         │
         ▼ (Enforced at Runtime)
@@ -72,11 +73,15 @@ All tools available to agents follow `.ai/contracts/tool.contract.md` which cate
 
 Tool executions across the runtime emit standardized, redacted JSONL audit records conforming to `.ai/contracts/tool-audit.contract.md`. Audit records correlate execution traces (`trace_id`), agent identity (`agent_id`), permission tiers, side-effect classes, redacted parameter payloads, and verification evidence references (`verification_evidence_ref`).
 
-## 4. Model & Provider Governance Schema
+## 4. Memory & Knowledge Governance Schema
+
+All agent memory systems, vector RAG stores, and episodic state stores follow `.ai/contracts/memory.contract.md` defining memory taxonomy tiers (`SHORT_TERM_TRAJECTORY`, `EPISODIC_RECORD`, `LONG_TERM_SEMANTIC`, `ENTITY_KNOWLEDGE`), write policy invariants (zero raw secrets/PII, structured schema, provenance trace_id), lifecycle/deletion operations (`SOFT_DELETE`, `PURGE_HARD_DELETE`, `TTL_EXPIRATION`, `PRIVACY_TOMBSTONE`), and memory poisoning trust labeling (`VERIFIED_EPISODIC`, `UNTRUSTED_EXTERNAL_KNOWLEDGE`, `STALE_MEMORY`).
+
+## 5. Model & Provider Governance Schema
 
 All model providers and backends follow `.ai/contracts/model-provider.contract.md` establishing model capability schemas (`context_window_tokens`, `max_output_tokens`, `tool_calling`, `privacy_tier`), health states (`PRESENT`, `CONFIGURED`, `HEALTHY`, `DEGRADED`, `UNHEALTHY`, `INACTIVE`), multi-provider routing rules, and fallback cascade semantics.
 
-## 5. Evidence Protocol Schema
+## 6. Evidence Protocol Schema
 
 All facts, results, and claims reported in agent handoffs must use the standardized evidence labels:
 
@@ -106,7 +111,7 @@ All facts, results, and claims reported in agent handoffs must use the standardi
 
 ---
 
-## 6. Ecosystem Compatibility (CHAD & LapisLLM)
+## 7. Ecosystem Compatibility (CHAD & LapisLLM)
 
 ### CHAD Runtime Layer
 - CHAD enforces contract permissions dynamically at the tool dispatch boundary.
