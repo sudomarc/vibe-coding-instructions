@@ -5,9 +5,11 @@ description: This skill should be used when integrating external CLIs, MCP serve
 
 # Capability Routing Skill
 
-Treat external tools as interchangeable implementation providers behind a stable capability contract.
+Treat external tools as interchangeable implementation providers behind a stable capability contract (`.ai/contracts/capability-fallback.contract.md`).
 
 A capability layer may discover, provision, configure, health-check and route providers. It should not reimplement or wrap an upstream tool unless translation is required by the application's contract.
+
+References: `.ai/contracts/capability-fallback.contract.md`, `.ai/templates/capability-matrix.md`.
 
 ## 1. Model the capability, not the brand
 

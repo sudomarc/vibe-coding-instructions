@@ -37,6 +37,8 @@ State:
 
 - role policy: PRESENT;
 - tool governance contract: PRESENT;
+- capability fallback contract: PRESENT (`.ai/contracts/capability-fallback.contract.md`);
+- permission escalation controls: PRESENT (`.ai/skills/security/references/permission-escalation-controls.md`);
 - model provider contract: PRESENT (`.ai/contracts/model-provider.contract.md`);
 - runtime adapter: PLANNED;
 - automatic synchronization of arbitrary framework files: NOT REQUIRED.

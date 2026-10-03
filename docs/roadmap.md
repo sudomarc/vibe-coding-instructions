@@ -36,7 +36,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Agent identity and correlation guidance (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
 - [x] Multi-agent audit conventions (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
 
-## Phase 3 — Tool governance
+## Phase 3 — Tool governance [completed]
 
 - [x] Standard tool contract (`.ai/contracts/tool.contract.md`).
 - [x] Tool permission taxonomy (`.ai/contracts/tool.contract.md`).
@@ -45,7 +45,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] External content/prompt-injection guidance (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [x] Sandbox requirements (`.ai/skills/security/references/sandbox-requirements.md`).
 - [x] Tool audit-log conventions (`.ai/contracts/tool-audit.contract.md`).
-- [ ] Capability/fallback templates.
+- [x] Capability/fallback templates (`.ai/contracts/capability-fallback.contract.md`).
 
 ## Phase 4 — Context, memory and knowledge governance [completed]
 
@@ -71,7 +71,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Prompt-injection threat model (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [x] Tool-confusion threat model (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [x] Data-exfiltration patterns (`.ai/skills/security/references/prompt-injection-threat-model.md`).
-- [ ] Permission escalation controls.
+- [x] Permission escalation controls (`.ai/skills/security/references/permission-escalation-controls.md`).
 - [ ] Sandbox escape test guidance.
 - [x] Secret-handling guidance for agent runtimes (`.ai/skills/security/references/secret-handling.md`).
 - [x] Security review playbooks (`.ai/skills/security/references/security-review-playbook.md`).
