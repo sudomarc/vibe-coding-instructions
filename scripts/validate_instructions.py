@@ -28,6 +28,7 @@ REQUIRED_PATHS = [
     ".ai/contracts/analyst.contract.md",
     ".ai/contracts/tool.contract.md",
     ".ai/contracts/tool-audit.contract.md",
+    ".ai/contracts/capability-fallback.contract.md",
     ".ai/contracts/memory.contract.md",
     ".ai/skills/memory-governance/SKILL.md",
     ".ai/contracts/model-provider.contract.md",
@@ -53,6 +54,7 @@ REQUIRED_PATHS = [
     "docs/web-project-baseline.md",
     ".ai/skills/security/references/sandbox-requirements.md",
     ".ai/skills/security/references/secret-handling.md",
+    ".ai/skills/security/references/permission-escalation-controls.md",
     ".ai/skills/security/references/security-review-playbook.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
@@ -211,6 +213,35 @@ PLAYBOOK_MARKERS = (
     "verification checklists",
 )
 
+CAPABILITY_FALLBACK_MARKERS = (
+    "capability_id",
+    "health state",
+    "fallback cascade",
+    "error taxonomy",
+)
+
+PERMISSION_ESCALATION_MARKERS = (
+    "permission tiers taxonomy",
+    "least privilege",
+    "human checkpoint triggers",
+    "isolation boundary",
+)
+
+def validate_capability_and_permission_contracts(failures: list[str]) -> None:
+    cap_file = ROOT / ".ai/contracts/capability-fallback.contract.md"
+    if cap_file.exists():
+        text = cap_file.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in CAPABILITY_FALLBACK_MARKERS if marker not in text]
+        if missing:
+            failures.append(f"capability-fallback.contract.md is missing marker(s): {', '.join(missing)}")
+
+    perm_file = ROOT / ".ai/skills/security/references/permission-escalation-controls.md"
+    if perm_file.exists():
+        text = perm_file.read_text(encoding="utf-8", errors="ignore").lower()
+        missing = [marker for marker in PERMISSION_ESCALATION_MARKERS if marker not in text]
+        if missing:
+            failures.append(f"permission-escalation-controls.md is missing marker(s): {', '.join(missing)}")
+
 def validate_security_references(failures: list[str]) -> None:
     sec_file = ROOT / ".ai/skills/security/references/secret-handling.md"
     if sec_file.exists():
@@ -365,6 +396,7 @@ def main() -> int:
     validate_security_references(failures)
     validate_tool_audit_contract(failures)
     validate_memory_contract(failures)
+    validate_capability_and_permission_contracts(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)
