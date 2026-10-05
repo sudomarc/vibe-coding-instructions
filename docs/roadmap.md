@@ -66,13 +66,13 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Model evaluation reporting format (`.ai/templates/model-evaluation-report.md`).
 - [x] Contract-testing guidance for model backends (`.ai/skills/model-governance/references/contract-testing.md`).
 
-## Phase 6 — Agent security
+## Phase 6 — Agent security [completed]
 
 - [x] Prompt-injection threat model (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [x] Tool-confusion threat model (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [x] Data-exfiltration patterns (`.ai/skills/security/references/prompt-injection-threat-model.md`).
 - [x] Permission escalation controls (`.ai/skills/security/references/permission-escalation-controls.md`).
-- [ ] Sandbox escape test guidance.
+- [x] Sandbox escape test guidance (`.ai/skills/security/references/sandbox-escape-testing.md`).
 - [x] Secret-handling guidance for agent runtimes (`.ai/skills/security/references/secret-handling.md`).
 - [x] Security review playbooks (`.ai/skills/security/references/security-review-playbook.md`).
 
