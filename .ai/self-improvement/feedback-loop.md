@@ -14,7 +14,7 @@ Create an observation or learning record using the structures in `.ai/self-impro
 
 ## 4. Classify
 
-Classify the signal as `ONE_OFF_FAILURE`, `RECURRING_FAILURE`, or `SYSTEMIC_FAILURE` only when the evidence supports that classification.
+Map the failure to the failure taxonomy in `.ai/self-improvement/references/failure-taxonomy.md` (e.g., `PLAN_DEFECT`, `TOOL_EXEC_ERR`, `SAFETY_BLOCKED`) and assign a severity tier (`CRITICAL`, `MAJOR`, `MINOR`, `INFORMATIONAL`). Classify the persistence signal as `ONE_OFF_FAILURE`, `RECURRING_FAILURE`, or `SYSTEMIC_FAILURE` only when the evidence supports that classification.
 
 ## 5. Root Cause
 
