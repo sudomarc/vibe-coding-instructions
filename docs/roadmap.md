@@ -99,7 +99,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 ## Phase 9 — Self-improvement for agent systems
 
 - [x] Observation/proposal/outcome records.
-- [ ] Agent failure taxonomy.
+- [x] Agent failure taxonomy (`.ai/self-improvement/references/failure-taxonomy.md`).
 - [ ] Repeated-failure clustering.
 - [ ] Skill effectiveness measurement.
 - [ ] Regression-aware skill updates.

@@ -122,6 +122,7 @@ Measure before/after where meaningful. Allowed outcome states include `CONFIRMED
 
 - `rules.md` — governance and approval boundaries.
 - `feedback-loop.md` — evidence lifecycle.
+- `references/failure-taxonomy.md` — agent failure taxonomy and severity classification.
 - `daily-cycle.md` — periodic execution and stop conditions.
 - `metrics.md` — measurement and outcome semantics.
 - `schemas/observation.md` — observation format.

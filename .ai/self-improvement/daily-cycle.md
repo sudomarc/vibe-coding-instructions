@@ -8,6 +8,10 @@ The periodic cycle is an evidence-collection and proposal process. It is not unr
 - **Weekly:** aggregate the last seven days, identify recurring or systemic patterns, and prepare the smallest justified improvements.
 - **Manual:** run the same cycle for a bounded window when a maintainer wants an immediate retrospective.
 
+## Failure Taxonomy
+
+All observed agent failures should be classified using `.ai/self-improvement/references/failure-taxonomy.md` into primary failure categories (`PERM_DENIED`, `TOOL_EXEC_ERR`, `PLAN_DEFECT`, `VERIF_FALSE_POS`, `CONTEXT_EXCEEDED`, `MODEL_HALLUC`, `SAFETY_BLOCKED`, `INFRA_FAIL`) and assigned a severity tier (`CRITICAL`, `MAJOR`, `MINOR`, `INFORMATIONAL`).
+
 ## Decision model
 
 Every signal is classified as one of:

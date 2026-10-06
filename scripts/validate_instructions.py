@@ -62,6 +62,7 @@ REQUIRED_PATHS = [
     ".ai/self-improvement/SKILL.md",
     ".ai/self-improvement/rules.md",
     ".ai/self-improvement/feedback-loop.md",
+    ".ai/self-improvement/references/failure-taxonomy.md",
     ".github/agents/self-improvement.agent.md",
     ".github/copilot-instructions.md",
 ]
@@ -174,6 +175,27 @@ TOOL_AUDIT_MARKERS = (
     "redaction",
     "trace_id",
 )
+
+FAILURE_TAXONOMY_MARKERS = (
+    "perm_denied",
+    "tool_exec_err",
+    "plan_defect",
+    "verif_false_pos",
+    "context_exceeded",
+    "model_halluc",
+    "safety_blocked",
+    "infra_fail",
+)
+
+def validate_failure_taxonomy(failures: list[str]) -> None:
+    tax_file = ROOT / ".ai/self-improvement/references/failure-taxonomy.md"
+    if not tax_file.exists():
+        failures.append("missing failure taxonomy reference: .ai/self-improvement/references/failure-taxonomy.md")
+        return
+    text = tax_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in FAILURE_TAXONOMY_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"failure-taxonomy.md is missing marker(s): {', '.join(missing)}")
 
 MEMORY_GOVERNANCE_MARKERS = (
     "short_term_trajectory",
@@ -388,6 +410,7 @@ def validate_workflows(failures: list[str]) -> None:
 def main() -> int:
     failures: list[str] = []
     validate_required_paths(failures)
+    validate_failure_taxonomy(failures)
     validate_governance_markers(failures)
     validate_token_economy(failures)
     validate_claude_code_anthropic_doc(failures)
