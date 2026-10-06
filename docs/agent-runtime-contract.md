@@ -41,11 +41,12 @@ Each role must specify:
 | evidence | required verification |
 | output | structured handoff/final result |
 
-Concrete role contracts live in `.ai/contracts/`:
+Concrete role and interface contracts live in `.ai/contracts/`:
 - [.ai/contracts/orchestrator.contract.md](../.ai/contracts/orchestrator.contract.md)
 - [.ai/contracts/researcher.contract.md](../.ai/contracts/researcher.contract.md)
 - [.ai/contracts/coder.contract.md](../.ai/contracts/coder.contract.md)
 - [.ai/contracts/analyst.contract.md](../.ai/contracts/analyst.contract.md)
+- [.ai/contracts/runtime-interface.contract.md](../.ai/contracts/runtime-interface.contract.md)
 
 ## Orchestrator
 

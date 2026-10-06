@@ -14,7 +14,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Tool Governance Contract (tool.contract.md)
   ├─ Tool Audit Contract (tool-audit.contract.md)
   ├─ Memory Governance Contract (memory.contract.md)
-  └─ Model Provider Contract (model-provider.contract.md)
+  ├─ Model Provider Contract (model-provider.contract.md)
+  └─ Runtime Interface Contract (runtime-interface.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -80,6 +81,10 @@ All agent memory systems, vector RAG stores, and episodic state stores follow `.
 ## 5. Model & Provider Governance Schema
 
 All model providers and backends follow `.ai/contracts/model-provider.contract.md` establishing model capability schemas (`context_window_tokens`, `max_output_tokens`, `tool_calling`, `privacy_tier`), health states (`PRESENT`, `CONFIGURED`, `HEALTHY`, `DEGRADED`, `UNHEALTHY`, `INACTIVE`), multi-provider routing rules, and fallback cascade semantics.
+
+## 5.1 Runtime Interface Governance Schema
+
+The runtime interaction protocols between CHAD, LapisLLM, and Vibe Coding Instructions follow `.ai/contracts/runtime-interface.contract.md`, defining standard REST/RPC Model Inference protocols, Tool Execution RPC dispatch schemas, capability discovery, Semantic Versioning rules, and cross-repository change-propagation workflows.
 
 ## 6. Evidence Protocol Schema
 

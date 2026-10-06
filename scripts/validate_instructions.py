@@ -30,6 +30,7 @@ REQUIRED_PATHS = [
     ".ai/contracts/tool-audit.contract.md",
     ".ai/contracts/capability-fallback.contract.md",
     ".ai/contracts/memory.contract.md",
+    ".ai/contracts/runtime-interface.contract.md",
     ".ai/skills/memory-governance/SKILL.md",
     ".ai/contracts/model-provider.contract.md",
     ".ai/skills/model-governance/SKILL.md",
@@ -219,6 +220,24 @@ def validate_memory_contract(failures: list[str]) -> None:
     missing = [marker for marker in MEMORY_GOVERNANCE_MARKERS if marker not in text]
     if missing:
         failures.append(f"memory.contract.md is missing marker(s): {', '.join(missing)}")
+
+RUNTIME_INTERFACE_MARKERS = (
+    "model_inference_protocol",
+    "tool_execution_rpc",
+    "capability_discovery",
+    "version_compatibility",
+    "change_propagation",
+)
+
+def validate_runtime_interface_contract(failures: list[str]) -> None:
+    if_file = ROOT / ".ai/contracts/runtime-interface.contract.md"
+    if not if_file.exists():
+        failures.append("missing runtime interface contract: .ai/contracts/runtime-interface.contract.md")
+        return
+    text = if_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in RUNTIME_INTERFACE_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"runtime-interface.contract.md is missing marker(s): {', '.join(missing)}")
 
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
@@ -419,6 +438,7 @@ def main() -> int:
     validate_security_references(failures)
     validate_tool_audit_contract(failures)
     validate_memory_contract(failures)
+    validate_runtime_interface_contract(failures)
     validate_capability_and_permission_contracts(failures)
     validate_links(failures)
     validate_custom_agent(failures)

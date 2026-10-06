@@ -87,14 +87,14 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Release-gate templates (`.ai/skills/evaluation/SKILL.md`, `.ai/templates/agent-evaluation-report.md`).
 - [x] Incident-analysis templates (`.ai/skills/evaluation/SKILL.md`).
 
-## Phase 8 — CHAD/Lapis integration reference
+## Phase 8 — CHAD/Lapis integration reference [completed]
 
-- [ ] Stable CHAD/Lapis interface reference.
-- [ ] Cross-repository compatibility matrix.
-- [ ] Version compatibility policy.
-- [ ] Shared change-propagation workflow.
-- [ ] Contract-test examples.
-- [ ] Integration incident runbook.
+- [x] Stable CHAD/Lapis interface reference (`.ai/contracts/runtime-interface.contract.md`).
+- [x] Cross-repository compatibility matrix (`docs/ecosystem-compatibility.md`).
+- [x] Version compatibility policy (`.ai/contracts/runtime-interface.contract.md`).
+- [x] Shared change-propagation workflow (`.ai/contracts/runtime-interface.contract.md`).
+- [x] Contract-test examples (`.ai/contracts/runtime-interface.contract.md`).
+- [x] Integration incident runbook (`.ai/contracts/runtime-interface.contract.md`).
 
 ## Phase 9 — Self-improvement for agent systems
 
