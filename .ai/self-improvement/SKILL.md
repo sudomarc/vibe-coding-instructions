@@ -26,9 +26,11 @@ Do not use it for a one-off implementation bug that can be fixed locally. Do not
 
 ## Operating Model
 
-`OBSERVE → COLLECT → ANALYZE → CLASSIFY → IDENTIFY ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION CHECK → MEASURE → RECORD OUTCOME`
+`OBSERVE → COLLECT → CLUSTER → ANALYZE → CLASSIFY → IDENTIFY ROOT CAUSE → PROPOSE → VALIDATE → APPROVE → APPLY → REGRESSION CHECK → MEASURE → RECORD OUTCOME → POSTMORTEM (IF CRITICAL)`
 
 See `daily-cycle.md` for the periodic execution model.
+See `references/failure-clustering-and-skill-eval.md` for repeated-failure clustering, skill effectiveness measurement, and regression-aware skill updates.
+See `references/governance-approval-workflow.md` for human checkpoint triggers and governance approval workflows.
 
 ## Classification
 
@@ -118,11 +120,17 @@ Measure before/after where meaningful. Allowed outcome states include `CONFIRMED
 - **Circular learning:** repeating rejected proposals without new evidence.
 - **Regression:** improving one path while breaking another.
 
+## Postmortem Analysis
+
+For any `CRITICAL` severity incident, security boundary breach, severe token burn, or multi-agent cascade failure, execute an agentic postmortem using `.ai/templates/agentic-postmortem.md`. Record root cause decomposition, timeline cascade, token burn variance, and actionable remediation items.
+
 ## References
 
 - `rules.md` — governance and approval boundaries.
 - `feedback-loop.md` — evidence lifecycle.
 - `references/failure-taxonomy.md` — agent failure taxonomy and severity classification.
+- `references/failure-clustering-and-skill-eval.md` — repeated-failure clustering, skill effectiveness evaluation, and regression-aware updates.
+- `references/governance-approval-workflow.md` — human approval workflows, permission matrices, and checkpoint triggers.
 - `daily-cycle.md` — periodic execution and stop conditions.
 - `metrics.md` — measurement and outcome semantics.
 - `schemas/observation.md` — observation format.
@@ -130,4 +138,5 @@ Measure before/after where meaningful. Allowed outcome states include `CONFIRMED
 - `schemas/improvement-proposal.md` — proposal format.
 - `templates/learning-record.md` — reusable record template.
 - `templates/improvement-proposal.md` — reusable proposal template.
+- `templates/agentic-postmortem.md` — incident postmortem template for agentic system failures.
 - `examples/example-cycle.md` — bounded example.

@@ -96,15 +96,15 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Contract-test examples (`.ai/contracts/runtime-interface.contract.md`).
 - [x] Integration incident runbook (`.ai/contracts/runtime-interface.contract.md`).
 
-## Phase 9 — Self-improvement for agent systems
+## Phase 9 — Self-improvement for agent systems [completed]
 
 - [x] Observation/proposal/outcome records.
 - [x] Agent failure taxonomy (`.ai/self-improvement/references/failure-taxonomy.md`).
-- [ ] Repeated-failure clustering.
-- [ ] Skill effectiveness measurement.
-- [ ] Regression-aware skill updates.
-- [ ] Human approval workflow for governance changes.
-- [ ] Agentic-system postmortem templates.
+- [x] Repeated-failure clustering (`.ai/self-improvement/references/failure-clustering-and-skill-eval.md`).
+- [x] Skill effectiveness measurement (`.ai/self-improvement/references/failure-clustering-and-skill-eval.md`).
+- [x] Regression-aware skill updates (`.ai/self-improvement/references/failure-clustering-and-skill-eval.md`).
+- [x] Human approval workflow for governance changes (`.ai/self-improvement/references/governance-approval-workflow.md`).
+- [x] Agentic-system postmortem templates (`.ai/templates/agentic-postmortem.md`).
 
 ## Phase 10 — Long-horizon engineering agents
 
