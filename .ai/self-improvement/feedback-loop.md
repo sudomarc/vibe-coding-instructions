@@ -12,9 +12,11 @@ Run deterministic collection when a periodic cycle is active. Gather repository 
 
 Create an observation or learning record using the structures in `.ai/self-improvement/schemas/` and templates in `.ai/self-improvement/templates/`. Remove secrets and unnecessary personal data.
 
-## 4. Classify
+## 4. Cluster & Classify
 
-Map the failure to the failure taxonomy in `.ai/self-improvement/references/failure-taxonomy.md` (e.g., `PLAN_DEFECT`, `TOOL_EXEC_ERR`, `SAFETY_BLOCKED`) and assign a severity tier (`CRITICAL`, `MAJOR`, `MINOR`, `INFORMATIONAL`). Classify the persistence signal as `ONE_OFF_FAILURE`, `RECURRING_FAILURE`, or `SYSTEMIC_FAILURE` only when the evidence supports that classification.
+Map the failure to the failure taxonomy in `.ai/self-improvement/references/failure-taxonomy.md` (e.g., `PLAN_DEFECT`, `TOOL_EXEC_ERR`, `SAFETY_BLOCKED`) and assign a severity tier (`CRITICAL`, `MAJOR`, `MINOR`, `INFORMATIONAL`).
+
+Cluster observations across trajectories by Taxonomy, Target Surface, Tool Signature, Context Depth, and Root Cause Hypothesis as defined in `.ai/self-improvement/references/failure-clustering-and-skill-eval.md`. Classify persistence as `ONE_OFF_FAILURE`, `RECURRING_FAILURE`, or `SYSTEMIC_FAILURE` based on cluster thresholds.
 
 ## 5. Root Cause
 
@@ -30,7 +32,7 @@ Check instruction precedence, related skills, examples, templates, references, a
 
 ## 8. Approve
 
-Apply `rules.md`. Governance-critical changes require explicit human approval. Confidence is evidence quality, not authorization.
+Apply `rules.md` and `.ai/self-improvement/references/governance-approval-workflow.md`. Governance-critical changes ($L0/L1$) require explicit human approval and PR review. Confidence is evidence quality, not authorization.
 
 ## 9. Apply
 
@@ -44,9 +46,11 @@ Re-run the checks that failed before the improvement and relevant repository-wid
 
 Compare `BEFORE` and `AFTER` when the target signal can be measured. Do not mark an improvement confirmed without supporting post-change evidence.
 
-## 12. Close the Loop
+## 12. Close the Loop & Postmortem
 
 Record the actual outcome, remaining uncertainty, and next measurement window. Useful outcome states include `CONFIRMED`, `PARTIALLY_CONFIRMED`, `INEFFECTIVE`, `REVERTED`, and `AWAITING_EVIDENCE`.
+
+For `CRITICAL` incidents or severe multi-agent cascade failures, conduct an agentic postmortem using `.ai/templates/agentic-postmortem.md` to capture root cause decomposition, token burn analysis, and remediation actions.
 
 ## Evidence Vocabulary
 

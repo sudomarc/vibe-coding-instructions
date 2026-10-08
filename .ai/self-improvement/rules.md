@@ -42,6 +42,9 @@ Explicit human approval is required before changing or materially weakening:
 
 For unattended automation, these changes must remain proposals. They must not be applied to the default branch.
 
+See `references/governance-approval-workflow.md` for complete human checkpoint triggers, permission matrices ($L0 - L4$), pull request review workflows, and anti-self-authorization invariants.
+See `references/failure-clustering-and-skill-eval.md` for failure clustering requirements and skill effectiveness metrics.
+
 ## Evidence Requirement
 
 Every proposal must identify:

@@ -64,6 +64,9 @@ REQUIRED_PATHS = [
     ".ai/self-improvement/rules.md",
     ".ai/self-improvement/feedback-loop.md",
     ".ai/self-improvement/references/failure-taxonomy.md",
+    ".ai/self-improvement/references/failure-clustering-and-skill-eval.md",
+    ".ai/self-improvement/references/governance-approval-workflow.md",
+    ".ai/templates/agentic-postmortem.md",
     ".github/agents/self-improvement.agent.md",
     ".github/copilot-instructions.md",
 ]
@@ -268,6 +271,58 @@ PERMISSION_ESCALATION_MARKERS = (
     "isolation boundary",
 )
 
+POSTMORTEM_MARKERS = (
+    "agentic system postmortem report",
+    "failure cascade analysis",
+    "token & cost burn analysis",
+    "root cause decomposition",
+    "actionable remediation",
+)
+
+CLUSTERING_MARKERS = (
+    "repeated-failure clustering protocol",
+    "cluster dimensionality",
+    "skill effectiveness measurement protocol",
+    "regression-aware skill update protocol",
+)
+
+GOVERNANCE_WORKFLOW_MARKERS = (
+    "governance autonomy tiers",
+    "human checkpoint triggers",
+    "anti-self-authorization",
+    "pull request & review workflow",
+)
+
+def validate_postmortem_template(failures: list[str]) -> None:
+    path = ROOT / ".ai/templates/agentic-postmortem.md"
+    if not path.exists():
+        failures.append("missing postmortem template: .ai/templates/agentic-postmortem.md")
+        return
+    text = path.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in POSTMORTEM_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"agentic-postmortem.md is missing marker(s): {', '.join(missing)}")
+
+def validate_failure_clustering(failures: list[str]) -> None:
+    path = ROOT / ".ai/self-improvement/references/failure-clustering-and-skill-eval.md"
+    if not path.exists():
+        failures.append("missing failure clustering reference: .ai/self-improvement/references/failure-clustering-and-skill-eval.md")
+        return
+    text = path.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in CLUSTERING_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"failure-clustering-and-skill-eval.md is missing marker(s): {', '.join(missing)}")
+
+def validate_governance_approval_workflow(failures: list[str]) -> None:
+    path = ROOT / ".ai/self-improvement/references/governance-approval-workflow.md"
+    if not path.exists():
+        failures.append("missing governance approval reference: .ai/self-improvement/references/governance-approval-workflow.md")
+        return
+    text = path.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in GOVERNANCE_WORKFLOW_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"governance-approval-workflow.md is missing marker(s): {', '.join(missing)}")
+
 def validate_capability_and_permission_contracts(failures: list[str]) -> None:
     cap_file = ROOT / ".ai/contracts/capability-fallback.contract.md"
     if cap_file.exists():
@@ -440,6 +495,9 @@ def main() -> int:
     validate_memory_contract(failures)
     validate_runtime_interface_contract(failures)
     validate_capability_and_permission_contracts(failures)
+    validate_postmortem_template(failures)
+    validate_failure_clustering(failures)
+    validate_governance_approval_workflow(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)
