@@ -214,6 +214,8 @@ Adapt project commands, framework conventions, deployment requirements, ownershi
 
 - Context lifecycle: .ai/skills/context-management/SKILL.md
 - Handoff protocol: .ai/skills/context-management/references/handoff-protocol.md
+- Long-horizon execution: .ai/skills/long-horizon-execution/SKILL.md
+- Long-horizon task contract: .ai/contracts/long-horizon-task.contract.md
 
 
 - Core: .ai/core/
