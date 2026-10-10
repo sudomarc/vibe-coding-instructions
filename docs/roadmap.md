@@ -106,15 +106,15 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Human approval workflow for governance changes (`.ai/self-improvement/references/governance-approval-workflow.md`).
 - [x] Agentic-system postmortem templates (`.ai/templates/agentic-postmortem.md`).
 
-## Phase 10 — Long-horizon engineering agents
+## Phase 10 — Long-horizon engineering agents [completed]
 
-- [ ] Durable task handoffs.
-- [ ] Context compaction conventions.
-- [ ] Multi-session task state.
-- [ ] Research-to-code handoffs.
-- [ ] Cross-agent artifact contracts.
-- [ ] Failure-resume semantics.
-- [ ] Long-running cost controls.
+- [x] Multi-session task state (`.ai/contracts/long-horizon-task.contract.md`).
+- [x] Durable task handoffs (`.ai/contracts/long-horizon-task.contract.md`, `.ai/skills/long-horizon-execution/SKILL.md`).
+- [x] Context compaction conventions (`.ai/contracts/long-horizon-task.contract.md`, `.ai/skills/long-horizon-execution/SKILL.md`).
+- [x] Research-to-code handoffs (`.ai/contracts/long-horizon-task.contract.md`, `.ai/skills/long-horizon-execution/SKILL.md`).
+- [x] Cross-agent artifact contracts (`.ai/contracts/long-horizon-task.contract.md`).
+- [x] Failure-resume semantics (`.ai/contracts/long-horizon-task.contract.md`, `.ai/skills/long-horizon-execution/SKILL.md`).
+- [x] Long-running cost controls (`.ai/contracts/long-horizon-task.contract.md`, `.ai/skills/long-horizon-execution/SKILL.md`).
 
 ## Completion principle
 
