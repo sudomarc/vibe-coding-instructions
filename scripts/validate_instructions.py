@@ -31,6 +31,9 @@ REQUIRED_PATHS = [
     ".ai/contracts/capability-fallback.contract.md",
     ".ai/contracts/memory.contract.md",
     ".ai/contracts/runtime-interface.contract.md",
+    ".ai/contracts/long-horizon-task.contract.md",
+    ".ai/skills/long-horizon-execution/SKILL.md",
+    ".ai/templates/long-horizon-task.md",
     ".ai/skills/memory-governance/SKILL.md",
     ".ai/contracts/model-provider.contract.md",
     ".ai/skills/model-governance/SKILL.md",
@@ -241,6 +244,25 @@ def validate_runtime_interface_contract(failures: list[str]) -> None:
     missing = [marker for marker in RUNTIME_INTERFACE_MARKERS if marker not in text]
     if missing:
         failures.append(f"runtime-interface.contract.md is missing marker(s): {', '.join(missing)}")
+
+LONG_HORIZON_MARKERS = (
+    "multi-session task state",
+    "durable task handoff",
+    "research-to-code handoff",
+    "cross-agent artifact",
+    "failure-resume recovery semantics",
+    "long-running cost",
+)
+
+def validate_long_horizon_contract(failures: list[str]) -> None:
+    lht_file = ROOT / ".ai/contracts/long-horizon-task.contract.md"
+    if not lht_file.exists():
+        failures.append("missing long horizon task contract: .ai/contracts/long-horizon-task.contract.md")
+        return
+    text = lht_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in LONG_HORIZON_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"long-horizon-task.contract.md is missing marker(s): {', '.join(missing)}")
 
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
@@ -494,6 +516,7 @@ def main() -> int:
     validate_tool_audit_contract(failures)
     validate_memory_contract(failures)
     validate_runtime_interface_contract(failures)
+    validate_long_horizon_contract(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
     validate_failure_clustering(failures)
