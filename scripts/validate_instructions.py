@@ -31,6 +31,9 @@ REQUIRED_PATHS = [
     ".ai/contracts/capability-fallback.contract.md",
     ".ai/contracts/memory.contract.md",
     ".ai/contracts/runtime-interface.contract.md",
+    ".ai/contracts/long-horizon-task.contract.md",
+    ".ai/skills/long-horizon-execution/SKILL.md",
+    ".ai/templates/long-horizon-task.md",
     ".ai/skills/memory-governance/SKILL.md",
     ".ai/contracts/model-provider.contract.md",
     ".ai/skills/model-governance/SKILL.md",
@@ -293,6 +296,24 @@ GOVERNANCE_WORKFLOW_MARKERS = (
     "pull request & review workflow",
 )
 
+LONG_HORIZON_MARKERS = (
+    "durable multi-session state",
+    "research-to-code handoff",
+    "cross-agent artifact exchange",
+    "failure-resume recovery",
+    "long-running cost controls",
+)
+
+def validate_long_horizon_contract(failures: list[str]) -> None:
+    lh_file = ROOT / ".ai/contracts/long-horizon-task.contract.md"
+    if not lh_file.exists():
+        failures.append("missing long horizon contract: .ai/contracts/long-horizon-task.contract.md")
+        return
+    text = lh_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in LONG_HORIZON_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"long-horizon-task.contract.md is missing marker(s): {', '.join(missing)}")
+
 def validate_postmortem_template(failures: list[str]) -> None:
     path = ROOT / ".ai/templates/agentic-postmortem.md"
     if not path.exists():
@@ -498,6 +519,7 @@ def main() -> int:
     validate_postmortem_template(failures)
     validate_failure_clustering(failures)
     validate_governance_approval_workflow(failures)
+    validate_long_horizon_contract(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)
