@@ -15,7 +15,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Tool Audit Contract (tool-audit.contract.md)
   ├─ Memory Governance Contract (memory.contract.md)
   ├─ Model Provider Contract (model-provider.contract.md)
-  └─ Runtime Interface Contract (runtime-interface.contract.md)
+  ├─ Runtime Interface Contract (runtime-interface.contract.md)
+  └─ Long-Horizon Task Governance Contract (long-horizon-task.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -85,6 +86,10 @@ All model providers and backends follow `.ai/contracts/model-provider.contract.m
 ## 5.1 Runtime Interface Governance Schema
 
 The runtime interaction protocols between CHAD, LapisLLM, and Vibe Coding Instructions follow `.ai/contracts/runtime-interface.contract.md`, defining standard REST/RPC Model Inference protocols, Tool Execution RPC dispatch schemas, capability discovery, Semantic Versioning rules, and cross-repository change-propagation workflows.
+
+## 5.2 Long-Horizon Engineering Task Schema
+
+All long-horizon multi-session tasks follow `.ai/contracts/long-horizon-task.contract.md`, establishing state schemas (`INIT`, `RESEARCHING`, `PLANNING`, `EXECUTING`, `VERIFYING`, `SUSPENDED`, `COMPLETED`, `FAILED`), research-to-code handoff contracts, cross-agent artifact exchange protocols, failure-resume recovery semantics, and long-running cost/budget circuit breakers. Template schema lives in `.ai/templates/long-horizon-task.md`.
 
 ## 6. Evidence Protocol Schema
 
