@@ -33,6 +33,9 @@ REQUIRED_PATHS = [
     ".ai/contracts/runtime-interface.contract.md",
     ".ai/skills/memory-governance/SKILL.md",
     ".ai/contracts/model-provider.contract.md",
+    ".ai/contracts/long-horizon-task.contract.md",
+    ".ai/skills/long-horizon-execution/SKILL.md",
+    ".ai/templates/long-horizon-task.md",
     ".ai/skills/model-governance/SKILL.md",
     ".ai/skills/token-economics/SKILL.md",
     ".ai/skills/token-economics/references/providers/fable-5.md",
@@ -223,6 +226,23 @@ def validate_memory_contract(failures: list[str]) -> None:
     missing = [marker for marker in MEMORY_GOVERNANCE_MARKERS if marker not in text]
     if missing:
         failures.append(f"memory.contract.md is missing marker(s): {', '.join(missing)}")
+
+LONG_HORIZON_MARKERS = (
+    "longhorizontaskstate",
+    "researchtocodehandoffartifact",
+    "failure-resume recovery semantics",
+    "token_budget",
+)
+
+def validate_long_horizon_contract(failures: list[str]) -> None:
+    lh_file = ROOT / ".ai/contracts/long-horizon-task.contract.md"
+    if not lh_file.exists():
+        failures.append("missing long-horizon contract: .ai/contracts/long-horizon-task.contract.md")
+        return
+    text = lh_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in LONG_HORIZON_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"long-horizon-task.contract.md is missing marker(s): {', '.join(missing)}")
 
 RUNTIME_INTERFACE_MARKERS = (
     "model_inference_protocol",
@@ -494,6 +514,7 @@ def main() -> int:
     validate_tool_audit_contract(failures)
     validate_memory_contract(failures)
     validate_runtime_interface_contract(failures)
+    validate_long_horizon_contract(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
     validate_failure_clustering(failures)
