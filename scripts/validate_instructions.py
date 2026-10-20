@@ -32,6 +32,7 @@ REQUIRED_PATHS = [
     ".ai/contracts/memory.contract.md",
     ".ai/contracts/runtime-interface.contract.md",
     ".ai/contracts/long-horizon-task.contract.md",
+    ".ai/contracts/evaluation.contract.md",
     ".ai/skills/long-horizon-execution/SKILL.md",
     ".ai/templates/long-horizon-task.md",
     ".ai/skills/memory-governance/SKILL.md",
@@ -263,6 +264,26 @@ def validate_long_horizon_task_contract(failures: list[str]) -> None:
     missing = [marker for marker in LONG_HORIZON_TASK_MARKERS if marker not in text]
     if missing:
         failures.append(f"long-horizon-task.contract.md is missing marker(s): {', '.join(missing)}")
+
+EVALUATION_CONTRACT_MARKERS = (
+    "tool_call_reliability",
+    "plan_quality_index",
+    "completion_recovery_ratio",
+    "cost_per_verified_success",
+    "trace_correlation_schema",
+    "benchmark_task_schema",
+    "release_gate_criteria",
+)
+
+def validate_evaluation_contract(failures: list[str]) -> None:
+    ev_file = ROOT / ".ai/contracts/evaluation.contract.md"
+    if not ev_file.exists():
+        failures.append("missing evaluation contract: .ai/contracts/evaluation.contract.md")
+        return
+    text = ev_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in EVALUATION_CONTRACT_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"evaluation.contract.md is missing marker(s): {', '.join(missing)}")
 
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
@@ -517,6 +538,7 @@ def main() -> int:
     validate_memory_contract(failures)
     validate_runtime_interface_contract(failures)
     validate_long_horizon_task_contract(failures)
+    validate_evaluation_contract(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
     validate_failure_clustering(failures)

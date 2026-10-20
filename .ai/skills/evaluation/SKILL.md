@@ -7,7 +7,7 @@ description: Use when measuring agent performance, plan quality, tool-call relia
 
 ## Purpose
 
-This skill establishes provider-neutral governance for evaluating AI coding and engineering agents. It standardizes metrics, trace correlation, benchmark formats, release gates, and incident analysis protocols.
+This skill establishes provider-neutral governance for evaluating AI coding and engineering agents in compliance with [.ai/contracts/evaluation.contract.md](../../contracts/evaluation.contract.md). It standardizes metrics, trace correlation, benchmark formats, release gates, and incident analysis protocols.
 
 This framework is policy-only: it defines the metrics, trace schemas, and evaluation rules that agent runtimes (e.g., CHAD) and model backends (e.g., LapisLLM) must produce or conform to without embedding runtime code.
 
