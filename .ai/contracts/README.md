@@ -16,7 +16,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Memory Governance Contract (memory.contract.md)
   ├─ Model Provider Contract (model-provider.contract.md)
   ├─ Runtime Interface Contract (runtime-interface.contract.md)
-  └─ Long-Horizon Task Contract (long-horizon-task.contract.md)
+  ├─ Long-Horizon Task Contract (long-horizon-task.contract.md)
+  └─ Evaluation Governance Contract (evaluation.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -90,6 +91,10 @@ The runtime interaction protocols between CHAD, LapisLLM, and Vibe Coding Instru
 ## 5.2 Long-Horizon Engineering Task Governance Schema
 
 Long-running, multi-session, multi-agent tasks follow `.ai/contracts/long-horizon-task.contract.md` defining multi-session state schemas, research-to-code handoff artifact protocols, cross-agent artifact exchange rules, failure-resume recovery semantics, context compaction conventions, and budget/cost controls.
+
+## 5.3 Evaluation & Observability Governance Schema
+
+All agent evaluations, telemetry streams, and release gates follow `.ai/contracts/evaluation.contract.md` defining core metrics schemas (TCR, PQI, CRR, CPVS, FPSR), trace correlation schemas (`trace_id`, `span_id`, `parent_span_id`, `session_id`), benchmark task specifications, release gate quality thresholds, and ecosystem boundary responsibilities across CHAD and LapisLLM.
 
 ## 6. Evidence Protocol Schema
 

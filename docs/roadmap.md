@@ -78,6 +78,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 
 ## Phase 7 — Evaluation and observability [completed]
 
+- [x] Evaluation & observability contract (`.ai/contracts/evaluation.contract.md`).
 - [x] Agent-task benchmark format (`.ai/skills/evaluation/SKILL.md`).
 - [x] Tool-call reliability metrics (`.ai/skills/evaluation/SKILL.md`).
 - [x] Plan quality metrics (`.ai/skills/evaluation/SKILL.md`).
