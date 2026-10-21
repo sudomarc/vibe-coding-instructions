@@ -17,7 +17,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Model Provider Contract (model-provider.contract.md)
   ├─ Runtime Interface Contract (runtime-interface.contract.md)
   ├─ Long-Horizon Task Contract (long-horizon-task.contract.md)
-  └─ Evaluation Governance Contract (evaluation.contract.md)
+  ├─ Evaluation Governance Contract (evaluation.contract.md)
+  └─ Sandbox Governance Contract (sandbox.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -75,6 +76,10 @@ All tools available to agents follow `.ai/contracts/tool.contract.md` which cate
 ## 3.1 Tool Audit Logging Schema
 
 Tool executions across the runtime emit standardized, redacted JSONL audit records conforming to `.ai/contracts/tool-audit.contract.md`. Audit records correlate execution traces (`trace_id`), agent identity (`agent_id`), permission tiers, side-effect classes, redacted parameter payloads, and verification evidence references (`verification_evidence_ref`).
+
+## 3.2 Sandbox Execution & Boundary Isolation Schema
+
+All tool execution environments follow `.ai/contracts/sandbox.contract.md` defining isolation level specifications (Level 0-3), container lifecycle state machines (`PROVISIONING`, `READY`, `EXECUTING`, `TEARDOWN`, `DESTROYED`, `ESCAPE_VIOLATION`), resource quota bounds (vCPU, RAM, ephemeral disk, PID limit, step timeout), secret sanitization policies, intercepting network egress proxies, and escape violation telemetry.
 
 ## 4. Memory & Knowledge Governance Schema
 

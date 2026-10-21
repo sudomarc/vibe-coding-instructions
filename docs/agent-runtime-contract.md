@@ -47,6 +47,7 @@ Concrete role and interface contracts live in `.ai/contracts/`:
 - [.ai/contracts/coder.contract.md](../.ai/contracts/coder.contract.md)
 - [.ai/contracts/analyst.contract.md](../.ai/contracts/analyst.contract.md)
 - [.ai/contracts/runtime-interface.contract.md](../.ai/contracts/runtime-interface.contract.md)
+- [.ai/contracts/sandbox.contract.md](../.ai/contracts/sandbox.contract.md)
 
 ## Orchestrator
 
