@@ -46,6 +46,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Sandbox requirements (`.ai/skills/security/references/sandbox-requirements.md`).
 - [x] Tool audit-log conventions (`.ai/contracts/tool-audit.contract.md`).
 - [x] Capability/fallback templates (`.ai/contracts/capability-fallback.contract.md`).
+- [x] Sandbox execution contract (`.ai/contracts/sandbox.contract.md`).
 
 ## Phase 4 — Context, memory and knowledge governance [completed]
 

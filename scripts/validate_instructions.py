@@ -33,6 +33,7 @@ REQUIRED_PATHS = [
     ".ai/contracts/runtime-interface.contract.md",
     ".ai/contracts/long-horizon-task.contract.md",
     ".ai/contracts/evaluation.contract.md",
+    ".ai/contracts/sandbox.contract.md",
     ".ai/skills/long-horizon-execution/SKILL.md",
     ".ai/templates/long-horizon-task.md",
     ".ai/skills/memory-governance/SKILL.md",
@@ -284,6 +285,24 @@ def validate_evaluation_contract(failures: list[str]) -> None:
     missing = [marker for marker in EVALUATION_CONTRACT_MARKERS if marker not in text]
     if missing:
         failures.append(f"evaluation.contract.md is missing marker(s): {', '.join(missing)}")
+
+SANDBOX_CONTRACT_MARKERS = (
+    "isolation_levels",
+    "resource_quotas",
+    "network_egress_policy",
+    "secret_sanitization",
+    "escape_violation_telemetry",
+)
+
+def validate_sandbox_contract(failures: list[str]) -> None:
+    sb_file = ROOT / ".ai/contracts/sandbox.contract.md"
+    if not sb_file.exists():
+        failures.append("missing sandbox contract: .ai/contracts/sandbox.contract.md")
+        return
+    text = sb_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in SANDBOX_CONTRACT_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"sandbox.contract.md is missing marker(s): {', '.join(missing)}")
 
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
@@ -539,6 +558,7 @@ def main() -> int:
     validate_runtime_interface_contract(failures)
     validate_long_horizon_task_contract(failures)
     validate_evaluation_contract(failures)
+    validate_sandbox_contract(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
     validate_failure_clustering(failures)
