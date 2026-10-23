@@ -79,6 +79,7 @@ References:
 - references/delegation.md
 - references/parallel-review.md
 - references/bounded-autonomy-escalation.md
+- references/multi-agent-capability-routing.md
 - .ai/templates/escalation-report.md
 - .ai/templates/design-brief.md
 - examples/delegated-review.md

@@ -35,6 +35,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Failure escalation rules (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
 - [x] Agent identity and correlation guidance (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
 - [x] Multi-agent audit conventions (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
+- [x] Multi-agent capability routing & provider failover (`.ai/skills/agent-orchestration/references/multi-agent-capability-routing.md`).
 
 ## Phase 3 — Tool governance [completed]
 
