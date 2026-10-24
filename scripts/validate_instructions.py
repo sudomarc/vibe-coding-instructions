@@ -403,6 +403,23 @@ def validate_governance_approval_workflow(failures: list[str]) -> None:
     if missing:
         failures.append(f"governance-approval-workflow.md is missing marker(s): {', '.join(missing)}")
 
+MULTI_AGENT_ROUTING_MARKERS = (
+    "shared capability health cache",
+    "dynamic capability discovery",
+    "task redistribution cascades",
+    "circuit breaker interaction",
+)
+
+def validate_multi_agent_routing_reference(failures: list[str]) -> None:
+    ref_file = ROOT / ".ai/skills/agent-orchestration/references/multi-agent-capability-routing.md"
+    if not ref_file.exists():
+        failures.append("missing multi-agent capability routing reference: .ai/skills/agent-orchestration/references/multi-agent-capability-routing.md")
+        return
+    text = ref_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in MULTI_AGENT_ROUTING_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"multi-agent-capability-routing.md is missing marker(s): {', '.join(missing)}")
+
 def validate_capability_and_permission_contracts(failures: list[str]) -> None:
     cap_file = ROOT / ".ai/contracts/capability-fallback.contract.md"
     if cap_file.exists():
@@ -577,6 +594,7 @@ def main() -> int:
     validate_long_horizon_task_contract(failures)
     validate_evaluation_contract(failures)
     validate_sandbox_contract(failures)
+    validate_multi_agent_routing_reference(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
     validate_failure_clustering(failures)

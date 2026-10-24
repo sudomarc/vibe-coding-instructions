@@ -100,3 +100,9 @@ When a provider fails, the capability router MUST classify the error into one of
 - `BROKEN`: Unexpected output format, schema violation, or process crash.
 - `ENVIRONMENT_RISK`: Sandbox policy or permissions forbid execution.
 - `UNSUPPORTED`: Requested sub-operation not implemented by this specific provider.
+
+## Multi-Agent Capability Routing & Task Redistribution
+
+In multi-agent environments (`.ai/skills/agent-orchestration/references/multi-agent-capability-routing.md`), capability health state updates are shared across all active agents via CHAD's Shared Capability Health Cache. When a primary capability fails or trips its circuit breaker during subagent delegation:
+1. The health update immediately invalidates the cache for all subagents.
+2. The Orchestrator initiates a task redistribution cascade: re-routing the active subagent to a secondary capability provider or re-assigning the subtask to an alternate specialist.

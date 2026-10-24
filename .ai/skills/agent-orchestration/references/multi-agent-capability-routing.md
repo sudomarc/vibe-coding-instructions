@@ -1,105 +1,109 @@
-# Multi-Agent Capability Routing & Fallback Protocol
+# Multi-Agent Capability Routing & Provider Failover Governance
 
-This reference defines how tool capabilities, health states, and fallback cascades propagate across multi-agent orchestration hierarchies in the CHAD + LapisLLM ecosystem.
+## Metadata
+- **reference_id**: `multi_agent_capability_routing`
+- **version**: `1.0.0`
+- **ecosystem**: CHAD / LapisLLM / Vibe Coding Instructions
 
-## 1. Multi-Agent Capability Fallback Architecture
+## Purpose
+Establish standard governance policies for routing capabilities across multi-agent hierarchies, managing shared capability health state, handling provider degradation/failover during subagent delegation, and executing task redistribution cascades when a delegate or underlying provider encounters errors or circuit-breaker activations.
 
-In a multi-agent hierarchy, capability execution occurs within delegated subagents (e.g., `researcher`, `coder`, `analyst`), while global workflow coordination remains with the `orchestrator`.
+---
+
+## 1. Architecture Overview
+
+In a multi-agent orchestration setup, the Orchestrator delegates subtasks to specialist subagents (e.g. `researcher`, `coder`, `analyst`). Subagents consume capabilities (LLM inference, sandboxed execution, search APIs, git operations, browser tools) supplied by underlying providers.
 
 ```text
-               +-----------------------+
-               |     Orchestrator      |
-               | (Global Health Cache) |
-               +-----------+-----------+
-                           |
-          +----------------+----------------+
-          |                                 |
-          v                                 v
-  +---------------+                 +---------------+
-  |  Researcher   |                 |     Coder     |
-  | (Local Scope) |                 | (Local Scope) |
-  +---------------+                 +---------------+
+Orchestrator
+  ├─ Shared Capability Health Cache
+  ├─ Subagent Delegation & Task Redistribution Engine
+  │
+  ├── Delegate: Researcher ──> [Capability: Web Search / Browser QA]
+  ├── Delegate: Coder ───────> [Capability: Code Editing / Sandbox Exec]
+  └── Delegate: Analyst ─────> [Capability: Data Ingestion / Analysis]
 ```
-
-When a subagent encounters a capability failure (e.g., tool timeout, rate limit, provider outage):
-
-1. **In-Agent Local Fallback**: If the subagent possesses an authorized fallback provider within its granted permission tier, it executes local fallback silently and logs a `tool_fallback_event`.
-2. **Subagent Escalation**: If no local fallback is available or authorized, the subagent halts execution and escalates to the `orchestrator` with a structured `CAPABILITY_FAILURE` status.
-3. **Orchestrator Redistribution**: The `orchestrator` updates the **Shared Capability Health Cache**, marks the provider `UNHEALTHY` across all active delegates, and either:
-   - Re-routes the task to another subagent with an alternative capability profile; or
-   - Re-configures the task to use a degraded capability mode; or
-   - Escalates to `HUMAN_CHECKPOINT_REQUIRED` if no viable fallback exists.
 
 ---
 
 ## 2. Shared Capability Health Cache
 
-To prevent redundant tool failures across subagents, the Orchestrator maintains a centralized **Shared Capability Health Cache**.
+To prevent subagents from repeatedly calling unhealthy or degraded capabilities/providers:
 
-### Health Cache Semantics
-- **Health States**: `PRESENT`, `CONFIGURED`, `HEALTHY`, `DEGRADED`, `UNHEALTHY`, `INACTIVE`.
-- **Cache TTL**: Health states expire after a configurable TTL (default: 300 seconds).
-- **Propagation**:
-  - When any subagent observes an `UNHEALTHY` or `RATE_LIMITED` failure, it publishes a health update event to the Orchestrator.
-  - The Orchestrator broadcasts updated health states to all currently active delegates before their next tool invocation.
-
----
-
-## 3. Delegation Matrix & Permission Isolation
-
-Capabilities granted to subagents MUST adhere to permission isolation rules:
-
-| Agent Role | Allowed Permission Tiers | Primary Capability Domain | Fallback Boundaries |
-|---|---|---|---|
-| `orchestrator` | `READ_ONLY`, `ISOLATED_EXECUTE` | Workflow & Health Coordination | Cannot execute mutations directly; delegates re-routing |
-| `researcher` | `READ_ONLY`, `NETWORK_ACCESS` | Web Search & Document Retrieval | Fallback from Primary API -> Fallback Search API -> Cached Search |
-| `coder` | `WORKSPACE_WRITE`, `ISOLATED_EXECUTE` | Repository File Modification & Tests | Fallback from Lapis AST edit -> RegEx diff patch |
-| `analyst` | `READ_ONLY` | Data Analysis & Inspection | Fallback from GPU acceleration -> CPU processing |
-
-### Isolation Invariant
-A subagent MUST NOT switch to a fallback provider that requires a higher permission tier (`side_effect_level`) than originally granted by the Orchestrator.
+1. **Centralized Health State**: CHAD maintains a runtime Shared Capability Health Cache accessible to the Orchestrator and all active subagents.
+2. **Health States**:
+   - `PRESENT`: Provider discovered but unverified.
+   - `CONFIGURED`: Provider credentials validated.
+   - `HEALTHY`: Latency within bounds, error rate < 1%, 200 OK responses.
+   - `DEGRADED`: Transient errors (1-10%) or elevated latency. Primary route used with retry budget; secondary fallback prepared.
+   - `UNHEALTHY`: 3 consecutive failures within 60s or HTTP 5xx / timeout. Triggers circuit breaker and routes to fallback provider.
+   - `INACTIVE`: Provider disabled or blacklisted.
+3. **Cross-Agent Health Propagation**: When Subagent A observes a capability failure or trips a provider circuit breaker, the health update instantly invalidates the cache for Subagent B and Subagent C.
 
 ---
 
-## 4. Multi-Agent Fallback Escalation Loop
+## 3. Dynamic Capability Discovery & Subagent Matching
+
+When delegating a subtask, the Orchestrator evaluates:
+
+- **Required Capability**: Specific tool or inference capability required (e.g., `code_execution_level_2`, `web_search_v1`).
+- **Permission Tier Bounds**: Maximum allowed permission level (`READ_ONLY`, `WORKSPACE_WRITE`, `ISOLATED_EXECUTE`, `NETWORK_ACCESS`, `PRIVILEGED_MUTATION`).
+- **Provider Health & Cost**: Route to the highest-health, lowest-cost provider currently marked `HEALTHY` or `DEGRADED`.
+- **Fallback Cascade**: If primary provider for Subagent A becomes `UNHEALTHY`, automatically route Subagent A to secondary provider, or redistribute subtask to an alternate delegate with equivalent capability.
+
+---
+
+## 4. Subagent Failure Escalation & Redistribution Cascades
+
+When a subagent execution fails or encounters provider errors:
 
 ```text
-SUBAGENT TOOL FAILURE
-  ├──> Local Fallback Available & Authorized?
-  │      ├──> YES: Execute Local Fallback -> Log Fallback Telemetry -> Continue
-  │      └──> NO: Escalate CAPABILITY_FAILURE to Orchestrator
+Subagent Error / Timeout
   │
-  └──> ORCHESTRATOR RECEIVES ESCALATION
-         ├──> Update Shared Capability Health Cache (mark provider UNHEALTHY)
-         ├──> Alternative Provider or Subagent Available?
-         │      ├──> YES: Re-assign Subtask with Updated Provider Routing -> Resume
-         │      └──> NO: Trigger HUMAN_CHECKPOINT_REQUIRED
+  ├── Try local retry (max 3 retries with modified parameters/context)
+  │
+  ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
+  │
+  └── Escalate to Orchestrator
+        │
+        ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
+        ├── Cascade 2: Re-assign subtask to alternate specialist subagent
+        └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
 
 ---
 
-## 5. Audit & Telemetry Schema
+## 5. Circuit Breaker Interaction across Multi-Agent Boundaries
 
-Every multi-agent capability fallback event MUST produce a telemetry record correlated with `trace_id` and `parent_agent_id`:
+1. **Subagent Circuit Breaker**: Activates if a subagent executes 3 consecutive identical tool/model errors or produces zero net state progress.
+2. **Provider Circuit Breaker**: Activates after 3 consecutive HTTP 5xx errors, timeouts (>30s), or auth failures across any subagents sharing the provider.
+3. **Recovery & Cooling Period**: Marked `UNHEALTHY` for 300 seconds. A probe request is sent after 300s; if successful, state transitions to `HEALTHY`.
+
+---
+
+## 6. Multi-Agent Capability Telemetry Schema
+
+All multi-agent capability dispatches emit standardized telemetry log events:
 
 ```json
 {
-  "event_type": "multi_agent_capability_fallback",
-  "trace_id": "tr-2026-994821",
-  "parent_agent_id": "orchestrator-main",
-  "subagent_id": "researcher-sub-1",
-  "capability_id": "web_search",
-  "failed_provider": "google_search_v1",
-  "failure_classification": "RATE_LIMITED",
-  "selected_fallback": "duckduckgo_api",
-  "fallback_scope": "LOCAL_SUBAGENT | ORCHESTRATOR_REDISTRIBUTED",
-  "timestamp_iso": "2026-03-31T12:00:00Z"
+  "trace_id": "tr-20250330-multi-001",
+  "orchestrator_id": "orchestrator-main",
+  "subagent_id": "coder-01",
+  "capability_id": "sandboxed_code_execution",
+  "provider_id": "docker_sandbox_primary",
+  "health_state": "HEALTHY",
+  "action": "EXECUTE_TOOL",
+  "status": "SUCCESS",
+  "latency_ms": 142,
+  "circuit_breaker_triggered": false,
+  "timestamp": "2025-03-30T12:00:00Z"
 }
 ```
 
 ---
 
-## 6. CHAD Runtime & LapisLLM Compatibility
+## 7. CHAD & LapisLLM Runtime Compatibility
 
-- **CHAD Engine**: Enforces Shared Capability Health Cache synchronization across concurrent subagent processes and logs multi-agent fallback telemetry.
-- **LapisLLM Gateway**: Ingests degraded capability state signals in prompt context to adapt model reasoning during task generation.
+- **CHAD Enforcement**: CHAD manages the Shared Capability Health Cache, intercepts subagent capability failures, enforces provider fallback cascades, and logs multi-agent capability telemetry.
+- **LapisLLM Inference**: LapisLLM serves as a primary or secondary model inference provider in the multi-agent cascade, advertising capabilities via `GET /v1/models`.
