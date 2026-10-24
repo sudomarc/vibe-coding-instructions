@@ -53,9 +53,17 @@ When delegating a subtask, the Orchestrator evaluates:
 
 ---
 
-## 4. Subagent Failure Escalation & Redistribution Cascades
+## 4. Subagent Escalation & Orchestrator Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution fails or encounters provider errors, the runtime triggers subagent escalation and orchestrator redistribution cascades through the standard `multi_agent_capability_fallback` strategy:
+
+### Multi-Agent Capability Fallback (`multi_agent_capability_fallback`)
+
+1. **Local Subagent Retry**: Execute up to 3 local retries with adjusted context/parameters if error is transient (`DEGRADED`).
+2. **Shared Health Update**: If provider circuit breaker trips, update Shared Capability Health Cache to `UNHEALTHY`, invalidating the route for all active agents.
+3. **Provider Fallback Cascade**: Re-route the subagent to a secondary healthy provider for the requested capability (aligned with `.ai/contracts/capability-fallback.contract.md`).
+4. **Orchestrator Redistribution**: If no secondary provider is available, escalate to the Orchestrator to re-assign the subtask to an alternate delegate with matching capability permissions.
+5. **Human Checkpoint**: If all fallback cascades and redistribution targets are exhausted, pause execution and emit `HUMAN_CHECKPOINT_REQUIRED`.
 
 ```text
 Subagent Error / Timeout
@@ -64,10 +72,10 @@ Subagent Error / Timeout
   │
   ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
   │
-  └── Escalate to Orchestrator
+  └── Escalate to Orchestrator (`multi_agent_capability_fallback`)
         │
         ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
-        ├── Cascade 2: Re-assign subtask to alternate specialist subagent
+        ├── Cascade 2: Re-assign subtask to alternate specialist subagent (redistribution)
         └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
 
