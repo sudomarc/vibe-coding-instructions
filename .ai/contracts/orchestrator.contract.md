@@ -16,6 +16,7 @@ Decompose user requests into bounded subtasks, select appropriate specialist age
 
 ## Allowed Tools & Capabilities
 - Agent delegation & subagent dispatch
+- Shared Capability Health Cache management & capability routing
 - Plan creation, modification, and set_plan tools
 - File reading & repository inspection tools
 - Task state tracking and handoff parsing

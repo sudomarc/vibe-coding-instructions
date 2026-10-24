@@ -79,6 +79,15 @@ capability_routing_policy:
 3. **Privacy & Data Boundary**: If a primary provider is local/air-gapped, routing to a public SaaS fallback MUST be explicitly authorized by application policy.
 4. **Audit Logging**: Every fallback cascade execution MUST record a `tool_fallback_event` in the tool audit log containing: `capability_id`, `failed_provider`, `failure_reason`, `selected_fallback`, and `latency_ms`.
 
+## Multi-Agent Context Propagation & Health Cache Sharing
+
+When capabilities and tools are invoked within a multi-agent hierarchy:
+
+1. **Shared Health Cache**: The Orchestrator maintains a centralized **Shared Capability Health Cache** tracking provider states across active subagents.
+2. **Subagent Failure Escalation**: If a subagent encounters an `UNHEALTHY` or `RATE_LIMITED` capability failure without a locally authorized fallback, it emits a `CAPABILITY_FAILURE` signal to the Orchestrator.
+3. **Health Broadcast**: When a provider state changes to `UNHEALTHY` or `DEGRADED`, the Orchestrator updates the shared health cache and propagates the state to all active delegates to prevent duplicate tool failures.
+4. **Telemetry Correlation**: All fallback events across subagents MUST include `trace_id` and `parent_agent_id` matching `.ai/skills/agent-orchestration/references/multi-agent-capability-routing.md`.
+
 ## Error Taxonomy for Capabilities
 
 When a provider fails, the capability router MUST classify the error into one of the standard classifications:
