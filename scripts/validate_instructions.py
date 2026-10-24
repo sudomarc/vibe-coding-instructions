@@ -62,6 +62,7 @@ REQUIRED_PATHS = [
     ".ai/skills/security/references/secret-handling.md",
     ".ai/skills/security/references/permission-escalation-controls.md",
     ".ai/skills/security/references/security-review-playbook.md",
+    ".ai/skills/agent-orchestration/references/multi-agent-capability-routing.md",
     ".ai/skills/legal-compliance/SKILL.md",
     ".ai/agents/legal-compliance-reviewer.agent.md",
     ".ai/templates/legal-audit.md",
@@ -355,6 +356,23 @@ GOVERNANCE_WORKFLOW_MARKERS = (
     "pull request & review workflow",
 )
 
+MULTI_AGENT_CAPABILITY_MARKERS = (
+    "shared capability health cache",
+    "subagent escalation",
+    "orchestrator redistribution",
+    "multi_agent_capability_fallback",
+)
+
+def validate_multi_agent_capability_routing(failures: list[str]) -> None:
+    path = ROOT / ".ai/skills/agent-orchestration/references/multi-agent-capability-routing.md"
+    if not path.exists():
+        failures.append("missing multi-agent capability routing reference: .ai/skills/agent-orchestration/references/multi-agent-capability-routing.md")
+        return
+    text = path.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in MULTI_AGENT_CAPABILITY_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"multi-agent-capability-routing.md is missing marker(s): {', '.join(missing)}")
+
 def validate_postmortem_template(failures: list[str]) -> None:
     path = ROOT / ".ai/templates/agentic-postmortem.md"
     if not path.exists():
@@ -563,6 +581,7 @@ def main() -> int:
     validate_postmortem_template(failures)
     validate_failure_clustering(failures)
     validate_governance_approval_workflow(failures)
+    validate_multi_agent_capability_routing(failures)
     validate_links(failures)
     validate_custom_agent(failures)
     validate_workflows(failures)

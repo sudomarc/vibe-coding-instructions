@@ -57,6 +57,7 @@ Use .ai/templates/design-brief.md for the normalized handoff.
 - Public/indexable pages: seo-auditor + performance-auditor
 - Browser-facing security: web-security-reviewer
 - External CLIs, MCPs, SaaS providers or multi-backend integrations: integration-health-reviewer + security/provider specialist as relevant
+- Multi-agent tool capability routing or provider failover: multi-agent capability fallback rules + Shared Capability Health Cache
 
 ## Delegation Economics
 
@@ -79,6 +80,7 @@ References:
 - references/delegation.md
 - references/parallel-review.md
 - references/bounded-autonomy-escalation.md
+- references/multi-agent-capability-routing.md
 - .ai/templates/escalation-report.md
 - .ai/templates/design-brief.md
 - examples/delegated-review.md
