@@ -2,6 +2,7 @@
 
 ## Metadata
 - **reference_id**: `multi_agent_capability_routing`
+- **fallback_policy**: `multi_agent_capability_fallback`
 - **version**: `1.0.0`
 - **ecosystem**: CHAD / LapisLLM / Vibe Coding Instructions
 
@@ -53,9 +54,9 @@ When delegating a subtask, the Orchestrator evaluates:
 
 ---
 
-## 4. Subagent Failure Escalation & Redistribution Cascades
+## 4. Subagent Failure Escalation & Orchestrator Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+During subagent escalation when execution fails or encounters provider errors, the orchestrator redistribution protocol triggers as follows:
 
 ```text
 Subagent Error / Timeout
