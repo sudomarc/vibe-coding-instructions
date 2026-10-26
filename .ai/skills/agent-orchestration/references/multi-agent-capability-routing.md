@@ -49,13 +49,13 @@ When delegating a subtask, the Orchestrator evaluates:
 - **Required Capability**: Specific tool or inference capability required (e.g., `code_execution_level_2`, `web_search_v1`).
 - **Permission Tier Bounds**: Maximum allowed permission level (`READ_ONLY`, `WORKSPACE_WRITE`, `ISOLATED_EXECUTE`, `NETWORK_ACCESS`, `PRIVILEGED_MUTATION`).
 - **Provider Health & Cost**: Route to the highest-health, lowest-cost provider currently marked `HEALTHY` or `DEGRADED`.
-- **Fallback Cascade**: If primary provider for Subagent A becomes `UNHEALTHY`, automatically route Subagent A to secondary provider, or redistribute subtask to an alternate delegate with equivalent capability.
+- **Fallback Cascade (`multi_agent_capability_fallback`)**: If primary provider for Subagent A becomes `UNHEALTHY`, automatically route Subagent A to secondary provider, or execute orchestrator redistribution to an alternate delegate with equivalent capability.
 
 ---
 
-## 4. Subagent Failure Escalation & Redistribution Cascades
+## 4. Subagent Failure Escalation & Orchestrator Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution fails or encounters provider errors, subagent escalation and orchestrator redistribution follow a structured cascade:
 
 ```text
 Subagent Error / Timeout
