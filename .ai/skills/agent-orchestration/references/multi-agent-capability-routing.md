@@ -55,7 +55,7 @@ When delegating a subtask, the Orchestrator evaluates:
 
 ## 4. Subagent Failure Escalation & Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution fails or encounters provider degradation or circuit-breaker events:
 
 ```text
 Subagent Error / Timeout
@@ -64,12 +64,39 @@ Subagent Error / Timeout
   │
   ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
   │
-  └── Escalate to Orchestrator
+  └── Subagent Escalation to Orchestrator
         │
-        ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
-        ├── Cascade 2: Re-assign subtask to alternate specialist subagent
+        ├── Cascade 1: Re-route subagent via multi_agent_capability_fallback
+        ├── Cascade 2: Orchestrator Redistribution to alternate specialist subagent
         └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
+
+### 4.1 Subagent Escalation Protocol
+When local retries are exhausted or a provider circuit breaker activates, the delegate generates a structured **subagent escalation** payload sent to the Orchestrator:
+
+```json
+{
+  "escalation_event": "subagent_escalation",
+  "failed_subagent_id": "coder-01",
+  "capability_id": "sandboxed_code_execution",
+  "provider_id": "docker_sandbox_primary",
+  "error_type": "PROVIDER_TIMEOUT",
+  "retry_count": 3,
+  "circuit_breaker_triggered": true,
+  "context_snapshot": "Executed pytest run; 3 consecutive timeouts > 30s.",
+  "timestamp": "2025-03-30T12:05:00Z"
+}
+```
+
+### 4.2 Multi-Agent Capability Fallback Execution Rules (`multi_agent_capability_fallback`)
+1. **Fallback Cascade Resolution**: The Orchestrator evaluates `multi_agent_capability_fallback` policy to select an alternative provider offering equivalent capability (e.g., falling back from `docker_sandbox_primary` to `gvisor_sandbox_secondary` or an alternative LLM backend).
+2. **Health Cache Invalidation**: The primary provider is marked `UNHEALTHY` in the Shared Capability Health Cache, causing immediate failover across all concurrent subagents.
+
+### 4.3 Orchestrator Redistribution
+If no alternative provider exists for the requested capability, the Orchestrator performs **orchestrator redistribution**:
+1. **Re-assignment to Alternate Delegate**: Re-assigns the subtask to another delegate (e.g. re-routing a web search subtask from `researcher-01` to `analyst-01` equipped with offline document lookup tools).
+2. **Task Scope Decomposition**: Decomposes the blocked subtask into smaller, lower-overhead subtasks that consume lower-tier capabilities.
+3. **Escalation to Human Checkpoint**: If orchestrator redistribution fails or all fallback routes are exhausted, the task transitions to `HUMAN_CHECKPOINT_REQUIRED`.
 
 ---
 
