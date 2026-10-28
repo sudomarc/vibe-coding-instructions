@@ -2,11 +2,12 @@
 
 ## Metadata
 - **reference_id**: `multi_agent_capability_routing`
+- **fallback_policy**: `multi_agent_capability_fallback`
 - **version**: `1.0.0`
 - **ecosystem**: CHAD / LapisLLM / Vibe Coding Instructions
 
 ## Purpose
-Establish standard governance policies for routing capabilities across multi-agent hierarchies, managing shared capability health state, handling provider degradation/failover during subagent delegation, and executing task redistribution cascades when a delegate or underlying provider encounters errors or circuit-breaker activations.
+Establish standard governance policies for dynamic capability discovery, routing capabilities across multi-agent hierarchies, managing shared capability health state, handling provider degradation/failover during subagent delegation, and executing orchestrator redistribution and task redistribution cascades when a delegate or underlying provider encounters errors or circuit-breaker activations.
 
 ---
 
@@ -53,20 +54,20 @@ When delegating a subtask, the Orchestrator evaluates:
 
 ---
 
-## 4. Subagent Failure Escalation & Redistribution Cascades
+## 4. Subagent Escalation & Orchestrator Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution fails or encounters provider errors, subagent escalation sends diagnostic details to the orchestrator for orchestrator redistribution:
 
 ```text
-Subagent Error / Timeout
+Subagent Error / Timeout (Subagent Escalation)
   │
   ├── Try local retry (max 3 retries with modified parameters/context)
   │
   ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
   │
-  └── Escalate to Orchestrator
+  └── Escalate to Orchestrator (Orchestrator Redistribution)
         │
-        ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
+        ├── Cascade 1: Re-route subagent via multi_agent_capability_fallback to Fallback Provider for same capability
         ├── Cascade 2: Re-assign subtask to alternate specialist subagent
         └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
