@@ -2,6 +2,7 @@
 
 ## Metadata
 - **reference_id**: `multi_agent_capability_routing`
+- **fallback_policy**: `multi_agent_capability_fallback`
 - **version**: `1.0.0`
 - **ecosystem**: CHAD / LapisLLM / Vibe Coding Instructions
 
@@ -53,9 +54,9 @@ When delegating a subtask, the Orchestrator evaluates:
 
 ---
 
-## 4. Subagent Failure Escalation & Redistribution Cascades
+## 4. Subagent Escalation & Orchestrator Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution fails or encounters provider errors, subagent escalation and orchestrator redistribution procedures are executed:
 
 ```text
 Subagent Error / Timeout
@@ -64,10 +65,10 @@ Subagent Error / Timeout
   │
   ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
   │
-  └── Escalate to Orchestrator
+  └── Subagent Escalation to Orchestrator
         │
-        ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
-        ├── Cascade 2: Re-assign subtask to alternate specialist subagent
+        ├── Cascade 1: Orchestrator Redistribution -> Re-route subagent to Fallback Provider for same capability
+        ├── Cascade 2: Orchestrator Redistribution -> Re-assign subtask to alternate specialist subagent
         └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
 
