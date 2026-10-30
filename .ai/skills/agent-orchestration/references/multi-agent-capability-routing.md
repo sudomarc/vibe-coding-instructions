@@ -49,27 +49,32 @@ When delegating a subtask, the Orchestrator evaluates:
 - **Required Capability**: Specific tool or inference capability required (e.g., `code_execution_level_2`, `web_search_v1`).
 - **Permission Tier Bounds**: Maximum allowed permission level (`READ_ONLY`, `WORKSPACE_WRITE`, `ISOLATED_EXECUTE`, `NETWORK_ACCESS`, `PRIVILEGED_MUTATION`).
 - **Provider Health & Cost**: Route to the highest-health, lowest-cost provider currently marked `HEALTHY` or `DEGRADED`.
-- **Fallback Cascade**: If primary provider for Subagent A becomes `UNHEALTHY`, automatically route Subagent A to secondary provider, or redistribute subtask to an alternate delegate with equivalent capability.
+- **Fallback Cascade (`multi_agent_capability_fallback`)**: If primary provider for Subagent A becomes `UNHEALTHY`, automatically trigger multi_agent_capability_fallback to route Subagent A to secondary provider, or trigger orchestrator redistribution to reassign the subtask to an alternate delegate with equivalent capability.
 
 ---
 
-## 4. Subagent Failure Escalation & Redistribution Cascades
+## 4. Subagent Failure Escalation & Orchestrator Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution fails or encounters provider errors, the runtime triggers subagent escalation:
 
 ```text
-Subagent Error / Timeout
+Subagent Escalation Pipeline
   │
-  ├── Try local retry (max 3 retries with modified parameters/context)
+  ├── Step 1: Subagent local retry (max 3 retries with modified parameters/context)
   │
-  ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
+  ├── Step 2: If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
   │
-  └── Escalate to Orchestrator
+  └── Step 3: Subagent Escalation to Orchestrator
         │
-        ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
-        ├── Cascade 2: Re-assign subtask to alternate specialist subagent
+        ├── Cascade 1 (`multi_agent_capability_fallback`): Re-route subagent to Fallback Provider for same capability
+        ├── Cascade 2 (`orchestrator redistribution`): Orchestrator redistribution of subtask to alternate specialist subagent
         └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
+
+### 4.1 Subagent Escalation Protocol
+1. **Subagent Escalation Trigger**: Subagent raises a `SUBAGENT_CAPABILITY_FAILURE` event containing error trace, tool name, provider ID, and retry history.
+2. **Orchestrator Redistribution Policy**: The Orchestrator receives the escalation event, inspects the Shared Capability Health Cache, and executes orchestrator redistribution to reallocate workload away from failing nodes.
+3. **Multi-Agent Capability Fallback (`multi_agent_capability_fallback`)**: Fallback pathways are pre-registered per capability ID. The Orchestrator evaluates available providers and applies `multi_agent_capability_fallback` rules before halting execution or escalating to human review.
 
 ---
 
