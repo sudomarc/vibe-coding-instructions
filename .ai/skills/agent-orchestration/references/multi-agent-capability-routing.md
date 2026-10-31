@@ -2,6 +2,7 @@
 
 ## Metadata
 - **reference_id**: `multi_agent_capability_routing`
+- **alias**: `multi_agent_capability_fallback`
 - **version**: `1.0.0`
 - **ecosystem**: CHAD / LapisLLM / Vibe Coding Instructions
 
@@ -53,23 +54,35 @@ When delegating a subtask, the Orchestrator evaluates:
 
 ---
 
-## 4. Subagent Failure Escalation & Redistribution Cascades
+## 4. Subagent Escalation & Orchestrator Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution encounters capability errors, rate limits, or provider degradations, the following **subagent escalation** and **orchestrator redistribution** sequence applies:
 
 ```text
-Subagent Error / Timeout
+Subagent Error / Timeout / Rate Limit
   │
-  ├── Try local retry (max 3 retries with modified parameters/context)
+  ├── Local retry discipline (max 3 retries with modified parameters/context)
   │
-  ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
+  ├── Subagent Escalation: If provider circuit breaker trips or retries exhausted
+  │     └─ Update Shared Capability Health Cache to UNHEALTHY
   │
-  └── Escalate to Orchestrator
+  └── Orchestrator Redistribution:
         │
         ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
         ├── Cascade 2: Re-assign subtask to alternate specialist subagent
         └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
+
+### 4.1 Subagent Escalation Protocol
+1. **Immediate Escalation**: If a delegate subagent detects an `AUTH_REQUIRED`, `UPSTREAM_UNAVAILABLE`, or circuit-breaker event, it does not loop pointlessly. It executes a structured subagent escalation returning `GOAL_BLOCKED` with explicit capability failure metadata.
+2. **Health Cache Invalidation**: The subagent escalation payload includes failure diagnostics allowing CHAD to invalidate the capability in the Shared Capability Health Cache across all concurrent subagents.
+
+### 4.2 Orchestrator Redistribution Workflow
+1. **Redistribution Evaluation**: Upon receiving an escalation, the Orchestrator checks for alternate providers in the capability's fallback cascade.
+2. **Provider Failover vs. Agent Reassignment**:
+   - If an alternate provider is `HEALTHY`, the Orchestrator executes a provider failover for the existing subagent.
+   - If the capability requires a different toolset or subagent specialization, the Orchestrator triggers orchestrator redistribution to re-assign the subtask to an alternate specialist.
+3. **Budget and Checkpoint Escalation**: If all fallback cascades are exhausted, orchestrator redistribution ceases and triggers `HUMAN_CHECKPOINT_REQUIRED`.
 
 ---
 
