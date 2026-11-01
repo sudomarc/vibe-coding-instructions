@@ -2,6 +2,7 @@
 
 ## Metadata
 - **reference_id**: `multi_agent_capability_routing`
+- **alias**: `multi_agent_capability_fallback`
 - **version**: `1.0.0`
 - **ecosystem**: CHAD / LapisLLM / Vibe Coding Instructions
 
@@ -55,7 +56,7 @@ When delegating a subtask, the Orchestrator evaluates:
 
 ## 4. Subagent Failure Escalation & Redistribution Cascades
 
-When a subagent execution fails or encounters provider errors:
+When a subagent execution fails or encounters provider errors, the runtime executes a structured subagent escalation protocol followed by an orchestrator redistribution cascade:
 
 ```text
 Subagent Error / Timeout
@@ -64,12 +65,20 @@ Subagent Error / Timeout
   │
   ├── If provider circuit breaker trips -> Update Shared Capability Health Cache to UNHEALTHY
   │
-  └── Escalate to Orchestrator
+  └── Subagent Escalation to Orchestrator
         │
-        ├── Cascade 1: Re-route subagent to Fallback Provider for same capability
-        ├── Cascade 2: Re-assign subtask to alternate specialist subagent
-        └── Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
+        ├── Orchestrator Redistribution Cascade 1: Re-route subagent to Fallback Provider for same capability
+        ├── Orchestrator Redistribution Cascade 2: Re-assign subtask to alternate specialist subagent
+        └── Orchestrator Redistribution Cascade 3: If no viable alternative -> Trigger HUMAN_CHECKPOINT_REQUIRED
 ```
+
+### 4.1 Subagent Escalation Protocol
+- When a subagent exhausts its local retry budget (max 3 retries with modified parameters/context) or trips a capability-level circuit breaker, it initiates subagent escalation.
+- The subagent emits a structured failure event containing `subagent_id`, `capability_id`, `provider_id`, error classification (`TOOL_EXEC_ERR` or `INFRA_FAIL`), and partial verification state.
+
+### 4.2 Orchestrator Redistribution Protocol
+- Upon receiving a subagent escalation, the orchestrator triggers orchestrator redistribution across available backup providers or compatible alternative subagent roles.
+- If primary and secondary capability providers are exhausted across all delegates, the orchestrator halts execution under the `HUMAN_CHECKPOINT_REQUIRED` stop condition.
 
 ---
 
