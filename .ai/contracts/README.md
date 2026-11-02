@@ -18,7 +18,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Runtime Interface Contract (runtime-interface.contract.md)
   ├─ Long-Horizon Task Contract (long-horizon-task.contract.md)
   ├─ Evaluation Governance Contract (evaluation.contract.md)
-  └─ Sandbox Governance Contract (sandbox.contract.md)
+  ├─ Sandbox Governance Contract (sandbox.contract.md)
+  └─ Concurrency & Resource Locking Contract (concurrency-lock.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -80,6 +81,10 @@ Tool executions across the runtime emit standardized, redacted JSONL audit recor
 ## 3.2 Sandbox Execution & Boundary Isolation Schema
 
 All tool execution environments follow `.ai/contracts/sandbox.contract.md` defining isolation level specifications (Level 0-3), container lifecycle state machines (`PROVISIONING`, `READY`, `EXECUTING`, `TEARDOWN`, `DESTROYED`, `ESCAPE_VIOLATION`), resource quota bounds (vCPU, RAM, ephemeral disk, PID limit, step timeout), secret sanitization policies, intercepting network egress proxies, and escape violation telemetry.
+
+## 3.3 Concurrency & Shared Resource Locking Schema
+
+Parallel multi-agent execution follows `.ai/contracts/concurrency-lock.contract.md` defining concurrency control modes (`PESSIMISTIC_EXCLUSIVE`, `PESSIMISTIC_SHARED`, `OPTIMISTIC_CONCURRENCY_CONTROL`), resource scope taxonomies (`FILE_LOCK`, `DIRECTORY_LOCK`, `SHARED_RESOURCE_LOCK`), lease durations (TTL) and automated heartbeats, deadlock prevention via hierarchical resource ordering, and conflict resolution arbiter protocols.
 
 ## 4. Memory & Knowledge Governance Schema
 

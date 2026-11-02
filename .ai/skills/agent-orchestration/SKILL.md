@@ -58,6 +58,7 @@ Use .ai/templates/design-brief.md for the normalized handoff.
 - Browser-facing security: web-security-reviewer
 - External CLIs, MCPs, SaaS providers or multi-backend integrations: integration-health-reviewer + security/provider specialist as relevant
 - Multi-agent tool capability routing or provider failover: multi-agent capability fallback rules + Shared Capability Health Cache
+- Multi-agent parallel execution & shared resource locking: concurrency-and-resource-locking reference + `.ai/contracts/concurrency-lock.contract.md`
 
 ## Delegation Economics
 
@@ -79,6 +80,7 @@ When a subagent reaches a stop condition other than SUCCESS_VERIFIED, escalate t
 References:
 - references/delegation.md
 - references/parallel-review.md
+- references/concurrency-and-resource-locking.md
 - references/bounded-autonomy-escalation.md
 - references/multi-agent-capability-routing.md
 - .ai/templates/escalation-report.md

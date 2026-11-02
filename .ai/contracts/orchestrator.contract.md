@@ -62,6 +62,7 @@ Decompose user requests into bounded subtasks, select appropriate specialist age
 ## Multi-Agent Capability Routing & Failover
 - **Shared Capability Health Cache**: Orchestrator queries CHAD's runtime Shared Capability Health Cache (`.ai/skills/agent-orchestration/references/multi-agent-capability-routing.md`) prior to dispatching subtasks to specialist subagents.
 - **Task Redistribution Cascades**: When a delegate subagent or underlying model/tool provider encounters provider degradation or trips a circuit breaker, the Orchestrator executes failover cascades (routing to secondary providers or reassigning subtasks).
+- **Concurrency & Resource Locking**: Orchestrator partitions workspace paths and shared resources across parallel delegates following `.ai/contracts/concurrency-lock.contract.md` to prevent race conditions and lock contention.
 
 ## CHAD & LapisLLM Runtime Compatibility
 - **CHAD Enforcement**: CHAD acts as the orchestration engine executing this contract, managing delegate subagent lifecycles, token budgets, and multi-agent capability routing.
