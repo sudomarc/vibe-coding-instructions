@@ -120,6 +120,15 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Failure-resume semantics (`.ai/contracts/long-horizon-task.contract.md`).
 - [x] Long-running cost controls (`.ai/contracts/long-horizon-task.contract.md`).
 
+## Phase 11 — Transactional rollback & state compensation [completed]
+
+- [x] Transactional rollback contract (`.ai/contracts/rollback.contract.md`).
+- [x] Reversibility tiers taxonomy (`.ai/contracts/rollback.contract.md`).
+- [x] Side-effect journal schema (`.ai/contracts/rollback.contract.md`).
+- [x] LIFO Saga unwinding strategies (`.ai/contracts/rollback.contract.md`).
+- [x] Reversibility & compensation operational guidelines (`.ai/skills/safety/references/reversibility-and-compensation.md`).
+- [x] Rollback journal template (`.ai/templates/rollback-journal.md`).
+
 ## Completion principle
 
 This repository should remain **portable and provider-neutral**. Product/runtime implementation remains in CHAD; model implementation remains in LapisLLM.
