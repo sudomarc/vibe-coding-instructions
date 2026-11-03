@@ -41,6 +41,7 @@ State:
 - permission escalation controls: PRESENT (`.ai/skills/security/references/permission-escalation-controls.md`);
 - model provider contract: PRESENT (`.ai/contracts/model-provider.contract.md`);
 - runtime interface contract: PRESENT (`.ai/contracts/runtime-interface.contract.md`);
+- transactional rollback contract: PRESENT (`.ai/contracts/rollback.contract.md`);
 - runtime adapter: PLANNED;
 - automatic synchronization of arbitrary framework files: NOT REQUIRED.
 
