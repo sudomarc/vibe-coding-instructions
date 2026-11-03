@@ -34,6 +34,8 @@ REQUIRED_PATHS = [
     ".ai/contracts/long-horizon-task.contract.md",
     ".ai/contracts/evaluation.contract.md",
     ".ai/contracts/sandbox.contract.md",
+    ".ai/contracts/concurrency-lock.contract.md",
+    ".ai/skills/agent-orchestration/references/concurrency-and-resource-locking.md",
     ".ai/skills/long-horizon-execution/SKILL.md",
     ".ai/templates/long-horizon-task.md",
     ".ai/skills/memory-governance/SKILL.md",
@@ -304,6 +306,25 @@ def validate_sandbox_contract(failures: list[str]) -> None:
     missing = [marker for marker in SANDBOX_CONTRACT_MARKERS if marker not in text]
     if missing:
         failures.append(f"sandbox.contract.md is missing marker(s): {', '.join(missing)}")
+
+CONCURRENCY_LOCK_MARKERS = (
+    "pessimistic_exclusive",
+    "pessimistic_shared",
+    "optimistic_concurrency_control",
+    "resource scope taxonomy",
+    "deadlock prevention & hierarchical lock ordering",
+    "conflict resolution & merge arbiter",
+)
+
+def validate_concurrency_lock_contract(failures: list[str]) -> None:
+    cl_file = ROOT / ".ai/contracts/concurrency-lock.contract.md"
+    if not cl_file.exists():
+        failures.append("missing concurrency lock contract: .ai/contracts/concurrency-lock.contract.md")
+        return
+    text = cl_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in CONCURRENCY_LOCK_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"concurrency-lock.contract.md is missing marker(s): {', '.join(missing)}")
 
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
@@ -594,6 +615,7 @@ def main() -> int:
     validate_long_horizon_task_contract(failures)
     validate_evaluation_contract(failures)
     validate_sandbox_contract(failures)
+    validate_concurrency_lock_contract(failures)
     validate_multi_agent_routing_reference(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
