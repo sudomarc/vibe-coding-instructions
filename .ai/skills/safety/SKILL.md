@@ -37,7 +37,12 @@ A command that installs software or writes configuration is a host mutation even
 
 Never execute `rm -rf` on an uncertain path, `git push --force` on shared history, destructive SQL without validated scope, or arbitrary `curl | bash` without explicit trusted-source authorization and a safer reviewed alternative.
 
+## Transactional Rollback & Compensation
+
+Before dispatching mutating tools, assess reversibility tiers (`PURE_REVERSIBLE`, `COMPENSABLE`, `FORWARD_FIX_ONLY`, `IRREVERSIBLE`) per `.ai/contracts/rollback.contract.md`. Maintain an append-only side-effect journal and follow LIFO Saga unwinding if execution aborts or encounters a blocking stop condition.
+
 ## Reference
 
 - `references/dangerous-actions.md`
 - `references/safe-shell-patterns.md`
+- `references/reversibility-and-compensation.md`

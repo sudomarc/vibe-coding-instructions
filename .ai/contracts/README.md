@@ -19,7 +19,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Long-Horizon Task Contract (long-horizon-task.contract.md)
   ├─ Evaluation Governance Contract (evaluation.contract.md)
   ├─ Sandbox Governance Contract (sandbox.contract.md)
-  └─ Concurrency & Resource Locking Contract (concurrency-lock.contract.md)
+  ├─ Concurrency & Resource Locking Contract (concurrency-lock.contract.md)
+  └─ Transactional Rollback Contract (rollback.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -85,6 +86,10 @@ All tool execution environments follow `.ai/contracts/sandbox.contract.md` defin
 ## 3.3 Concurrency & Shared Resource Locking Schema
 
 Parallel multi-agent execution follows `.ai/contracts/concurrency-lock.contract.md` defining concurrency control modes (`PESSIMISTIC_EXCLUSIVE`, `PESSIMISTIC_SHARED`, `OPTIMISTIC_CONCURRENCY_CONTROL`), resource scope taxonomies (`FILE_LOCK`, `DIRECTORY_LOCK`, `SHARED_RESOURCE_LOCK`), lease durations (TTL) and automated heartbeats, deadlock prevention via hierarchical resource ordering, and conflict resolution arbiter protocols.
+
+## 3.4 Transactional Rollback & State Compensation Schema
+
+Execution recovery and transactional state unwinding follow `.ai/contracts/rollback.contract.md` defining reversibility taxonomies (`PURE_REVERSIBLE`, `COMPENSABLE`, `FORWARD_FIX_ONLY`, `IRREVERSIBLE`), append-only side-effect journals (`journal.jsonl`), LIFO Saga unwinding strategies (`AUTOMATED_SAGA_UNWIND`, `SUPERVISED_ROLLBACK_CHECKPOINT`, `QUARANTINE_MANUAL_HOLD`), compensation verification gates, and telemetry schemas.
 
 ## 4. Memory & Knowledge Governance Schema
 
