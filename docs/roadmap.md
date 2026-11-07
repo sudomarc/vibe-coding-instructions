@@ -37,6 +37,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Multi-agent audit conventions (`.ai/skills/agent-orchestration/references/bounded-autonomy-escalation.md`).
 - [x] Multi-agent capability routing & provider failover (`.ai/skills/agent-orchestration/references/multi-agent-capability-routing.md`).
 - [x] Multi-agent concurrency & shared resource locking (`.ai/contracts/concurrency-lock.contract.md`, `.ai/skills/agent-orchestration/references/concurrency-and-resource-locking.md`).
+- [x] Transactional rollback & state compensation (`.ai/contracts/rollback.contract.md`, `.ai/skills/safety/references/reversibility-and-compensation.md`, `.ai/templates/rollback-journal.md`).
 
 ## Phase 3 — Tool governance [completed]
 
