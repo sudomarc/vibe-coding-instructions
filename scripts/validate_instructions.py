@@ -35,6 +35,9 @@ REQUIRED_PATHS = [
     ".ai/contracts/evaluation.contract.md",
     ".ai/contracts/sandbox.contract.md",
     ".ai/contracts/concurrency-lock.contract.md",
+    ".ai/contracts/rollback.contract.md",
+    ".ai/skills/safety/references/reversibility-and-compensation.md",
+    ".ai/templates/rollback-journal.md",
     ".ai/skills/agent-orchestration/references/concurrency-and-resource-locking.md",
     ".ai/skills/long-horizon-execution/SKILL.md",
     ".ai/templates/long-horizon-task.md",
@@ -326,6 +329,28 @@ def validate_concurrency_lock_contract(failures: list[str]) -> None:
     if missing:
         failures.append(f"concurrency-lock.contract.md is missing marker(s): {', '.join(missing)}")
 
+ROLLBACK_CONTRACT_MARKERS = (
+    "pure_reversible",
+    "compensable",
+    "forward_fix_only",
+    "irreversible",
+    "journal.jsonl",
+    "automated_saga_unwind",
+    "supervised_rollback_checkpoint",
+    "quarantine_manual_hold",
+    "rollback_telemetry",
+)
+
+def validate_rollback_contract(failures: list[str]) -> None:
+    rb_file = ROOT / ".ai/contracts/rollback.contract.md"
+    if not rb_file.exists():
+        failures.append("missing rollback contract: .ai/contracts/rollback.contract.md")
+        return
+    text = rb_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in ROLLBACK_CONTRACT_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"rollback.contract.md is missing marker(s): {', '.join(missing)}")
+
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
     if not audit_file.exists():
@@ -616,6 +641,7 @@ def main() -> int:
     validate_evaluation_contract(failures)
     validate_sandbox_contract(failures)
     validate_concurrency_lock_contract(failures)
+    validate_rollback_contract(failures)
     validate_multi_agent_routing_reference(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
