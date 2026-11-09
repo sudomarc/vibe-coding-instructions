@@ -41,3 +41,4 @@ Never execute `rm -rf` on an uncertain path, `git push --force` on shared histor
 
 - `references/dangerous-actions.md`
 - `references/safe-shell-patterns.md`
+- `references/reversibility-and-compensation.md`
