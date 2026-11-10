@@ -18,8 +18,8 @@ vibe-coding-instructions
 
 | Repository | Owns | Must not own |
 |---|---|---|
-| vibe-coding-instructions | agent governance, skills, role contracts, evidence rules, token economics, evaluation contracts, concurrency/locking contracts, rollback/compensation contracts, self-improvement policy | runtime execution, user accounts, model training |
-| CHAD | product UI/API, orchestration runtime, agents, tools, memory, files, provider routing, concurrency lock manager, saga compensation coordinator, permissions | Transformer internals, model training |
+| vibe-coding-instructions | agent governance, skills, role contracts, evidence rules, token economics, evaluation contracts, concurrency/locking contracts, rollback/compensation contracts, incident containment contracts, self-improvement policy | runtime execution, user accounts, model training |
+| CHAD | product UI/API, orchestration runtime, agents, tools, memory, files, provider routing, concurrency lock manager, saga compensation coordinator, emergency kill-switch manager, permissions | Transformer internals, model training |
 | LapisLLM | tokenizer, Transformer, training, checkpoints, inference runtime, model evaluation, model-serving primitives | consumer UX, accounts, agent orchestration, product memory |
 
 ## Relationship

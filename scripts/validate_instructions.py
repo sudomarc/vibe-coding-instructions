@@ -36,6 +36,9 @@ REQUIRED_PATHS = [
     ".ai/contracts/sandbox.contract.md",
     ".ai/contracts/concurrency-lock.contract.md",
     ".ai/contracts/rollback.contract.md",
+    ".ai/contracts/incident-response.contract.md",
+    ".ai/skills/incident-response/references/agentic-incident-response.md",
+    ".ai/templates/incident-containment-report.md",
     ".ai/skills/safety/references/reversibility-and-compensation.md",
     ".ai/templates/rollback-journal.md",
     ".ai/skills/agent-orchestration/references/concurrency-and-resource-locking.md",
@@ -350,6 +353,30 @@ def validate_rollback_contract(failures: list[str]) -> None:
     if missing:
         failures.append(f"rollback.contract.md is missing marker(s): {', '.join(missing)}")
 
+INCIDENT_RESPONSE_CONTRACT_MARKERS = (
+    "sev0_critical",
+    "sev1_high",
+    "sev2_medium",
+    "sev3_low",
+    "normal_operation",
+    "containment_triaged",
+    "quarantine_isolated",
+    "global_kill_switch_engaged",
+    "sig_kill_switch",
+    "forensic preservation protocol",
+    "ecosystem responsibilities matrix",
+)
+
+def validate_incident_response_contract(failures: list[str]) -> None:
+    ir_file = ROOT / ".ai/contracts/incident-response.contract.md"
+    if not ir_file.exists():
+        failures.append("missing incident response contract: .ai/contracts/incident-response.contract.md")
+        return
+    text = ir_file.read_text(encoding="utf-8", errors="ignore").lower()
+    missing = [marker for marker in INCIDENT_RESPONSE_CONTRACT_MARKERS if marker not in text]
+    if missing:
+        failures.append(f"incident-response.contract.md is missing marker(s): {', '.join(missing)}")
+
 def validate_tool_audit_contract(failures: list[str]) -> None:
     audit_file = ROOT / ".ai/contracts/tool-audit.contract.md"
     if not audit_file.exists():
@@ -641,6 +668,7 @@ def main() -> int:
     validate_sandbox_contract(failures)
     validate_concurrency_lock_contract(failures)
     validate_rollback_contract(failures)
+    validate_incident_response_contract(failures)
     validate_multi_agent_routing_reference(failures)
     validate_capability_and_permission_contracts(failures)
     validate_postmortem_template(failures)
