@@ -50,6 +50,7 @@ The framework is evolving from a coding-agent instruction library into a **gener
 - [x] Capability/fallback templates (`.ai/contracts/capability-fallback.contract.md`).
 - [x] Sandbox execution contract (`.ai/contracts/sandbox.contract.md`).
 - [x] Transactional rollback & state compensation (`.ai/contracts/rollback.contract.md`, `.ai/skills/safety/references/reversibility-and-compensation.md`, `.ai/templates/rollback-journal.md`).
+- [x] Incident response & emergency containment (`.ai/contracts/incident-response.contract.md`, `.ai/skills/incident-response/references/agentic-incident-response.md`, `.ai/templates/incident-containment-report.md`).
 
 ## Phase 4 — Context, memory and knowledge governance [completed]
 

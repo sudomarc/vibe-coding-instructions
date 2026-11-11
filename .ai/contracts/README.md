@@ -20,7 +20,8 @@ Vibe Coding Instructions (.ai/contracts/)
   ├─ Evaluation Governance Contract (evaluation.contract.md)
   ├─ Sandbox Governance Contract (sandbox.contract.md)
   ├─ Concurrency & Resource Locking Contract (concurrency-lock.contract.md)
-  └─ Transactional Rollback Contract (rollback.contract.md)
+  ├─ Transactional Rollback Contract (rollback.contract.md)
+  └─ Incident Response & Emergency Containment Contract (incident-response.contract.md)
         │
         ▼ (Enforced at Runtime)
   CHAD Agent Runtime
@@ -90,6 +91,10 @@ Parallel multi-agent execution follows `.ai/contracts/concurrency-lock.contract.
 ## 3.4 Transactional Rollback & State Compensation Schema
 
 Mutable operations, state-changing commands, and multi-step tasks follow `.ai/contracts/rollback.contract.md` defining reversibility tiers (`PURE_REVERSIBLE`, `COMPENSABLE`, `FORWARD_FIX_ONLY`, `IRREVERSIBLE`), append-only side-effect journaling (`journal.jsonl`), LIFO Saga unwinding models (`AUTOMATED_SAGA_UNWIND`, `SUPERVISED_ROLLBACK_CHECKPOINT`, `QUARANTINE_MANUAL_HOLD`), compensation verification gates, and telemetry emission.
+
+## 3.5 Incident Response & Emergency Containment Schema
+
+Critical anomalies, runaway loops, privilege escalations, and sandbox security events follow `.ai/contracts/incident-response.contract.md` defining severity classifications (`SEV0_CRITICAL`, `SEV1_HIGH`, `SEV2_MEDIUM`, `SEV3_LOW`), containment state transitions (`NORMAL_OPERATION`, `CONTAINMENT_TRIAGED`, `QUARANTINE_ISOLATED`, `GLOBAL_KILL_SWITCH_ENGAGED`), subagent quarantine isolation, emergency kill-switch activation, and forensic snapshot preservation (`.ai/templates/incident-containment-report.md`).
 
 ## 4. Memory & Knowledge Governance Schema
 
